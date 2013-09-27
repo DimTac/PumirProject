@@ -1,57 +1,116 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset=utf-8>
-	<title>Test API Météo</title>
-	<script type="text/javascript">
- 
-    function startWatch(){
-      if (navigator.geolocation)
-        var watchId = navigator.geolocation.watchPosition(successCallback,
-                                  errorCallback,
-                                  {enableHighAccuracy:true,
-                                  timeout:1000,
-                                  maximumAge:0});
-      else
-        alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
-    }
-     
-    function stopWatch(){
-      navigator.geolocation.clearWatch(watchId);
-    }     
-     
-    function successCallback(position){
-      document.getElementById("lat").innerHTML = position.coords.latitude;
-      document.getElementById("long").innerHTML = position.coords.longitude;
-      document.getElementById("prec").innerHTML = position.coords.accuracy;
-      document.getElementById("alt").innerHTML = position.coords.altitude;
-      document.getElementById("precalt").innerHTML = position.coords.altitudeAccuracy;
-      document.getElementById("angle").innerHTML = position.coords.heading;
-      document.getElementById("speed").innerHTML = position.coords.speed;
-      document.getElementById("time").innerHTML = new Date(position.timestamp);
-    };  
- 
-    function errorCallback(error){
-      switch(error.code){
-        case error.PERMISSION_DENIED:
-          alert("L'utilisateur n'a pas autorisé l'accès à sa position");
-          break;      
-        case error.POSITION_UNAVAILABLE:
-          alert("L'emplacement de l'utilisateur n'a pas pu être déterminé");
-          break;
-        case error.TIMEOUT:
-          alert("Le service n'a pas répondu à temps");
-          break;
-        }
-    };
- 
-  </script>
-</head>
+	<title>HTML5 : Géolocalisation avec carte Google Maps</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+  
+  </head>
 
-<body>	
-	<header><h1>Géolocalisation + Météo</h1></header>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	
-	<footer></footer>	
+<body>
+<div class="container">
+
+<div class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Géolocalisation + Météo</a>
+        </div>
+      </div>
+
+<!-- Affichage Position -->
+<div id="maposition"></div>
+
+<!-- Affichage Carte -->
+<div id="map-canvas"></div>
+
+<!-- Affichage Météo -->
+<div id="meteo">
+	<h1> Il fait <label id="weather_picture"></label> à <label id="city_name" class="label label-info"></label></h1>
+	<h2> La température est de <label id="temp_min" class="label label-primary"></label> au minimum et de <label id="temp_max" class="label label-danger"></label> au maximum</h2>
+	<hr></hr>
+</div>
+
+<script>
+
+
+if(navigator.geolocation) {
+	// Fonction de callback en cas de succès
+	function affichePosition(position) 
+	{
+
+		jQuery(document).ready(function($) 
+		{ 
+			//Récupération des données depuis l'API OpenWeatherMap
+			$.ajax(
+			{ 
+				url : "http://api.openweathermap.org/data/2.5/weather?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&units=metric&lang=fr",
+				dataType : "jsonp", 
+				success : function(parsed_json) 
+				{ 
+					var city_name = parsed_json['name']; 
+					var icon = parsed_json['weather'][0]['icon']; 
+					var temp_min = parsed_json['main']['temp_min'];
+					var temp_max = parsed_json['main']['temp_max'];
+
+					//	Remplissage du contenu
+					document.getElementById("weather_picture").innerHTML = "<img src='img/w/"+icon+".png'/>";
+					document.getElementById("temp_min").innerHTML = temp_min+"&deg;";
+					document.getElementById("temp_max").innerHTML = temp_max+"&deg;";
+					document.getElementById("city_name").innerHTML = city_name;
+				} 
+
+
+			}); 
+		});
+	}
+
+	// Fonction de callback en cas d’erreur
+	function erreurPosition(error) {
+		var info = "Erreur lors de la géolocalisation : ";
+		switch(error.code) {
+		case error.TIMEOUT:
+			info += "Timeout !";
+		break;
+		case error.PERMISSION_DENIED:
+			info += "Vous n’avez pas donné la permission";
+		break;
+		case error.POSITION_UNAVAILABLE:
+			info += "La position n’a pu être déterminée";
+		break;
+		case error.UNKNOWN_ERROR:
+			info += "Erreur inconnue";
+		break;
+		}
+		document.getElementById("maposition").innerHTML = info;
+	}
+
+	navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
+
+} 
+else 
+{
+	alert("Ce navigateur ne supporte pas la géolocalisation");
+}
+</script>
+
+
+</div>
+<!--
+
+Day	 Night	
+01d.png	 01n.png	 sky is clear
+02d.png	 02n.png	 few clouds
+03d.png	 03n.png	 scattered clouds
+04d.png	 04n.png	 broken clouds
+09d.png	 09n.png	 shower rain
+10d.png	 10n.png	 Rain
+11d.png	 11n.png	 Thunderstorm
+13d.png	 13n.png	 snow
+50d.png	 50n.png	 mist
+
+-->
 </body>
 </html>
