@@ -124,6 +124,8 @@
 						var temp_min = parsed_json['main']['temp_min'];
 						var temp_max = parsed_json['main']['temp_max'];
 
+    					alert("resultat = "+parsed_json);
+    					
 						//	Remplissage du contenu
 						document.getElementById("weather_picture").innerHTML = "<img src='http://openweathermap.org/img/w/"+icon+".png'/>";
 						document.getElementById("temp_min").innerHTML = temp_min+"&deg;";

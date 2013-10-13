@@ -22,7 +22,7 @@ var auth = {
 };
 
 var terms = 'food';
-var near = 'Paris';
+var near = 'San+Francisco';
 
 var accessor = {
   consumerSecret: auth.consumerSecret,
@@ -38,6 +38,7 @@ parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
 parameters.push(['oauth_token', auth.accessToken]);
 parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
+alert("parametres = "+parameters);
 var message = { 
   'action': 'http://api.yelp.com/v2/search',
   'method': 'GET',
@@ -56,11 +57,13 @@ $.ajax({
   'data': parameterMap,
   'cache': true,
   'dataType': 'jsonp',
-  'jsonpCallback': 'cb',
-  'success': function(data, textStats, XMLHttpRequest) {
-    console.log(data);
-    var output = prettyPrint(data);
-    $("body").append(output);
+  'success': function(parsed_json) 
+  { 
+    //On récupère la taille du tableau de données
+    var taille = parsed_json['response'];
+    alert('taille'+parsed_json);
+    JSON.stringify(parsed_json);
+    $("body").append(parsed_json);
   }
 });
 </script>
