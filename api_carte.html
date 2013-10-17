@@ -16,6 +16,52 @@
   <div id='map'></div>
 
   <script type='text/javascript'>
+  var tableau_resultat = new Array();
+  var present = false;
+  var n=49;
+  var x;
+
+  function getTirage(n)
+  {
+    return parseInt(Math.random()*n)+1;
+  }
+
+  while(tableau_resultat.length < 6)
+  {
+    x = getTirage(49);
+
+    for (var i = 0; i < tableau_resultat.length; i++) 
+    {
+      if(x == tableau_resultat[i])
+      {
+        present == true;
+      } 
+    }
+
+    if(present == false)
+    {
+      tableau_resultat.push(x);
+    } 
+  } 
+
+  console.log(tableau_resultat);
+  </script>
+
+
+
+<!---------------------------------------------------->
+  <script type='text/javascript'>
+
+  var texte="Bonjour ca va?";
+
+  for (var i = 0; i < texte.length; i++) 
+  {
+    
+  }
+
+  </script>
+
+  <script type='text/javascript'>
   var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([37.9, -77], 5);
   
   </script>

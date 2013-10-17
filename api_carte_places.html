@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>HTML5 : Géolocalisation + MapBox</title>
+  <meta charset="utf-8">
+
+  <!-- Bootstrap Twitter -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+  <!-- GoogleMaps c'est old school vive MapBox -->
+  <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js'></script>
+
+  <!-- JS Scripts -->
+  <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { width:100%;height:400px; }
+  </style>
+
+  </head>
+
+<body>
+  <div class="container">
+  <div class="navbar navbar-default">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="#">Géolocalisation + Météo</a>
+      </div>
+  </div>
+
+  <hr>
+
+  <!-- Show weather -->
+  <div id="meteo">
+    <h1> Il fait <label id="weather_picture"></label> à <label id="city_name" class="label label-info"></label></h1>
+    <h2> La température est de <label id="temp_min" class="label label-primary"></label> au minimum et de <label id="temp_max" class="label label-danger"></label> au maximum</h2>
+  </div>
+  
+  <hr>
+  
+  <div id="retour"></div>
+
+  <hr>
+
+  <div id='map'></div>
+
+  <!-- Show feedback -->
+  <div id="feedback-block">
+    
+  </div>
+    
+  <script type="text/javascript">
+
+    // APPEL AJAX API GOOGLE PLACES
+    $(document).ready(function()
+    {
+
+      var query = "japonnais";
+      var rayon = 500;
+      var key = "AIzaSyBe8eF-UN8AuSoHLFOxQeLvFqu8NACa6bA";
+      var resultats = new Array();
+      var taille;
+
+      $.ajax(
+      { 
+          url : "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&location=48.853526,2.379934&radius="+rayon+"&types=food|restaurant&sensor=false&key="+key,
+          dataType : "json", 
+          success : function(parsed_json){ 
+            //On récupère la taille du tableau de données
+            for (var i = 0; i < parsed_json['results'].length; i++) 
+            {
+              resultats.push({
+                'nom':parsed_json['results'][i]['name'],
+                'lattitude':parsed_json['results'][i]['geometry']['location']['lat'],
+                'longitude':parsed_json['results'][i]['geometry']['location']['lng'],
+                'adresse':parsed_json['results'][i]['formatted_address'],
+                'feature':'Feature',
+                'marker-size':'medium'});
+            } 
+          }
+      }); 
+    });
+
+  if(navigator.geolocation) 
+  {
+    var lati;
+    var longi;
+
+    // Fonction de callback en cas de succès
+    function affichePosition(position) 
+    {
+      $(document).ready(function(){
+        //Récupération des données depuis l'API OpenWeatherMap
+        $.ajax({ 
+          url : "http://api.openweathermap.org/data/2.5/weather?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&units=metric&lang=fr",
+          dataType : "jsonp", 
+          success : function(json) 
+          { 
+            var city_name = json['name']; 
+            var icon = json['weather'][0]['icon']; 
+            var temp_min = json['main']['temp_min'];
+            var temp_max = json['main']['temp_max'];
+              
+            //  Remplissage du contenu
+           $("#weather_picture").append("<img src='http://openweathermap.org/img/w/"+icon+".png'/>");
+           $("#temp_min").append(""+temp_min+" &deg;");
+           $("#temp_max").append(""+temp_max+" &deg;");
+           $("#city_name").append(""+city_name);
+          }
+        }); 
+      });
+
+      var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 13);
+
+      L.mapbox.markerLayer([
+      {
+          // this feature is in the GeoJSON format: see geojson.org
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              // coordinates here are in longitude, latitude order because
+              // x, y is the standard for GeoJSON and many formats
+              coordinates: [2.4218943285556797,48.85166003564586]
+          },
+          properties: {
+              title: 'Restaurant B',
+              description: '<p>Just one of me</p>',
+              // one can customize markers by adding simplestyle properties
+              // http://mapbox.com/developers/simplestyle/
+              'marker-size': 'medium',
+              'marker-color':'#58A419',
+              'marker-symbol': 'restaurant'
+          }
+      },
+      {
+          // this feature is in the GeoJSON format: see geojson.org
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              // coordinates here are in longitude, latitude order because
+              // x, y is the standard for GeoJSON and many formats
+              coordinates: [2.4298943285556797,48.85166003564586]
+          },
+          properties: {
+              title: 'Restaurant C',
+              description: '<p>Just one of me</p>',
+              // one can customize markers by adding simplestyle properties
+              // http://mapbox.com/developers/simplestyle/
+              'marker-size': 'medium',
+              'marker-color':'#78A419',
+              'marker-symbol': 'restaurant'
+          }
+      }
+      ]).addTo(map);      
+    }
+
+    // Fonction de callback en cas d’erreur
+    function erreurPosition(error) {
+      var info = "Erreur lors de la géolocalisation : ";
+      switch(error.code) {
+      case error.TIMEOUT:
+        info += "Timeout !";
+      break;
+      case error.PERMISSION_DENIED:
+        info += "Vous n’avez pas donné la permission";
+      break;
+      case error.POSITION_UNAVAILABLE:
+        info += "La position n’a pu être déterminée";
+      break;
+      case error.UNKNOWN_ERROR:
+        info += "Erreur inconnue";
+      break;
+      }
+    }
+
+    navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
+
+  } 
+  else 
+  {
+    alert("Ce navigateur ne supporte pas la géolocalisation");
+  }
+  </script>
+
+<!--//https://api.foursquare.com/v2/venues/search?client_id=R21TO35023CYTYLFMTCZUBDPGQMZVJKFXOYYFB5NJ1GNKSJZ&client_secret=OFXSG15TZOGK5IHHNV1K55HG03UOKLSHLX0I3WFI2RGJBLMB&v=20130815&ll=48.751989673430685,2.453483282054402&categoryID=4bf58dd8d48988d1e9941735-->
+  </div>
+  </body>
+</html>
