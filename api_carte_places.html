@@ -29,19 +29,10 @@
   <div class="container">
   <div class="navbar navbar-default">
       <div class="navbar-header">
-          <a class="navbar-brand" href="#">Géolocalisation + Météo</a>
+          <a class="navbar-brand" href="#">Google Places + MapBox</a>
       </div>
   </div>
 
-  <hr>
-
-  <!-- Show weather -->
-  <div id="meteo">
-    <h1> Il fait <label id="weather_picture"></label> à <label id="city_name" class="label label-info"></label></h1>
-    <h2> La température est de <label id="temp_min" class="label label-primary"></label> au minimum et de <label id="temp_max" class="label label-danger"></label> au maximum</h2>
-  </div>
-  
-  <div id="retour"></div>
   <div id='map'></div>
     
   </div>
@@ -52,9 +43,11 @@
   {
       // Déclaration des variables de recherche
       var query = "japonnais";
-      var rayon = 500;
+      var rayon = 400;
       var key = "AIzaSyDaLlMK7kcVE9WMXD8cNJLlV2T8hIJceRA";
-      var resultats = new Array();
+      var position_lat;
+      var position_long;
+      var jsonObj = [];
 
       /**
       * On formatte l'objet JSON en un GeoJSON
@@ -62,35 +55,32 @@
       */ 
       function tr(json)
       {
-        var geo = new Array();
-
         for (var i = 0; i < json.results.length; i++)
         {
-          if( i==0 )
-          {
-            resultats.push("{ type: 'Feature',"+
-              "geometry: { type: 'Point', coordinates: ["+json.results[i].geometry.location.lng+","+json.results[i].geometry.location.lat+"] },"+
-              "properties: { title: '"+json.results[i].name+"',"+
-              "description: 'DESCRIPTION',"+
-              "marker-size:'medium',"+
-              "marker-symbol:'restaurant'"+
-              "}}");
-          }
-          else
-          {
-            resultats.push(", { 'type': 'Feature',"+
-              "geometry: { type: 'Point', coordinates: ["+json.results[i].geometry.location.lng+","+json.results[i].geometry.location.lat+"] },"+
-              "properties: { title: '"+json.results[i].name+"',"+
-              "description: 'Description',"+
-              "marker-size:'medium',"+
-              "marker-symbol:'restaurant'"+
-              "}}");            
-          }
-          return resultats;
+          jsonObj.push({
+            type:'Feature',
+            geometry:
+            {
+              type:'Point',
+              coordinates: [json.results[i].geometry.location.lng,
+              json.results[i].geometry.location.lat]
+            },
+            properties:
+            {
+              title: json.results[i].name,
+              description: 'Description',
+              'marker-size': 'medium',
+              'marker-color':'#046380',
+              'marker-symbol': 'restaurant'
+            }
+          });
         }
+        return jsonObj;
       }
+
       /**
-      * Fonction callback
+      *
+      * Fonction callback d'erreur
       */ 
       function erreurPosition(error) {
         var info = "Erreur lors de la géolocalisation : ";
@@ -110,6 +100,8 @@
         }
       }
 
+      //navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
+      
       /**
       * On récupère les données JSON depuis l'API Google Places
       * Utilisation d'un Apel AJAX avec JQuery
@@ -118,9 +110,12 @@
       $.ajax({ 
           url : "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&location=48.853526,2.379934&radius="+rayon+"&types=food|restaurant&sensor=false&key="+key,
           dataType : "json", 
-          success : function(json){
+          success : function(json)
+          {
             // Passage a la fonction tr() pour transformation
-            resultats=tr(json);
+            jsonObj=tr(json);
+
+            //Affichage des points sur la carte
             afficher_points_carte();
           }
       });
@@ -135,16 +130,19 @@
       // Fonction de callback en cas de succès
       function affichePosition(position) 
       {
-        var geojson = resultats;
+        //On récupère la position
+        position_lat = position.coords.latitude;
+        position_long = position.coords.longitude;
 
-        var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 13);
-        alert("RESULTAT "+resultats);
-        L.mapbox.markerLayer(geojson).addTo(map); 
-      }    
+        //Déclaration de l'objet Map
+        var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 11);
+
+        // Ajout des points issus de GOOGLE PLACES sur la carte
+        L.mapbox.markerLayer(jsonObj).addTo(map);
+      }
     }
 
-
-  });
+});
   </script>
 
 <!--//https://api.foursquare.com/v2/venues/search?client_id=R21TO35023CYTYLFMTCZUBDPGQMZVJKFXOYYFB5NJ1GNKSJZ&client_secret=OFXSG15TZOGK5IHHNV1K55HG03UOKLSHLX0I3WFI2RGJBLMB&v=20130815&ll=48.751989673430685,2.453483282054402&categoryID=4bf58dd8d48988d1e9941735-->
