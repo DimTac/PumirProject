@@ -1,0 +1,70 @@
+
+        // {
+        //     // this feature is in the GeoJSON format: see geojson.org
+        //     type: 'Feature',
+        //     geometry: {
+        //         type: 'Point',
+        //         // coordinates here are in longitude, latitude order because
+        //         // x, y is the standard for GeoJSON and many formats
+        //         coordinates: [2.4218943285556797,48.85166003564586]
+        //     },
+        //     properties: {
+        //         title: 'Restaurant B',
+        //         description: '<p>Just one of me</p>',
+        //         // one can customize markers by adding simplestyle properties
+        //         // http://mapbox.com/developers/simplestyle/
+        //         'marker-size': 'medium',
+        //         'marker-color':'#58A419',
+        //         'marker-symbol': 'restaurant'
+        //     }
+        // },
+        // {
+        //     // this feature is in the GeoJSON format: see geojson.org
+        //     type: 'Feature',
+        //     geometry: {
+        //         type: 'Point',
+        //         // coordinates here are in longitude, latitude order because
+        //         // x, y is the standard for GeoJSON and many formats
+        //         coordinates: [2.4298943285556797,48.85166003564586]
+        //     },
+        //     properties: {
+        //         title: 'Restaurant C',
+        //         description: '<p>Just one of me</p>',
+        //         // one can customize markers by adding simplestyle properties
+        //         // http://mapbox.com/developers/simplestyle/
+        //         'marker-size': 'medium',
+        //         'marker-color':'#78A419',
+        //         'marker-symbol': 'restaurant'
+        //     }
+        // }
+
+            /**
+    * On test la possibilité de la géolocalisation
+    * On défini 2 variables afin de fluidifier la lecture du code
+    */ 
+    // if(navigator.geolocation) 
+    // {
+
+    //   // Fonction de callback en cas de succès
+    //   function affichePosition(position) 
+    //   {
+    //     $(document).ready(function(){
+    //       //Récupération des données depuis l'API OpenWeatherMap
+    //       $.ajax({ 
+    //         url : "http://api.openweathermap.org/data/2.5/weather?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&units=metric&lang=fr",
+    //         dataType : "jsonp", 
+    //         success : function(json) 
+    //         { 
+    //           var city_name = json['name']; 
+    //           var icon = json['weather'][0]['icon']; 
+    //           var temp_min = json['main']['temp_min'];
+    //           var temp_max = json['main']['temp_max'];
+                
+    //           //  Remplissage du contenu
+    //          $("#weather_picture").append("<img src='http://openweathermap.org/img/w/"+icon+".png'/>");
+    //          $("#temp_min").append(""+temp_min+" &deg;");
+    //          $("#temp_max").append(""+temp_max+" &deg;");
+    //          $("#city_name").append(""+city_name);
+    //         }
+    //       }); 
+    //     });

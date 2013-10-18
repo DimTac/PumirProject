@@ -41,150 +41,110 @@
     <h2> La température est de <label id="temp_min" class="label label-primary"></label> au minimum et de <label id="temp_max" class="label label-danger"></label> au maximum</h2>
   </div>
   
-  <hr>
-  
   <div id="retour"></div>
-
-  <hr>
-
   <div id='map'></div>
-
-  <!-- Show feedback -->
-  <div id="feedback-block">
     
   </div>
     
   <script type="text/javascript">
 
-    // APPEL AJAX API GOOGLE PLACES
-    $(document).ready(function()
-    {
-
+  $(document).ready(function()
+  {
+      // Déclaration des variables de recherche
       var query = "japonnais";
       var rayon = 500;
-      var key = "AIzaSyBe8eF-UN8AuSoHLFOxQeLvFqu8NACa6bA";
+      var key = "AIzaSyDaLlMK7kcVE9WMXD8cNJLlV2T8hIJceRA";
       var resultats = new Array();
-      var taille;
 
-      $.ajax(
-      { 
+      /**
+      * On formatte l'objet JSON en un GeoJSON
+      * pour placer les points sur MapBox
+      */ 
+      function tr(json)
+      {
+        var geo = new Array();
+
+        for (var i = 0; i < json.results.length; i++)
+        {
+          if( i==0 )
+          {
+            resultats.push("{ type: 'Feature',"+
+              "geometry: { type: 'Point', coordinates: ["+json.results[i].geometry.location.lng+","+json.results[i].geometry.location.lat+"] },"+
+              "properties: { title: '"+json.results[i].name+"',"+
+              "description: 'DESCRIPTION',"+
+              "marker-size:'medium',"+
+              "marker-symbol:'restaurant'"+
+              "}}");
+          }
+          else
+          {
+            resultats.push(", { 'type': 'Feature',"+
+              "geometry: { type: 'Point', coordinates: ["+json.results[i].geometry.location.lng+","+json.results[i].geometry.location.lat+"] },"+
+              "properties: { title: '"+json.results[i].name+"',"+
+              "description: 'Description',"+
+              "marker-size:'medium',"+
+              "marker-symbol:'restaurant'"+
+              "}}");            
+          }
+          return resultats;
+        }
+      }
+      /**
+      * Fonction callback
+      */ 
+      function erreurPosition(error) {
+        var info = "Erreur lors de la géolocalisation : ";
+        switch(error.code) {
+        case error.TIMEOUT:
+          info += "Timeout !";
+        break;
+        case error.PERMISSION_DENIED:
+          info += "Vous n’avez pas donné la permission";
+        break;
+        case error.POSITION_UNAVAILABLE:
+          info += "La position n’a pu être déterminée";
+        break;
+        case error.UNKNOWN_ERROR:
+          info += "Erreur inconnue";
+        break;
+        }
+      }
+
+      /**
+      * On récupère les données JSON depuis l'API Google Places
+      * Utilisation d'un Apel AJAX avec JQuery
+      * On envoi le résultat a la fonction tr pour modification
+      */ 
+      $.ajax({ 
           url : "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&location=48.853526,2.379934&radius="+rayon+"&types=food|restaurant&sensor=false&key="+key,
           dataType : "json", 
-          success : function(parsed_json){ 
-            //On récupère la taille du tableau de données
-            for (var i = 0; i < parsed_json['results'].length; i++) 
-            {
-              resultats.push({
-                'nom':parsed_json['results'][i]['name'],
-                'lattitude':parsed_json['results'][i]['geometry']['location']['lat'],
-                'longitude':parsed_json['results'][i]['geometry']['location']['lng'],
-                'adresse':parsed_json['results'][i]['formatted_address'],
-                'feature':'Feature',
-                'marker-size':'medium'});
-            } 
+          success : function(json){
+            // Passage a la fonction tr() pour transformation
+            resultats=tr(json);
+            afficher_points_carte();
           }
-      }); 
-    });
-
-  if(navigator.geolocation) 
-  {
-    var lati;
-    var longi;
-
-    // Fonction de callback en cas de succès
-    function affichePosition(position) 
-    {
-      $(document).ready(function(){
-        //Récupération des données depuis l'API OpenWeatherMap
-        $.ajax({ 
-          url : "http://api.openweathermap.org/data/2.5/weather?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&units=metric&lang=fr",
-          dataType : "jsonp", 
-          success : function(json) 
-          { 
-            var city_name = json['name']; 
-            var icon = json['weather'][0]['icon']; 
-            var temp_min = json['main']['temp_min'];
-            var temp_max = json['main']['temp_max'];
-              
-            //  Remplissage du contenu
-           $("#weather_picture").append("<img src='http://openweathermap.org/img/w/"+icon+".png'/>");
-           $("#temp_min").append(""+temp_min+" &deg;");
-           $("#temp_max").append(""+temp_max+" &deg;");
-           $("#city_name").append(""+city_name);
-          }
-        }); 
       });
+    
+    function afficher_points_carte()
+    {
+      navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
+    }    
 
-      var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 13);
+    if(navigator.geolocation) 
+    {
+      // Fonction de callback en cas de succès
+      function affichePosition(position) 
+      {
+        var geojson = resultats;
 
-      L.mapbox.markerLayer([
-      {
-          // this feature is in the GeoJSON format: see geojson.org
-          type: 'Feature',
-          geometry: {
-              type: 'Point',
-              // coordinates here are in longitude, latitude order because
-              // x, y is the standard for GeoJSON and many formats
-              coordinates: [2.4218943285556797,48.85166003564586]
-          },
-          properties: {
-              title: 'Restaurant B',
-              description: '<p>Just one of me</p>',
-              // one can customize markers by adding simplestyle properties
-              // http://mapbox.com/developers/simplestyle/
-              'marker-size': 'medium',
-              'marker-color':'#58A419',
-              'marker-symbol': 'restaurant'
-          }
-      },
-      {
-          // this feature is in the GeoJSON format: see geojson.org
-          type: 'Feature',
-          geometry: {
-              type: 'Point',
-              // coordinates here are in longitude, latitude order because
-              // x, y is the standard for GeoJSON and many formats
-              coordinates: [2.4298943285556797,48.85166003564586]
-          },
-          properties: {
-              title: 'Restaurant C',
-              description: '<p>Just one of me</p>',
-              // one can customize markers by adding simplestyle properties
-              // http://mapbox.com/developers/simplestyle/
-              'marker-size': 'medium',
-              'marker-color':'#78A419',
-              'marker-symbol': 'restaurant'
-          }
-      }
-      ]).addTo(map);      
+        var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 13);
+        alert("RESULTAT "+resultats);
+        L.mapbox.markerLayer(geojson).addTo(map); 
+      }    
     }
 
-    // Fonction de callback en cas d’erreur
-    function erreurPosition(error) {
-      var info = "Erreur lors de la géolocalisation : ";
-      switch(error.code) {
-      case error.TIMEOUT:
-        info += "Timeout !";
-      break;
-      case error.PERMISSION_DENIED:
-        info += "Vous n’avez pas donné la permission";
-      break;
-      case error.POSITION_UNAVAILABLE:
-        info += "La position n’a pu être déterminée";
-      break;
-      case error.UNKNOWN_ERROR:
-        info += "Erreur inconnue";
-      break;
-      }
-    }
 
-    navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
-
-  } 
-  else 
-  {
-    alert("Ce navigateur ne supporte pas la géolocalisation");
-  }
+  });
   </script>
 
 <!--//https://api.foursquare.com/v2/venues/search?client_id=R21TO35023CYTYLFMTCZUBDPGQMZVJKFXOYYFB5NJ1GNKSJZ&client_secret=OFXSG15TZOGK5IHHNV1K55HG03UOKLSHLX0I3WFI2RGJBLMB&v=20130815&ll=48.751989673430685,2.453483282054402&categoryID=4bf58dd8d48988d1e9941735-->
