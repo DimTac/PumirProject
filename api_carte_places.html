@@ -20,7 +20,7 @@
 
   <style>
     body { margin:0; padding:0; }
-    #map { width:100%;height:400px; }
+    #map { width:100%;height:600px; }
   </style>
 
   </head>
@@ -99,9 +99,35 @@
         break;
         }
       }
-
-      //navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
       
+      /**
+      * Lance la fonction de géolicalisation 
+      * Affichage de la carte
+      */ 
+      function afficher_points_carte()
+      {
+        navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
+      }
+
+      /**
+      * Fait le test si le navigateur supporte la géolocalisation
+      */ 
+      if(navigator.geolocation) 
+      {
+
+        console.log("position 1 :"+position_lat);
+
+        // Fonction de callback en cas de succès
+        function affichePosition(position) 
+        {
+          //Déclaration de l'objet Map
+          var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 11);
+
+          // Ajout des points issus de GOOGLE PLACES sur la carte
+          L.mapbox.markerLayer(jsonObj).addTo(map);
+        }
+      }
+
       /**
       * On récupère les données JSON depuis l'API Google Places
       * Utilisation d'un Apel AJAX avec JQuery
@@ -114,33 +140,10 @@
           {
             // Passage a la fonction tr() pour transformation
             jsonObj=tr(json);
-
             //Affichage des points sur la carte
             afficher_points_carte();
           }
-      });
-    
-    function afficher_points_carte()
-    {
-      navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
-    }    
-
-    if(navigator.geolocation) 
-    {
-      // Fonction de callback en cas de succès
-      function affichePosition(position) 
-      {
-        //On récupère la position
-        position_lat = position.coords.latitude;
-        position_long = position.coords.longitude;
-
-        //Déclaration de l'objet Map
-        var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 11);
-
-        // Ajout des points issus de GOOGLE PLACES sur la carte
-        L.mapbox.markerLayer(jsonObj).addTo(map);
-      }
-    }
+      });  
 
 });
   </script>
