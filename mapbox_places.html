@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>HTML5 : Géolocalisation + MapBox</title>
+  <meta charset="utf-8">
+
+  <!-- Bootstrap Twitter -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+  <!-- GoogleMaps c'est old school vive MapBox -->
+  <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js'></script>
+
+  <!-- JS Scripts -->
+  <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { width:100%;height:600px; }
+  </style>
+
+  </head>
+
+<body>
+  <div class="container">
+  <div class="navbar navbar-default">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="#">Google Places + MapBox</a>
+      </div>
+  </div>
+
+  <div id='map'></div>
+    
+  </div>
+    
+  <script type="text/javascript">
+
+  $(document).ready(function()
+  {
+      // Déclaration des variables de recherche
+      var query = "japonnais";
+      var rayon = 400;
+      var key = "AIzaSyDaLlMK7kcVE9WMXD8cNJLlV2T8hIJceRA";
+      var position_lat;
+      var position_long;
+      var jsonObj = [];
+
+      /**
+      * On formatte l'objet JSON en un GeoJSON
+      * pour placer les points sur MapBox
+      */ 
+      function tr(json)
+      {
+        for (var i = 0; i < json.results.length; i++)
+        {
+          jsonObj.push({
+            type:'Feature',
+            geometry:
+            {
+              type:'Point',
+              coordinates: [json.results[i].geometry.location.lng,
+              json.results[i].geometry.location.lat]
+            },
+            properties:
+            {
+              title: json.results[i].name,
+              description: 'Description',
+              'marker-size': 'medium',
+              'marker-color':'#046380',
+              'marker-symbol': 'restaurant'
+            }
+          });
+        }
+        return jsonObj;
+      }
+
+      /**
+      *
+      * Fonction callback d'erreur
+      */ 
+      function erreurPosition(error) {
+        var info = "Erreur lors de la géolocalisation : ";
+        switch(error.code) {
+        case error.TIMEOUT:
+          info += "Timeout !";
+        break;
+        case error.PERMISSION_DENIED:
+          info += "Vous n’avez pas donné la permission";
+        break;
+        case error.POSITION_UNAVAILABLE:
+          info += "La position n’a pu être déterminée";
+        break;
+        case error.UNKNOWN_ERROR:
+          info += "Erreur inconnue";
+        break;
+        }
+      }
+      
+      /**
+      * Lance la fonction de géolicalisation 
+      * Affichage de la carte
+      */ 
+      function afficher_points_carte()
+      {
+        navigator.geolocation.getCurrentPosition(affichePosition,erreurPosition);
+      }
+
+      /**
+      * Fait le test si le navigateur supporte la géolocalisation
+      */ 
+      if(navigator.geolocation) 
+      {
+
+        console.log("position 1 :"+position_lat);
+
+        // Fonction de callback en cas de succès
+        function affichePosition(position) 
+        {
+          //Déclaration de l'objet Map
+          var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([position.coords.latitude ,position.coords.longitude], 11);
+
+          // Ajout des points issus de GOOGLE PLACES sur la carte
+          L.mapbox.markerLayer(jsonObj).addTo(map);
+        }
+      }
+
+      /**
+      * On récupère les données JSON depuis l'API Google Places
+      * Utilisation d'un Apel AJAX avec JQuery
+      * On envoi le résultat a la fonction tr pour modification
+      */ 
+      $.ajax({ 
+          url : "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&location=48.853526,2.379934&radius="+rayon+"&types=food|restaurant&sensor=false&key="+key,
+          dataType : "json", 
+          success : function(json)
+          {
+            // Passage a la fonction tr() pour transformation
+            jsonObj=tr(json);
+            //Affichage des points sur la carte
+            afficher_points_carte();
+          }
+      });  
+
+});
+  </script>
+
+<!--//https://api.foursquare.com/v2/venues/search?client_id=R21TO35023CYTYLFMTCZUBDPGQMZVJKFXOYYFB5NJ1GNKSJZ&client_secret=OFXSG15TZOGK5IHHNV1K55HG03UOKLSHLX0I3WFI2RGJBLMB&v=20130815&ll=48.751989673430685,2.453483282054402&categoryID=4bf58dd8d48988d1e9941735-->
+  </div>
+  </body>
+</html>
