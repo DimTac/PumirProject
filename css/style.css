@@ -1,0 +1,79 @@
+* { margin:0; padding:0; }
+html,body { width:100%; height:100%; }
+
+body{
+	overflow-x: hidden;
+	overflow-y: hidden; 
+}
+
+#canvas {
+	top:20px;
+	left:20px;
+}
+
+/*body :first-child{
+	position: absolute;
+	width: 80%;
+	height: 100%;	
+	background-color: #119955;
+}
+
+body :nth-child(2){
+	position: absolute;	
+	width: 20%;
+	height: 100%;
+	background-color: #ccc;
+	right: 0;
+	box-shadow: 1px 0 0 #333;
+}
+*/
+input{
+	width: 50px;
+	height: 25px;
+	border: 1px dotted black;
+}
+
+/*
+body :nth-child(3){
+	position: absolute;	
+	width: 80%;
+	height: 100%;	
+	background-color: #991155;
+	display:none;
+}*/
+
+#roue{
+	position: absolute;
+	width: 100%;
+	height: 100%;	
+	background-color: #991155;
+	left:0;
+	visibility: visible;
+}
+
+#affichage{
+	position: absolute;
+	width: 20%;
+	min-width: 200px;
+	height: 100%;
+	margin-left: 80%;
+}
+
+#panel{
+	position: absolute;	
+	width: 100%;
+	min-width: 200px;
+	height: 100%;
+	background-color: #ccc;
+	/*right: 0;*/
+	box-shadow: 1px 0 0 #333;
+}
+
+#map{
+	position: absolute;	
+	width: 0%;
+	height: 100%;	
+	margin-left: 20%;
+	background-color: #119955;
+	/*visibility:hidden;*/
+}
