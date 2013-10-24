@@ -83,7 +83,7 @@ function spin() {
 }
 
 function rotationRoue() {
-  vitesseRotation += 50;
+  vitesseRotation += 200;
   if(vitesseRotation >= vitesseRotationTotal) {
     stoprotationRoue();
     return;
@@ -113,12 +113,8 @@ function stoprotationRoue() {
     });
   $("#panel").css('width', '20%');
   $("#map").css("width", "80%");
-/*  $("#map").css("width", "80%").animate(
-    {"margin-left":"20%"},
-    {
-      duration:500,
-      queue:false
-    });*/
+  $("#panel-roue").delay(1000).fadeOut(500);
+  $("#panel-results").delay(1000).fadeIn(500);
 }
 
 function back(){
@@ -126,20 +122,19 @@ function back(){
     {"margin-left":"80%"},
     {
       duration:500,
-      // queue:false
     }).animate(
     {"width":"20%"},
     {
       duration:500,
-      // queue:false
     });;
   $("#panel").css('width', '100%');
   $("#map").animate(
     {"width":"0%"},
     {
       duration:500,
-      // queue:false
     });
+  $("#panel-results").fadeOut(500);
+  $("#panel-roue").fadeIn(500);
 }
 
 function easeOut(t, b, c, d) {

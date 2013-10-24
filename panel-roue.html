@@ -11,16 +11,46 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/style.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
     </head>
     <body>
-            <div id="roue">
-                <canvas id="canvas" width="500" height="500"></canvas>
-            </div>
+        <div id="roue">
+               <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
         <div id="affichage">
             <div id="panel">
-                <input type="button" value="Go!" onclick="spin();" />
-                <input type="button" value="Back" onclick="back();">
+                <div id="panel-roue">
+                    <span>ou</span>
+                    <input type="button" value="Avec transport">
+                    <input type="button" value="Sans transport">
+                    
+                    <div>
+                        <span>Mon budget pour aujourd'hui</span>
+                    </div>
+                    
+                    <div id="choix">
+                        <span>J'ai plutôt envie de manger</span>
+                    </div>
+                    <div>
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                        <input type="button" value="" onclick="">
+                    </div>
+
+                    <input type="button" value="Go!" onclick="spin();" />
+                </div>
+                <div id="panel-results">
+                    <input type="button" value="Back" onclick="back();">
+                    <p>COUCOU.</p>
+                </div>
             </div>
 
             <div id="map">

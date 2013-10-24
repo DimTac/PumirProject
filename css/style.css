@@ -1,9 +1,59 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 * { margin:0; padding:0; }
 html,body { width:100%; height:100%; }
 
 body{
 	overflow-x: hidden;
 	overflow-y: hidden; 
+	font-family: Raleway;
 }
 
 #canvas {
@@ -11,26 +61,44 @@ body{
 	left:20px;
 }
 
-/*body :first-child{
-	position: absolute;
-	width: 80%;
-	height: 100%;	
-	background-color: #119955;
+*:focus {
+    outline: 0;
 }
 
-body :nth-child(2){
-	position: absolute;	
-	width: 20%;
-	height: 100%;
-	background-color: #ccc;
-	right: 0;
-	box-shadow: 1px 0 0 #333;
-}
-*/
 input{
-	width: 50px;
-	height: 25px;
-	border: 1px dotted black;
+	width: 50%;
+	height: 10%;
+	border:none;
+	margin:0;
+	padding:0;
+}
+span + input{
+	float: left;
+}
+input[value="Go!"]{
+	font-size:1.5em;
+	line-height: 3;
+	background-color: #be4d47;
+	color: #fff;
+	border:none;
+	text-transform: uppercase;
+	width:100%;
+	height:20%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+input[value="Back"]{
+	font-size:1.5em;
+	line-height: 3;
+	background-color: #be4d47;
+	color: #fff;
+	border:none;
+	text-transform: uppercase;
+	width:100%;
+	height:20%;
+	position: absolute;
+	bottom: 0;
 }
 
 /*
@@ -65,7 +133,6 @@ body :nth-child(3){
 	min-width: 200px;
 	height: 100%;
 	background-color: #ccc;
-	/*right: 0;*/
 	box-shadow: 1px 0 0 #333;
 }
 
@@ -76,4 +143,46 @@ body :nth-child(3){
 	margin-left: 20%;
 	background-color: #119955;
 	/*visibility:hidden;*/
+}
+
+#panel-roue{
+	height: 100%;
+	/*opacity: 1;*/
+	/*display: block;*/
+}
+#panel-roue div{
+	width: 100%;
+	background-color: #be4d47;
+	width: 100%;
+	height: 5%;
+}
+
+#panel-roue div:last-of-type{
+	height:50%;
+
+	background-color: transparent;
+}
+#panel-roue div:last-of-type :nth-child(2n+1){
+	float: left;
+}
+#panel-roue div:last-of-type input{
+	height: 20%;
+}
+
+#panel-results{
+	height: 100%;
+	/*visibility: hidden;*/
+	/*opacity: 0;*/
+	display: none;
+	background-color: #eeffee;
+}
+
+p{
+	color: black;
+}
+
+div > span{
+	color: #fff;
+	display:inline-block; 
+	vertical-align:middle
 }
