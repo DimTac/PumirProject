@@ -15,6 +15,8 @@ var vitesseRotationTotal = 0;
 
 var canvasContext;
 
+var aTourne = false;
+
 function dessinRoue() {
   var canvas = document.getElementById("canvas");
   if (canvas.getContext) {
@@ -76,10 +78,11 @@ function dessinRoue() {
 }
 
 function spin() {
-  spinAngleStart = Math.random() * 10 + 10;
-  vitesseRotation = 0;
-  vitesseRotationTotal = Math.random() * 3 + 4 * 1500;
-  rotationRoue();
+    aTourne = true;
+    spinAngleStart = Math.random() * 10 + 10;
+    vitesseRotation = 0;
+    vitesseRotationTotal = Math.random() * 3 + 4 * 1500;
+    rotationRoue();
 }
 
 function rotationRoue() {
@@ -135,6 +138,7 @@ function back(){
     });
   $("#panel-results").fadeOut(500);
   $("#panel-roue").fadeIn(500);
+  aTourne = false;
 }
 
 function easeOut(t, b, c, d) {

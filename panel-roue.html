@@ -29,35 +29,41 @@ and open the template in the editor.
         <div id="roue">
                <canvas id="canvas" width="500" height="500"></canvas>
         </div>
+
         <div id="affichage">
             <div id="panel">
                 <div id="panel-roue">
-                    <span>ou</span>
+                  <div id="transport">
                     <input type="button" value="Avec transport">
                     <input type="button" value="Sans transport">
-                    
                     <div>
-                        <span>Mon budget pour aujourd'hui</span>
+                      <span>ou</span>
                     </div>
-                    
-                    <div id="choix">
-                        <span>J'ai plutôt envie de manger</span>
-                    </div>
-                    <div>
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                        <input type="button" value="" onclick="">
-                    </div>
-
-                    <input type="button" value="Go!" onclick="spin();" />
+                  </div>
+                  
+                  <div id="budget">
+                      <span>Mon budget pour aujourd'hui</span>
+                      <input type="button" value="-" onclick="">
+                      <div></div>
+                      <input type="button" value="+" onclick="">
+                  </div>
+                  
+                  <div id="choix">
+                      <span>J'ai plutôt envie de manger</span>
+                      <input type="button" value="Chinois" onclick="">
+                      <input type="button" value="Japonais" onclick="">
+                      <input type="button" value="Kebab" onclick="">
+                      <input type="button" value="Brasserie" onclick="">
+                      <input type="button" value="Pizza" onclick="">
+                      <input type="button" value="Indien" onclick="">
+                      <input type="button" value="Crêperie" onclick="">
+                      <input type="button" value="Sandwich" onclick="">
+                      <input type="button" value="Bio-tibétain" onclick="">
+                      <input type="button" value="Chez maman" onclick="">
+                  </div>
+                  <input type="button" value="> Go!" onclick="spin();" />
                 </div>
+
                 <div id="panel-results">
                     <input type="button" value="Back" onclick="back();">
                     <p>COUCOU.</p>
@@ -155,3 +161,4 @@ and open the template in the editor.
                     </script>
     </body>
 </html>
+
