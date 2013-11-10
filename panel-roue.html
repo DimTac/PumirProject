@@ -26,30 +26,29 @@ and open the template in the editor.
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
     </head>
     <body>
+        <!-- <div id="trame"></div> -->
         <div id="roue">
                <canvas id="canvas" width="500" height="500"></canvas>
         </div>
-
+        
         <div id="affichage">
             <div id="panel">
                 <div id="panel-roue">
                   <div id="transport">
                     <input type="button" value="Avec transport">
                     <input type="button" value="Sans transport">
-                    <div>
-                      <span>ou</span>
-                    </div>
+                    <div>ou</div>
                   </div>
                   
                   <div id="budget">
-                      <span>Mon budget pour aujourd'hui</span>
-                      <input type="button" value="-" onclick="">
-                      <div></div>
-                      <input type="button" value="+" onclick="">
+                      <span class="budget">Mon budget pour aujourd'hui</span>
+                      <input id="moins" type="button" value="-" onclick="">
+                      <div class="budget0"></div>
+                      <input id="plus" type="button" value="+" onclick="">
                   </div>
                   
                   <div id="choix">
-                      <span>J'ai plutôt envie de manger</span>
+                      <span class="envie">J'ai plutôt envie de manger</span>
                       <input type="button" value="Chinois" onclick="">
                       <input type="button" value="Japonais" onclick="">
                       <input type="button" value="Kebab" onclick="">
@@ -72,13 +71,39 @@ and open the template in the editor.
 
             <div id="map">
                 <div id="resultats"></div>
-                    <div id="mapbox" class="dark"></div>
+                <div id="mapbox" class="dark"></div>
                 <div id="geolocate"></div>
             </div>
         </div>
 
         <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js'></script>
         <script src='js/roueTourne.js'></script>
+        <script type="text/javascript">
+          window.compteur = 0;
+          $('#moins').bind('click', function(evt){
+            evt.preventDefault();
+            if(window.compteur == 0){
+              return;
+            }
+            else{
+              window.compteur--;
+              $('#budget div').removeClass().addClass("budget"+window.compteur);   
+            }
+          });
+
+          $('#plus').bind('click', function(evt){
+            console.log("coucou");
+            evt.preventDefault();
+            if(window.compteur == 3){
+              return;
+            }
+            else{
+              window.compteur++;
+              $('#budget div').removeClass().addClass("budget"+window.compteur);   
+            }
+          });
+        </script>
+
           <script type="text/javascript">
 
                 var jsonObj = [];
@@ -158,7 +183,7 @@ and open the template in the editor.
                   L.mapbox.markerLayer(jsonObj).addTo(map);
                 }
 
-                    </script>
+          </script>
     </body>
 </html>
 

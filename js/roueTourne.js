@@ -112,7 +112,6 @@ function stoprotationRoue() {
     {"margin-left":"0%"},
     {
       duration:500,
-
     });
   $("#panel").css('width', '20%');
   $("#map").css("width", "80%");
@@ -129,7 +128,7 @@ function back(){
     {"width":"20%"},
     {
       duration:500,
-    });;
+    });
   $("#panel").css('width', '100%');
   $("#map").animate(
     {"width":"0%"},
