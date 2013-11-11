@@ -1,7 +1,10 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html>
 <html>
     <head>
-<<<<<<< HEAD
 
     <title>Wheelunch</title>
     <meta charset='utf-8' />
@@ -27,56 +30,31 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
             
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
-=======
-      <title>Wheelunch</title>
-      <meta charset='utf-8' />
-      <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <link href="css/style.css" rel="stylesheet">
-      <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
-      <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
-      <!-- Bootstrap Twitter -->
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-
-      <!-- GoogleMaps c'est old school vive MapBox -->
-      <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>     
-      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.standalone.js'></script>
-      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
-
-      <!-- JS Scripts -->
-      <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-      <script src="js/bootstrap.js"></script>    
-      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
->>>>>>> f666c2c30292f9a2f9fdc757b33aff5562b00359
     </head>
     <body>
+        <!-- <div id="trame"></div> -->
         <div id="roue">
-          <canvas id="canvas" width="500" height="500"></canvas>
+               <canvas id="canvas" width="500" height="500"></canvas>
         </div>
-
+        
         <div id="affichage">
             <div id="panel">
                 <div id="panel-roue">
                   <div id="transport">
                     <input type="button" value="Avec transport">
                     <input type="button" value="Sans transport">
-                    <div>
-                      <span>ou</span>
-                    </div>
+                    <div>ou</div>
                   </div>
                   
                   <div id="budget">
-                      <span>Mon budget pour aujourd'hui</span>
-                      <input type="button" value="-" onclick="">
-                      <div></div>
-                      <input type="button" value="+" onclick="">
+                      <span class="budget">Mon budget pour aujourd'hui</span>
+                      <input id="moins" type="button" value="-" onclick="">
+                      <div class="budget0"></div>
+                      <input id="plus" type="button" value="+" onclick="">
                   </div>
                   
                   <div id="choix">
-                      <span>J'ai plutôt envie de manger</span>
+                      <span class="envie">J'ai plutôt envie de manger</span>
                       <input type="button" value="Chinois" onclick="">
                       <input type="button" value="Japonais" onclick="">
                       <input type="button" value="Kebab" onclick="">
@@ -97,26 +75,13 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
             <!-- <div id="map"> -->
                 <div id="resultats"></div>
                 <div id="map" class="dark"></div>
                 <div id="geolocate"></div>
             <!-- </div> -->
-=======
-            <div id="resultats"></div>
-            <div id="map" class="dark"></div>
-            <div id="geolocate"></div>
->>>>>>> f666c2c30292f9a2f9fdc757b33aff5562b00359
         </div>
-        
-        <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/roueTourne.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 
-<<<<<<< HEAD
 
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
@@ -148,8 +113,6 @@
           }
         });
       </script>
-=======
->>>>>>> f666c2c30292f9a2f9fdc757b33aff5562b00359
     </body>
 </html>
 
