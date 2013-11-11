@@ -1,22 +1,27 @@
+////////////////////////////////////////////////
+/////  PARTIE JEREM/LUCIE POUR LA ROUE   ///////
+////////////////////////////////////////////////
+
+//------------  Déclaration des variables --------------
 var couleurs = ["#E1EBED", "#B0CDD8", "#7FA2B0", "#607588",
              "#B0CDD8", "#E1EBED", "#B0CDD8", "#7FA2B0",
              "#607588", "#B0CDD8", "#E1EBED", "#B0CDD8"];
 var typeRestos = ["Italien", "Chinois", "Indien", "Japonais",
                    "Crêperie", "Fast food", "Sandwich", "Pâtes",
                    "Kébab", "Brasserie","Coucou","Coucou2"];
-
 var startAngle = 0;
 var arc = Math.PI / 6;
 var vitesseRotationFin = null;
-
 var spinArcStart = 10;
 var vitesseRotation = 0;
 var vitesseRotationTotal = 0;
-
 var canvasContext;
-
 var aTourne = false;
 
+$("#map").css('width', '0%');
+
+
+//------------  Fonctions à décrire --------------
 function dessinRoue() {
   var canvas = document.getElementById("canvas");
   if (canvas.getContext) {
@@ -108,15 +113,16 @@ function stoprotationRoue() {
   canvasContext.fillText(text, 250 - canvasContext.measureText(text).width / 2, 250 + 10);
   canvasContext.restore();
 
-  $("#affichage").css('width', '100%').delay(1000).animate(
+  /*$("#affichage").css('width', '100%').delay(1000).animate(
     {"margin-left":"0%"},
     {
       duration:500,
+
     });
   $("#panel").css('width', '20%');
-  $("#map").css("width", "80%");
+  // $("#map").css("width", "80%");
   $("#panel-roue").delay(1000).fadeOut(500);
-  $("#panel-results").delay(1000).fadeIn(500);
+  $("#panel-results").delay(1000).fadeIn(500);*/
 }
 
 function back(){
@@ -130,11 +136,12 @@ function back(){
       duration:500,
     });
   $("#panel").css('width', '100%');
-  $("#map").animate(
-    {"width":"0%"},
-    {
-      duration:500,
-    });
+  $("#map").css('width', '0%');
+  // $("#map").animate(
+  //   {"width":"0%"},
+  //   {
+  //     duration:500,
+  //   });
   $("#panel-results").fadeOut(500);
   $("#panel-roue").fadeIn(500);
   aTourne = false;
@@ -145,5 +152,24 @@ function easeOut(t, b, c, d) {
   var tc = ts*t;
   return b+c*(tc + -3*ts + 3*t);
 }
+
+//------------  Action lors du lancement de la roue -----
+/*$("#go").on('click',function(e)
+{
+  console.log("GO"); //debug
+
+  // Animation roue
+  spin();
+
+  // Transition
+
+  // Chargement
+
+  // Foursquare Connect
+
+  // Initilialisation de la carte + Display
+  initialisationCarte();
+
+});*/
 
 dessinRoue();
