@@ -174,8 +174,13 @@ input[type="button"] + span{
 	width: 100%;
 	min-width: 200px;
 	height: 100%;
+<<<<<<< HEAD
+	/*background-color: #ccc;*/
+	/*box-shadow: 1px 0 0 #333;*/
+=======
 	background-color: #ccc;
 	box-shadow: 1px 0 0 #333;
+>>>>>>> f666c2c30292f9a2f9fdc757b33aff5562b00359
 }
 
 #map{
