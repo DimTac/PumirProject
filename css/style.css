@@ -64,6 +64,7 @@ body{
 	 -moz-background-size: cover; /* pour Firefox */
 	 -o-background-size: cover; /* pour Opera */
 	 background-size: cover; /* version standardisée */
+	 cursor: default;
 }
 
 #canvas {
