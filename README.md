@@ -14,7 +14,7 @@ WheeLunch
     <td valign="middle">Dimitri T.</td>
   </tr>
     <tr>
-    <td><img src="http://lorempixel.com/80/80/cats/"></td>
+    <td><img src="http://www.gravatar.com/avatar/baf8b79f41d7dd0274f386c241a5d555.png"></td>
     <td valign="middle">Lucie R.</td>
   </tr>
       <tr>
