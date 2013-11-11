@@ -212,7 +212,7 @@ input[type="button"] + span{
 	min-width: 200px;
 	height: 100%;
 	/*background-color: #ccc;*/
-	box-shadow: 1px 0 0 #333;
+	/*box-shadow: 1px 0 0 #333;*/
 }
 
 #map{
