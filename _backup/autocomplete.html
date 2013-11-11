@@ -1,0 +1,90 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Autocomplete - Remote JSONP datasource</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+  .ui-autocomplete-loading {
+    background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
+  }
+  #city { width: 25em; }
+
+  </style>
+
+
+
+</head>
+<body>
+
+ <script>
+var data = [
+    {"label" : "Aragorn"},
+    {"label" : "Arwen"},
+    {"label" : "Bilbo Baggins"},
+    {"label" : "Boromir"},
+    {"label" : "Frodo Baggins"},
+    {"label" : "Gandalf"},
+    {"label" : "Gimli"},
+    {"label" : "Gollum"},
+    {"label" : "Legolas"},
+    {"label" : "Meriadoc Merry Brandybuck"},
+    {"label" : "Peregrin Pippin Took"},
+    {"label" : "Samwise Gamgee"}
+    ];
+  </script>
+
+<script>
+$(function() {
+
+function jsoncallback(data){
+  //console.log("data "+data);
+}
+
+var postData ="http://api.deezer.com/search/autocomplete?q=eminem";
+
+ $.ajax({
+    type: "POST",
+    dataType: "json",
+    data: postData,
+    beforeSend: function(x) {
+        if(x && x.overrideMimeType) {
+            x.overrideMimeType("application/json;charset=UTF-8");
+        }
+    },
+    url: 'test.php',
+    success: function(data) {
+        // 'data' is a JSON object which we can access directly.
+        // Evaluate the data.success member and do something appropriate...
+        if (data.success == true){
+            $('#section1').html(data.message);
+        }
+        else{
+            $('#section2').html(data.message);
+        }
+    }
+});
+
+});
+</script>
+
+<input type="text" id="search" />  
+  
+<div class="ui-widget">
+  <label for="autocomplete">Your city: </label>
+  <input id="autocomplete" />
+  Powered by <a href="http://geonames.org">geonames.org</a>
+</div>
+ 
+<div class="ui-widget" style="margin-top: 2em; font-family: Arial;">
+  Result:
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+ 
+ 
+</body>
+</html>
