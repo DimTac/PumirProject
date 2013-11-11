@@ -35,11 +35,13 @@ and open the template in the editor.
         <!-- <div id="trame"></div> -->
         <div id="roue">
                <canvas id="canvas" width="500" height="500"></canvas>
+               <div id="restoDiv"></div>
         </div>
         
         <div id="affichage">
             <div id="panel">
                 <div id="panel-roue">
+
                   <div id="transport">
                     <input type="button" value="Avec transport">
                     <input type="button" value="Sans transport">
@@ -66,11 +68,11 @@ and open the template in the editor.
                       <input type="button" value="Bio-tibétain" onclick="">
                       <input type="button" value="Chez maman" onclick="">
                   </div>
-                  <input type="button" id="go" value="> Go!" onclick="spin();" />
+                  <input type="button" id="go" value="> Go!"/>
                 </div>
 
                 <div id="panel-results">
-                    <input type="button" id="back" value="Back" onclick="back();">
+                    <input type="button" id="back" value="Back">
                     <p>COUCOU.</p>
                 </div>
             </div>
@@ -81,13 +83,12 @@ and open the template in the editor.
                 <div id="geolocate"></div>
             <!-- </div> -->
         </div>
-
-
+      <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
-      <script src="js/roueTourne.js" type="text/javascript" charset="utf-8"></script>
+      <script src='js/roueTourne.js'></script>
+      <script src='js/roue.js'></script>
       <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
-      <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script type="text/javascript">
         window.compteur = 0;
         $('#moins').bind('click', function(evt){

@@ -48,8 +48,7 @@ $(document).ready(function(){
 	 * @see  afficher_carte()
 	 * @see  init_map()
 	 */
-	$("#go").on('click',function(e){	
-		spin();	
+	$.rotation_complete = function(){
 		if(getTokenUrl()!=''){	
 			console.log('Il y a un token dans l\'url...');
 			init_Foursquare();
@@ -57,7 +56,7 @@ $(document).ready(function(){
 			transition_carte();
 			init_map();
 		}
-	});
+	};
 
 	/**
 	 * Récupère le token présent dans l'url
