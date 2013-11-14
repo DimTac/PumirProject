@@ -1,5 +1,5 @@
 $(document).ready(function(){
    $('#canvas').rouetourne({
-       pplArray : ["Chinois", "Indien", "Bio-tibétain", "Brasserie","Boulangerie", "Kebab", "Crêperie", "Japonais", "Chez maman","Pizza"],
+       restoArray : ['Chinois','Japonais','Kebab','Brasserie','Pizza','Indien','Crêperie','Sandwich','Bio-tibétain','Chez maman'],
    });
 });
