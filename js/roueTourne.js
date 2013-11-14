@@ -53,19 +53,13 @@
             },
             //Fonction quand on clique sur "back", il faudra refaire ça, je trouve ça assez sale la façon dont c'est fait
             back : function(){
-                $("#affichage").animate(
-                    {"margin-left":"80%"},
-                    {
-                      duration:500,
-                    }).animate(
-                    {"width":"20%"},
-                    {
-                      duration:500,
-                    });
-                  $("#panel").css('width', '100%');
-                  $("#map").css('width', '0%');
-                  $("#panel-results").fadeOut(500);
-                  $("#panel-roue").fadeIn(500);
+              $("#panel").delay(1000).animate(
+                {"margin-left":"80%"},
+                {duration:500,}
+              );
+              $("#panel-results").delay(1500).fadeOut(500);
+              $("#panel-roue").delay(1500).fadeIn(500);
+              $('#map').fadeOut(1000);
             },
             tourne: function() {
                 tourneAngleStart = Math.random() * 10 + 10;
@@ -102,7 +96,7 @@
         }
         
        var rotateWheel = function rotateWheel() {
-                tourneTime += 30;
+                tourneTime += 200;
                 if(tourneTime >= tourneTimeTotal) {
                     stopRotateWheel();
                     return;

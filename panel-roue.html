@@ -34,11 +34,11 @@ and open the template in the editor.
     <body>
         <!-- <div id="trame"></div> -->
         <div id="roue">
-               <canvas id="canvas" width="500" height="500"></canvas>
-               <div id="restoDiv"></div>
+          <canvas id="canvas" width="500" height="500"></canvas>
+          <div id="restoDiv"></div>
         </div>
         
-        <div id="affichage">
+        <!-- <div id="affichage"> -->
             <div id="panel">
                 <div id="panel-roue">
 
@@ -49,31 +49,50 @@ and open the template in the editor.
                   </div>
                   
                   <div id="budget">
-                      <span class="budget">Mon budget pour aujourd'hui</span>
-                      <input id="moins" type="button" value="-" onclick="">
-                      <div class="budget0"></div>
-                      <input id="plus" type="button" value="+" onclick="">
+                    <span class="budget">Mon budget pour aujourd'hui</span>
+                    <input id="moins" type="button" value="-" onclick="">
+                    <div class="budget0"></div>
+                    <input id="plus" type="button" value="+" onclick="">
                   </div>
                   
                   <div id="choix">
-                      <span class="envie">J'ai plutôt envie de manger</span>
-                      <input type="button" value="Chinois" onclick="">
-                      <input type="button" value="Japonais" onclick="">
-                      <input type="button" value="Kebab" onclick="">
-                      <input type="button" value="Brasserie" onclick="">
-                      <input type="button" value="Pizza" onclick="">
-                      <input type="button" value="Indien" onclick="">
-                      <input type="button" value="Crêperie" onclick="">
-                      <input type="button" value="Sandwich" onclick="">
-                      <input type="button" value="Bio-tibétain" onclick="">
-                      <input type="button" value="Chez maman" onclick="">
+                    <span class="envie">J'ai plutôt envie de manger</span>
+                    <input type="button" value="Chinois" onclick="">
+                    <input type="button" value="Japonais" onclick="">
+                    <input type="button" value="Kebab" onclick="">
+                    <input type="button" value="Brasserie" onclick="">
+                    <input type="button" value="Pizza" onclick="">
+                    <input type="button" value="Indien" onclick="">
+                    <input type="button" value="Crêperie" onclick="">
+                    <input type="button" value="Sandwich" onclick="">
+                    <input type="button" value="Bio-tibétain" onclick="">
+                    <input type="button" value="Chez maman" onclick="">
                   </div>
                   <input type="button" id="go" value="> Go!"/>
                 </div>
 
                 <div id="panel-results">
-                    <input type="button" id="back" value="Back">
-                    <p>COUCOU.</p>
+                  <input type="button" id="back" value="Back">
+                  <div id="liste">
+                    <img src="" alt="">
+                    <h2>Restaurant</h2>
+                    <p>adresse</p>
+                    <p>prix</p>
+                    <p>note</p>
+                    <p>distance</p>
+                    <hr>
+                  </div>
+                </div>
+
+                <div id="details">
+                  <div id="content">
+                    <div id="resto">
+                    </div>
+                    <div id="comments">
+                    </div>
+                  </div>
+                  <div id="groupon">
+                  </div>
                 </div>
             </div>
 
@@ -82,7 +101,7 @@ and open the template in the editor.
                 <div id="map" class="dark"></div>
                 <div id="geolocate"></div>
             <!-- </div> -->
-        </div>
+        <!-- </div> -->
       <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>

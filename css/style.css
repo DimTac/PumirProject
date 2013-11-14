@@ -207,23 +207,31 @@ input[type="button"] + span{
 }
 
 #panel{
-	position: absolute;	
+/*	position: absolute;	
 	width: 100%;
 	min-width: 200px;
-	height: 100%;
+	height: 100%;*/
 	/*background-color: #ccc;*/
 	/*box-shadow: 1px 0 0 #333;*/
+	position: absolute;
+	width: 20%;
+	min-width: 200px;
+	height: 100%;
+	margin-left: 80%;
+	z-index: 20;
 }
 
 #map{
 	position: absolute;	
-	width: 0%;
+	width: 100%;
 	height: 100%;	
-	margin-left: 20%;
-	background-color: white;
+	/*margin-left: 20%;*/
+	/*background-color: white;*/
 	/*display: none;*/
 	/*background-color: #119955;*/
 	/*visibility:hidden;*/
+	display: none;
+	z-index : 1;
 }
 
 #panel-roue{
@@ -247,7 +255,7 @@ input[type="button"] + span{
 	/*visibility: hidden;*/
 	/*opacity: 0;*/
 	display: none;
-	background-color: #eeffee;
+	background-color: rgba(100,100,100,0.8);
 }
 
 p{
@@ -279,13 +287,4 @@ div > span{
 	background-position: center left;
 	background-repeat: no-repeat;
 	background-size: 35px 35px;
-}
-
-
-
-#trame{
-	width: 100%;
-	height: 100%;
-	position : absolute;
-	background: url('../img/trame.png') repeat;
 }
