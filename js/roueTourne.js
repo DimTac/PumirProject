@@ -1,19 +1,26 @@
-
-/*  
- *  This jquery plugin is based on this blogpost - http://www.switchonthecode.com/tutorials/creating-a-roulette-wheel-using-html5-canvas
- *  If you want to know more how it works, please refer to the above tutorial. 
- *  
- *  @author Roy Yu | iroy2000 [at] gmail.com ( modify, repackage and add new features )
- *  @description: This jquery plugin will create a tourne wheel and let you to add players at run time. 
- *  Please go to my blog for demo - http://iroylabs.blogspot.com/2011/06/latest-jquery-plugin.html
+/*  Code inspired from a JQuery Plug-in :
+ *  @author Roy Yu | iroy2000 [at] gmail.com 
+ *  @description: This jquery plugin will create a tourne roue and let you to add players at run time. 
+ *  http://iroylabs.blogspot.com/2011/06/latest-jquery-plugin.html
  */
 
 
 (function($){
     $.fn.rouetourne = function(options, callback){
         
-        var params = $.extend({},$.fn.rouetourne.default_options, options), $that = $(this), ctx = null, colorCache = [],
-        startAngle = 0, arc = Math.PI / 6, tourneTimeout = null, tourneArcStart = 10, tourneTime = 0, tourneTimeTotal = 0, tourneAngleStart = 0, pplLength = 12, pplArray = params.pplArray;
+        var paramsRoue = $.extend({},$.fn.rouetourne.default_options, options), 
+        $that = $(this), 
+        ctx = null, 
+        colorCache = [],
+        startAngle = 0, 
+        arc = Math.PI / 6, 
+        tourneTimeout = null, 
+        tourneArcStart = 10, 
+        tourneTime = 0, 
+        tourneTimeTotal = 0, 
+        tourneAngleStart = 0, 
+        restoLength = 10, 
+        restoArray = paramsRoue.restoArray;
 
         if($.isFunction(options)){
             callback = options;
@@ -24,22 +31,21 @@
             init: function() {
                 methods.getContext();
                 methods.setup();
-                drawWheel();                
-            },       
+                drawroue();                
+            },
+            //Setup des événements click et appel des méthodes    
             setup: function() {
-                $(params.tourneTrigger).bind('click', function(e){
+                $(paramsRoue.tourneDeclencheur).bind('click', function(e){
                     e.preventDefault();
                     methods.tourne();
                 });
                                               
-                $(params.addPplTrigger).bind('click', function(e){
+                $(paramsRoue.typeRestoDeclencheur).bind('click', function(e){
                     e.preventDefault();
-                    var item = $('<li />').append($(params.joiner).val());
-                    $(params.paricipants).append(item);
-                    methods.updatePanel();
+                    methods.updatePanel(e);
                 });
                 
-                $(params.backTrigger).bind('click', function(e){
+                $(paramsRoue.backDeclencheur).bind('click', function(e){
                     e.preventDefault();
                     methods.back();
                 });                
@@ -61,24 +67,42 @@
               $("#panel-roue").delay(1500).fadeIn(500);
               $('#map').fadeOut(1000);
             },
+            //Fonction qui fait tourner la roue !
             tourne: function() {
                 tourneAngleStart = Math.random() * 10 + 10;
                 tourneTime = 0;
                 tourneTimeTotal = Math.random() * 3 + 4 * 1000;
-                rotateWheel();                
+                rotateroue();                
             },
-            updatePanel: function() {
-                var $ppl = $(params.paricipants).children();  
-                pplArray = [];
-                $ppl.each(function(key, value){
-                    pplArray.push(value.innerHTML);
-                });
-                arc = 2 * Math.PI / $ppl.length;
-                pplLength = $ppl.length;
-                drawWheel();
+            //Fonction qui met à jour la roue quand on clique sur les types de resto : ajout ou suppression de quartiers
+            updatePanel: function(evenement) { 
+                var trouve=false;
+                    $restoAjout = evenement.currentTarget.value;
+                    console.log($restoAjout);
+                    var index = $.inArray($restoAjout, restoArray);
+                    if (index>-1){
+                            trouve=true;
+                        }
+
+                    //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
+                    if ((!trouve)&&(restoArray.length<10)){
+                        restoArray.push($restoAjout);
+                        arc = 2 * Math.PI / $restoAjout.length;
+                        //2pi/r
+                        restoLength = $restoAjout.length;
+                        drawroue();
+                    }
+                    //Sinon on le supprime (sauf si le tableau est vide, auquel cas on n'enlève pas le dernier élément)
+                    else if ((trouve)&&(restoArray.length>1)){
+                        restoArray.splice(index, 1);
+/*                        arc = 2 * Math.PI / $restoAjout.length;
+*/                      restoLength = restoArray.length;
+                        drawroue();
+                    }
             }
         }
-                                     
+             
+        //Génération des couleurs aléatoires ==> A SUPPR                        
         function genHex(){
             var colors=["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"], color = "", digit = [], i;
 
@@ -95,62 +119,77 @@
             }
         }
         
+<<<<<<< HEAD
        var rotateWheel = function rotateWheel() {
                 tourneTime += 200;
+=======
+       var rotateroue = function rotateroue() {
+                tourneTime += 30;
+>>>>>>> b29220093465d42cbd9345b156834494a5e85156
                 if(tourneTime >= tourneTimeTotal) {
-                    stopRotateWheel();
+                    stopRotateroue();
                     return;
                 }
 
                 var tourneAngle = tourneAngleStart - easeOut(tourneTime, 0, tourneAngleStart, tourneTimeTotal);
                 startAngle += (tourneAngle * Math.PI / 180);
-                drawWheel();
-                tourneTimeout = setTimeout(rotateWheel, 30);
+                drawroue();
+                tourneTimeout = setTimeout(rotateroue, 30);
         }
         
-        function stopRotateWheel () {
+        //Quand la roue a fini de tourner :
+        function stopRotateroue () {
                 $.rotation_complete();
                 clearTimeout(tourneTimeout);
                 var degrees = startAngle * 180 / Math.PI + 90;
                 var arcd = arc * 180 / Math.PI;
                 var index = Math.floor((360 - degrees % 360) / arcd);
                 ctx.save();
-                ctx.font = params.resultTextFont;
-                var text = pplArray[index];
-                $(params.restoDiv).html(text).show();
+                ctx.font = paramsRoue.resultTextFont;
+                var text = restoArray[index];
+                $(paramsRoue.restoResultatDiv).html(text).show();
                 //ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
                 ctx.restore();
             }         
         
+        //Dessin de la flèche
         function drawArrow() {
-            ctx.fillStyle = params.arrowColor;
+            ctx.fillStyle = paramsRoue.arrowColor;
             ctx.beginPath();
-            ctx.moveTo(250 - 4, 250 - (params.outterRadius + 15));
-            ctx.lineTo(250 + 4, 250 - (params.outterRadius + 15));
-            ctx.lineTo(250 + 4, 250 - (params.outterRadius - 15));
-            ctx.lineTo(250 + 9, 250 - (params.outterRadius - 15));
-            ctx.lineTo(250 + 0, 250 - (params.outterRadius - 23));
-            ctx.lineTo(250 - 9, 250 - (params.outterRadius - 15));
-            ctx.lineTo(250 - 4, 250 - (params.outterRadius - 15));
-            ctx.lineTo(250 - 4, 250 - (params.outterRadius + 15));
+            ctx.moveTo(250 - 4, 250 - (paramsRoue.outterRadius + 15));
+            ctx.lineTo(250 + 4, 250 - (paramsRoue.outterRadius + 15));
+            ctx.lineTo(250 + 4, 250 - (paramsRoue.outterRadius - 15));
+            ctx.lineTo(250 + 9, 250 - (paramsRoue.outterRadius - 15));
+            ctx.lineTo(250 + 0, 250 - (paramsRoue.outterRadius - 23));
+            ctx.lineTo(250 - 9, 250 - (paramsRoue.outterRadius - 15));
+            ctx.lineTo(250 - 4, 250 - (paramsRoue.outterRadius - 15));
+            ctx.lineTo(250 - 4, 250 - (paramsRoue.outterRadius + 15));
             ctx.fill();               
         }
-        
-        function drawWheel() {
-            ctx.strokeStyle = params.wheelBorderColor;
-            ctx.lineWidth = params.wheelBorderWidth;
-            ctx.font = params.wheelTextFont;            
+
+        //Dessin de la roue        
+        function drawroue() {
+            ctx.strokeStyle = paramsRoue.roueBorderColor;
+            ctx.lineWidth = paramsRoue.roueBorderWidth;
+            ctx.font = paramsRoue.roueTextFont;            
             ctx.clearRect(0,0,500,500);
-            var text = null, i = 0, totalJoiner = pplLength;
+            var text = null, 
+            i = 0,
+            totalJoiner = restoArray.length;
+
             for(i = 0; i < totalJoiner; i++) {
-                text = pplArray[i];           
-                var angle = startAngle + i * arc;                
-                ctx.fillStyle = colorCache.length > totalJoiner ? colorCache[i] : genHex();
+                text = restoArray[i];
+                //On met le texte/picto qui correspond au type de resto           
+                var angle = startAngle + i * arc; 
+/*                console.log(restoArray[i]+ " angle : "+ angle + " arc : "+ arc+ " startangle "+ startAngle);               
+*/                ctx.fillStyle = colorCache.length > totalJoiner ? colorCache[i] : genHex();
                 
                 ctx.beginPath();
                 // ** arc(centerX, centerY, radius, startingAngle, endingAngle, antiClockwise);
-                ctx.arc(250, 250, params.outterRadius, angle, angle + arc, false);
-                ctx.arc(250, 250, params.innerRadius, angle + arc, angle, true);
+                ctx.arc(250, 250, paramsRoue.outterRadius, angle, angle + arc, false);
+                //ctx.arc(x,y,radius,startAngle,endingAngle,counterclockwise);
+                ctx.arc(250, 250, paramsRoue.innerRadius, angle + arc, angle, true);
+
                 ctx.stroke();
                 ctx.fill();
         
@@ -158,18 +197,23 @@
                 ctx.shadowOffsetX = -1;
                 ctx.shadowOffsetY = -1;
                 ctx.shadowBlur    = 1;
-                ctx.shadowColor   = params.wheelTextShadowColor;
-                ctx.fillStyle = params.wheelTextColor;
-                ctx.translate(250 + Math.cos(angle + arc / 2) * params.textRadius, 250 + Math.sin(angle + arc / 2) * params.textRadius);
+                ctx.shadowColor   = paramsRoue.roueTextShadowColor;
+                ctx.fillStyle     = paramsRoue.roueTextColor;
+                ctx.translate(250 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 250 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
                 
                 ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
                 ctx.restore();
                 ctx.closePath();
-            }       
-            drawArrow();
+            }  
+            
+            if (restoArray.length!=0){
+                //La flèche     
+                drawArrow();
+            }
         }          
-  
+
+        //Animation de la roue !
         function easeOut(t, b, c, d) {
             var ts = (t/=d)*t;
             var tc = ts*t;
@@ -182,36 +226,34 @@
     /*  ---  please look at the index.html source in order to understand what they do ---
      *  outterRadius : the big circle border
      *  innerRadius  : the inner circle border
-     *  textRadius   : How far the the text on the wheel locate from the center point
-     *  tourneTrigger  : the element that trigger the tourne action 
-     *  wheelBorderColor : what is the wheel border color
-     *  wheelBorderWidth : what is the "thickness" of the border of the wheel
-     *  wheelTextFont : what is the style of the text on the wheel
-     *  wheelTextColor : what is the color of the tet on the wheel
-     *  wheelTextShadow : what is the shadow for the text on the wheel
+     *  textRadius   : How far the the text on the roue locate from the center point
+     *  tourneDeclencheur  : the element that Declencheur the tourne action 
+     *  roueBorderColor : what is the roue border color
+     *  roueBorderWidth : what is the "thickness" of the border of the roue
+     *  roueTextFont : what is the style of the text on the roue
+     *  roueTextColor : what is the color of the tet on the roue
+     *  roueTextShadow : what is the shadow for the text on the roue
      *  resultTextFont : it is not being used currently
      *  arrowColor : what is the color of the arrow on the top
-     *  participants : what is the container for participants for the wheel
+     *  participants : what is the container for participants for the roue
      *  joiner : usually a form input where user can put in their name
-     *  addPplTrigger : what element will trigger the add participant
+     *  typeRestoDeclencheur : what element will Declencheur the add participant
      *  winDiv : the element you want to display the winner
      */
     $.fn.rouetourne.default_options = {
         outterRadius:200, 
         innerRadius:3, 
         textRadius: 160, 
-        tourneTrigger: '#go', 
-        backTrigger : '#back',
-        wheelBorderColor: 'black',
-        wheelBorderWidth : 3, 
-        wheelTextFont : 'bold 15px sans-serif', 
-        wheelTextColor: 'black', 
-        wheelTextShadowColor : 'rgb(220,220,220)',
+        tourneDeclencheur: '#go', 
+        backDeclencheur : '#back',
+        roueBorderColor: 'black',
+        roueBorderWidth : 3, 
+        roueTextFont : 'bold 15px sans-serif', 
+        roueTextColor: 'black', 
+        roueTextShadowColor : 'rgb(220,220,220)',
         resultTextFont : 'bold 30px sans-serif', 
-        arrowColor :'black', 
-        paricipants:'.participants', 
-        addPplTrigger:'.add', 
-        joiner:'.joiner', 
-        restoDiv:'.winner'
+        arrowColor :'black',
+        typeRestoDeclencheur:'#choix :input',
+        restoResultatDiv:'#roue-result'
     }
 })(jQuery);
