@@ -119,13 +119,9 @@
             }
         }
         
-<<<<<<< HEAD
-       var rotateWheel = function rotateWheel() {
-                tourneTime += 200;
-=======
+
        var rotateroue = function rotateroue() {
-                tourneTime += 30;
->>>>>>> b29220093465d42cbd9345b156834494a5e85156
+                tourneTime += 200;
                 if(tourneTime >= tourneTimeTotal) {
                     stopRotateroue();
                     return;
