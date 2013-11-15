@@ -135,7 +135,8 @@ input[value="Back"]{
 	text-transform: uppercase;
 	width:100%;
 	height:15%;
-	position: absolute;
+	min-height: 100px;
+	/*position: absolute;*/
 	top: 0;
 }
 
@@ -238,7 +239,7 @@ input[type="button"] + span{
 #panel-roue{
 	height: 100%;
 	/*opacity: 1;*/
-	/*display: block;*/
+	display: block;
 }
 
 #panel-roue>div:last-of-type{
@@ -299,3 +300,45 @@ div > span{
 	background: url('../img/trame.png') repeat;
 }
 
+
+#liste{
+	width: 100%;
+}
+#liste hr{
+	float: right;
+	width: 80%;
+	margin: 0; 
+}
+#liste li{
+	width: 100%;
+	display: inline-block;
+}
+#liste h2{
+	margin: 0;
+}
+
+#image{
+	/*height: 150px;*/
+	float: left;
+	/*background-color: #ff4444;*/
+	width: 20%;
+	display: inline-block;
+}
+#image img{
+	width: 50px;
+	height: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#infos{
+	/*background-color: #4444ff;*/
+	width: 60%;
+	display: inline-block;
+	float: left;
+}
+#distance{
+	/*background-color: #44ff44;*/
+	float: right;
+	width: 20%;
+	display: inline-block;
+}
