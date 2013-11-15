@@ -50,11 +50,6 @@ table {
 * { margin:0; padding:0; }
 html,body { width:100%; height:100%; }
 
-
-
-
-
-
 body{
 	overflow-x: hidden;
 	overflow-y: hidden; 
@@ -209,31 +204,23 @@ input[type="button"] + span{
 }
 
 #panel{
-/*	position: absolute;	
+	position: absolute;	
 	width: 100%;
 	min-width: 200px;
-	height: 100%;*/
+	height: 100%;
 	/*background-color: #ccc;*/
 	/*box-shadow: 1px 0 0 #333;*/
-	position: absolute;
-	width: 20%;
-	min-width: 200px;
-	height: 100%;
-	margin-left: 80%;
-	z-index: 20;
 }
 
 #map{
 	position: absolute;	
-	width: 100%;
+	width: 0%;
 	height: 100%;	
-	/*margin-left: 20%;*/
-	/*background-color: white;*/
+	margin-left: 20%;
+	background-color: white;
 	/*display: none;*/
 	/*background-color: #119955;*/
 	/*visibility:hidden;*/
-	display: none;
-	z-index : 1;
 }
 
 #panel-roue{
@@ -257,7 +244,7 @@ input[type="button"] + span{
 	/*visibility: hidden;*/
 	/*opacity: 0;*/
 	display: none;
-	background-color: rgba(100,100,100,0.8);
+	background-color: #eeffee;
 }
 
 p{
@@ -291,6 +278,21 @@ div > span{
 	background-size: 35px 35px;
 }
 
+#restoDiv > img{
+	position:absolute;
+	width:35%;	
+	left:32%;
+	top:40%;
+}
+
+#restoDiv > p{
+	position:absolute;
+	width:35%;	
+	left:35%;
+	top:40%;
+	font-size: 9em;
+	color:white;
+}
 
 
 #trame{

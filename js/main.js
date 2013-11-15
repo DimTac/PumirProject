@@ -191,13 +191,14 @@ $(document).ready(function(){
 	 * @return {rien} Pas de retour
 	 */
 	function transition_carte(){
-	    $('#map').fadeIn(1000);
-		$("#panel").delay(1000).animate(
+		$("#affichage").css('width', '100%').delay(1000).animate(
 		    {"margin-left":"0%"},
 		    {duration:500,}
 	    );
-	    $("#panel-roue").delay(1500).fadeOut(500);
-	    $("#panel-results").delay(1500).fadeIn(500);
+	    $("#panel").css('width', '20%');
+	    $("#panel-roue").delay(1000).fadeOut(500);
+	    $("#map").css('width', '100%');
+	    $("#panel-results").delay(1000).fadeIn(500);
 	}
 
 });

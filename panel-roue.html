@@ -39,11 +39,14 @@ and open the template in the editor.
     <body>
         <!-- <div id="trame"></div> -->
         <div id="roue">
-          <canvas id="canvas" width="500" height="500"></canvas>
-          <div id="restoDiv"></div>
+               <canvas id="canvas" width="500px" height="1000px"></canvas>
+               <div id="restoDiv">
+                  <img src="img/logo.png" alt="logo">
+                  <p></p>
+               </div>
         </div>
         
-        <!-- <div id="affichage"> -->
+        <div id="affichage">
             <div id="panel">
                 <div id="panel-roue">
 
@@ -54,10 +57,10 @@ and open the template in the editor.
                   </div>
                   
                   <div id="budget">
-                    <span class="budget">Mon budget pour aujourd'hui</span>
-                    <input id="moins" type="button" value="-" onclick="">
-                    <div class="budget0"></div>
-                    <input id="plus" type="button" value="+" onclick="">
+                      <span class="budget">Mon budget pour aujourd'hui</span>
+                      <input id="moins" type="button" value="-" onclick="">
+                      <div class="budget0"></div>
+                      <input id="plus" type="button" value="+" onclick="">
                   </div>
                   
                   <div id="choix">
@@ -126,6 +129,7 @@ and open the template in the editor.
                   </div>
                   <div id="groupon">
                   </div>
+                    <input type="button" id="back" value="Back">
                 </div>
             </div>
 
@@ -135,6 +139,7 @@ and open the template in the editor.
                 <div id="geolocate"></div>
             <!-- </div> -->
         <!-- </div> -->
+        </div>
       <script type="text/javascript">
       document.getElementById('test').addEventListener('click', function(e){
         this.style["background-color"] = "#ddd";
