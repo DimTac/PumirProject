@@ -46,7 +46,7 @@ and open the template in the editor.
                </div>
         </div>
         
-        <div id="affichage">
+        <!-- <div id="affichage"> -->
             <div id="panel">
                 <div id="panel-roue">
 
@@ -83,24 +83,24 @@ and open the template in the editor.
                   <input type="button" id="back" value="< Je ne suis pas satisfait">
                   <ul id="liste">
                     <li id="test">
-                      <div id="image">
+                      <div class="image">
                         <img src="" alt="" >
                       </div>
                       <div>
-                        <div id="infos">
+                        <div class="infos">
                           <h2>Restaurant</h2>
                           <p>adresse</p>
                           <p>prix</p>
                           <p>note</p>
                         </div>
-                        <div id="distance">
+                        <div class="distance">
                           <p>distance</p>
                         </div>
                         <hr>
                       </div>
                     </li> 
 
-                    <li>
+<!--                     <li>
                       <div id="image">
                         <img src="" alt="" >
                       </div>
@@ -116,22 +116,38 @@ and open the template in the editor.
                         </div>
                         <hr>
                       </div>
-                    </li> 
+                    </li>  -->
                   </ul>
                 </div>
 
-                <div id="details">
+            </div>
+                <div id="details-restaurant">
                   <div id="content">
                     <div id="resto">
+                                          <li id="test">
+                      <div class="image">
+                        <img src="" alt="" >
+                      </div>
+                      <div>
+                        <div class="infos">
+                          <h2>Restaurant</h2>
+                          <p>adresse</p>
+                          <p>prix</p>
+                          <p>note</p>
+                        </div>
+                        <div class="distance">
+                          <p>distance</p>
+                        </div>
+                        <hr>
+                      </div>
+                    </li> 
                     </div>
                     <div id="comments">
                     </div>
                   </div>
                   <div id="groupon">
                   </div>
-                    <input type="button" id="back" value="Back">
                 </div>
-            </div>
 
             <!-- <div id="map"> -->
                 <div id="resultats"></div>
@@ -139,7 +155,7 @@ and open the template in the editor.
                 <div id="geolocate"></div>
             <!-- </div> -->
         <!-- </div> -->
-        </div>
+        <!-- </div> -->
       <script type="text/javascript">
       document.getElementById('test').addEventListener('click', function(e){
         this.style["background-color"] = "#ddd";

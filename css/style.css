@@ -183,14 +183,17 @@ input[type="button"] + span{
 }
 
 #choix input{
+	cursor: pointer;
 	color: #be4d47;
-	cursor:  pointer;
+	border: 1px solid #ddd;
 }
 
 /*@JEREM : classe quand le input est sélectionné (dans la roue), à remplir correctement*/
 .selected{
-	background-color:grey;
-	cursor:  pointer;
+	background-color: rgba(255,255,255,0.3);
+	cursor: pointer;
+	color: #000 !important;
+	border : none !important;
 }
 
 #roue{
@@ -204,30 +207,34 @@ input[type="button"] + span{
 
 #affichage{
 	position: absolute;
-	width: 20%;
+	width: 25%;
 	min-width: 200px;
 	height: 100%;
-	margin-left: 80%;
+	margin-left: 75%;
 }
 
 #panel{
-	position: absolute;	
+/*	position: absolute;	
 	width: 100%;
 	min-width: 200px;
-	height: 100%;
+	height: 100%;*/
 	/*background-color: #ccc;*/
 	/*box-shadow: 1px 0 0 #333;*/
+	position: absolute;
+	width: 25%;
+	min-width: 200px;
+	height: 100%;
+	margin-left: 75%;
+	z-index: 20;
 }
 
 #map{
 	position: absolute;	
-	width: 0%;
+	width: 100%;
 	height: 100%;	
-	margin-left: 20%;
 	background-color: white;
-	/*display: none;*/
-	/*background-color: #119955;*/
-	/*visibility:hidden;*/
+	display: none;
+	z-index : 1;
 }
 
 #panel-roue{
@@ -251,12 +258,9 @@ input[type="button"] + span{
 	/*visibility: hidden;*/
 	/*opacity: 0;*/
 	display: none;
-	background-color: #eeffee;
+	background-color: rgba(100,100,100,0.8);
 }
 
-p{
-	color: black;
-}
 
 div > span{
 	display: inline-block;
@@ -312,10 +316,12 @@ div > span{
 
 #liste{
 	width: 100%;
+	margin-top: 10px;
+	color: #fff;
 }
 #liste hr{
 	float: right;
-	width: 80%;
+	width: 70%;
 	margin: 0; 
 }
 #liste li{
@@ -324,30 +330,43 @@ div > span{
 }
 #liste h2{
 	margin: 0;
+	color: #be4d47;
+	font-size: 1.8em;
 }
 
-#image{
+.image{
 	/*height: 150px;*/
 	float: left;
 	/*background-color: #ff4444;*/
-	width: 20%;
+	width: 30%;
+	height: auto;
 	display: inline-block;
 }
-#image img{
-	width: 50px;
-	height: 50px;
+.image img{
+	width: 80%;
+	height: 80%;
 	margin-left: 10px;
 	margin-right: 10px;
 }
-#infos{
+.infos{
 	/*background-color: #4444ff;*/
-	width: 60%;
+	width: 55%;
 	display: inline-block;
 	float: left;
 }
-#distance{
+.distance{
 	/*background-color: #44ff44;*/
 	float: right;
-	width: 20%;
+	width: 15%;
 	display: inline-block;
+}
+
+#details-restaurant{
+	z-index: 2;
+	position: absolute;
+	left: 25%;
+	bottom: 0;
+	height: 25%;
+	width: 75%;
+	background-color: rgba(255,255,255,0.8);
 }
