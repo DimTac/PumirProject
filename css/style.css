@@ -191,6 +191,7 @@ input[type="button"] + span{
 /*@JEREM : classe quand le input est sélectionné (dans la roue), à remplir correctement*/
 .selected{
 	background-color: rgba(255,255,255,0.3);
+	background: rgb(255,255,255);
 	cursor: pointer;
 	color: #000 !important;
 	border : none !important;
@@ -259,6 +260,8 @@ input[type="button"] + span{
 	/*opacity: 0;*/
 	display: none;
 	background-color: rgba(100,100,100,0.8);
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(0, 0, 0);
 }
 
 
@@ -323,8 +326,10 @@ div > span{
 	float: right;
 	width: 70%;
 	margin: 0; 
+	margin-top:30px;
 }
 #liste li{
+	padding-top:30px;
 	width: 100%;
 	display: inline-block;
 }
@@ -332,6 +337,9 @@ div > span{
 	margin: 0;
 	color: #be4d47;
 	font-size: 1.8em;
+}
+#liste p{
+	color:white;
 }
 
 .image{
@@ -369,4 +377,5 @@ div > span{
 	height: 25%;
 	width: 75%;
 	background-color: rgba(255,255,255,0.8);
+	background-color: rgb(255,255,255);
 }

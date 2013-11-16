@@ -61,12 +61,20 @@
             },
 
             /////////////// RECUPERATION DU CONTEXTE POUR DRAW DANS LE CANVAS ////////////////            
-            getContext: function() {         
+            getContext: function() {  
                 if(ctx !== null)
                     return ctx;
 
-                var canvas = $that[0];
-                ctx = canvas.getContext("2d");          
+                 var canvas = document.getElementById("canvas");
+                 var G_vmlCanvasManager;
+
+                if (G_vmlCanvasManager != undefined) { // if IE9
+                        G_vmlCanvasManager.initElement(canvas);
+                }
+
+                if (canvas.getContext) {
+                        ctx = canvas.getContext('2d');
+                }   
             },
 
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
@@ -86,7 +94,7 @@
                 //   $("#panel-roue").fadeIn(500);
                 $("#panel").delay(1000).animate(
                     {"margin-left":"75%"},
-                    {duration:500,}
+                    {duration:500}
                 );
                 $("#panel-results").delay(1500).fadeOut(500);
                 $("#panel-roue").delay(1500).fadeIn(500);
@@ -163,7 +171,7 @@
                     $(paramsRoue.restoResultatDiv+">p").text(resultatRoue).fadeIn(100);
                   });
 
-                 $(paramsRoue.restoResultatDiv+">p").fadeOut("slow", function() {
+                 $(paramsRoue.restoResultatDiv+">p").fadeOut(0, function() {
                     $.rotation_complete(resultatRoue);
                     $("#canvas").fadeOut(500);
                     ctx.restore();
