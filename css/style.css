@@ -360,3 +360,8 @@ div > span{
 	width: 20%;
 	display: inline-block;
 }
+#fleche{
+	position:absolute;
+	left:25%;
+	top:50%;
+}

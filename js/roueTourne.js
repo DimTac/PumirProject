@@ -14,7 +14,7 @@
         var paramsRoue = $.extend({},$.fn.rouetourne.default_options, options), 
         $that = $(this), 
         ctx = null,
-        startAngle = 0, 
+        startAngle = 90, 
         arc = Math.PI / 5, 
         tourneTimeout = null, 
         tourneArcStart = 10, 
@@ -87,6 +87,8 @@
                   $("#panel-roue").fadeIn(500);
                   $(paramsRoue.restoResultatDiv+">img").fadeIn(1200);
                   $("#canvas").fadeIn(1000);
+                  $("#fleche").fadeIn(750);
+
                   modifResto=true;
             },
             //Fonction qui fait tourner la roue !
@@ -146,13 +148,16 @@
         /////////// QUAND LA ROUE A FINI DE TOURNER ////////////////////  
         function stopRotationRoue () {
                 clearTimeout(tourneTimeout);
+                //Quel type de resto va gagner ?
                 var degrees = startAngle * 180 / Math.PI + 90;
                 var arcd = arc * 180 / Math.PI;
                 var index = Math.floor((360 - degrees % 360) / arcd);
                 ctx.save();
+
                 ctx.font = paramsRoue.resultTextFont;
                 resultatRoue = restoArray[index];
 
+                //Affichage, à la place du logo, du type de resto gagnant :
                  $(paramsRoue.restoResultatDiv).children().fadeOut(0, function() {
                     $(paramsRoue.restoResultatDiv+">p").text(resultatRoue).fadeIn(100);
                   });
@@ -160,10 +165,11 @@
                  $(paramsRoue.restoResultatDiv+">p").fadeOut(0, function() {
                     $.rotation_complete(resultatRoue);
                     $("#canvas").fadeOut(500);
+                    $("#fleche").fadeOut(500);
                     ctx.restore();
                   });
             }         
-        
+/*        
         /////////// DESSIN DE LA FLECHE ////////////////////  
         function drawArrow() {
             ctx.fillStyle = paramsRoue.arrowColor;
@@ -177,7 +183,7 @@
             ctx.lineTo(0 - 4, 250 - (paramsRoue.outterRadius - 15));
             ctx.lineTo(0 - 4, 250 - (paramsRoue.outterRadius + 15));
             ctx.fill();               
-        }
+        }*/
 
         /////////// DESSIN DE LA ROUE ////////////////////      
         function drawroue() {
@@ -223,8 +229,8 @@
                 ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
                 ctx.restore();
                 ctx.closePath();
-            }     
-                drawArrow();
+            }     /*
+                drawArrow();*/
         }          
 
         /////////// ANIMATION DE LA ROUE QUAND ELLE TOURNE ////////////////////  
