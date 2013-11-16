@@ -79,12 +79,26 @@
 
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
             back : function(){
-                $("#affichage").animate({"margin-left":"80%"},{duration:500}).animate({"width":"20%"},{duration:500});
-
-                  $("#panel").css('width', '100%');
-                  $("#map").css('width', '0%');
-                  $("#panel-results").fadeOut(500);
-                  $("#panel-roue").fadeIn(500);
+                // $("#affichage").animate(
+                //     {"margin-left":"80%"},
+                //     {
+                //       duration:500,
+                //     }).animate(
+                //     {"width":"20%"},
+                //     {
+                //       duration:500,
+                //     });
+                //   $("#panel").css('width', '100%');
+                //   $("#map").css('width', '0%');
+                //   $("#panel-results").fadeOut(500);
+                //   $("#panel-roue").fadeIn(500);
+                $("#panel").delay(1000).animate(
+                    {"margin-left":"75%"},
+                    {duration:500}
+                );
+                $("#panel-results").delay(1500).fadeOut(500);
+                $("#panel-roue").delay(1500).fadeIn(500);
+                $('#map').fadeOut(1000);
                   $(paramsRoue.restoResultatDiv+">img").fadeIn(1200);
                   $("#canvas").fadeIn(1000);
                   $("#fleche").fadeIn(750);
