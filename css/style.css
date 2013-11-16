@@ -251,7 +251,10 @@ input[type="button"] + span{
 	/*visibility: hidden;*/
 	/*opacity: 0;*/
 	display: none;
-	background-color: #eeffee;
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(0, 0, 0);
+	/* RGBa with 0.6 opacity */
+	background: rgba(0, 0, 0, 0.6);
 }
 
 p{
@@ -317,13 +320,19 @@ div > span{
 	float: right;
 	width: 80%;
 	margin: 0; 
+	margin-top:30px;
 }
 #liste li{
+	padding-top:30px;
 	width: 100%;
 	display: inline-block;
 }
 #liste h2{
-	margin: 0;
+/*	margin-bottom: 10px;
+*/	color:#ca8781;
+}
+#liste p{
+	color:white;
 }
 
 #image{

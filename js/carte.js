@@ -9,7 +9,7 @@ var carte = {
     recherche:"food",
     zoom: 16,
     center: {latitude:48.857713,longitude:2.347271},
-    rechercheOk: function(){},
+    rechercheOk: function(){}
   },
 
   // Méthode d'initialisaiton

@@ -1,14 +1,10 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
       <meta charset='utf-8' />
+       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Wheelunch - Tournez, Trouvez, Lunchez !</title>
-    <link rel="shortcut icon" href="img/favicon.png" /> 
-    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <link rel="shortcut icon" href="img/favicon.png" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="css/style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
@@ -37,7 +33,7 @@ and open the template in the editor.
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
     </head>
     <body>
-        <!-- <div id="trame"></div> -->
+        <div id="trame"></div>
         <div id="roue">
                <canvas id="canvas" width="500px" height="1000px"></canvas>
                <div id="restoDiv">
@@ -138,12 +134,15 @@ and open the template in the editor.
                 <div id="map" class="dark"></div>
                 <div id="geolocate"></div>
             <!-- </div> -->
-        <!-- </div> -->
+        </div>
         </div>
       <script type="text/javascript">
-      document.getElementById('test').addEventListener('click', function(e){
-        this.style["background-color"] = "#ddd";
-      });
+      if ( document.addEventListener && window.addEventListener ) {
+          //Pour IE9
+          document.getElementById('test').addEventListener('click', function(e){
+            this.style["background-color"] = "#ddd";
+          });
+      }
       </script>
       <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>

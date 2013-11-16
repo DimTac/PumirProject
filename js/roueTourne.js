@@ -61,25 +61,26 @@
             },
 
             /////////////// RECUPERATION DU CONTEXTE POUR DRAW DANS LE CANVAS ////////////////            
-            getContext: function() {         
+            getContext: function() {  
                 if(ctx !== null)
                     return ctx;
 
-                var canvas = $that[0];
-                ctx = canvas.getContext("2d");          
+                 var canvas = document.getElementById("canvas");
+                 var G_vmlCanvasManager;
+
+                if (G_vmlCanvasManager != undefined) { // if IE9
+                        G_vmlCanvasManager.initElement(canvas);
+                }
+
+                if (canvas.getContext) {
+                        ctx = canvas.getContext('2d');
+                }   
             },
 
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
             back : function(){
-                $("#affichage").animate(
-                    {"margin-left":"80%"},
-                    {
-                      duration:500,
-                    }).animate(
-                    {"width":"20%"},
-                    {
-                      duration:500,
-                    });
+                $("#affichage").animate({"margin-left":"80%"},{duration:500}).animate({"width":"20%"},{duration:500});
+
                   $("#panel").css('width', '100%');
                   $("#map").css('width', '0%');
                   $("#panel-results").fadeOut(500);
@@ -156,7 +157,7 @@
                     $(paramsRoue.restoResultatDiv+">p").text(resultatRoue).fadeIn(100);
                   });
 
-                 $(paramsRoue.restoResultatDiv+">p").fadeOut("slow", function() {
+                 $(paramsRoue.restoResultatDiv+">p").fadeOut(0, function() {
                     $.rotation_complete(resultatRoue);
                     $("#canvas").fadeOut(500);
                     ctx.restore();

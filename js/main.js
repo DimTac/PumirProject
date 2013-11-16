@@ -191,10 +191,7 @@ $(document).ready(function(){
 	 * @return {rien} Pas de retour
 	 */
 	function transition_carte(){
-		$("#affichage").css('width', '100%').delay(1000).animate(
-		    {"margin-left":"0%"},
-		    {duration:500,}
-	    );
+		$("#affichage").css('width', '100%').delay(1000).animate({"margin-left":"0%"},{duration:500});
 	    $("#panel").css('width', '20%');
 	    $("#panel-roue").delay(1000).fadeOut(500);
 	    $("#map").css('width', '100%');
