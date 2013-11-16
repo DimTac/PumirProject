@@ -107,7 +107,7 @@ input{
 	font-size: 0.9em
 }
 
-input[value="> Go!"]{
+#go{
 	font-size:1.5em;
 	line-height: 3;
 	background-color: #be4d47;
@@ -121,7 +121,7 @@ input[value="> Go!"]{
 	left: 0;
 	border-bottom-left-radius: 10px;
 }
-input[value="Back"]{
+#back{
 	font-size:1.5em;
 	line-height: 3;
 	background-color: #be4d47;
@@ -184,6 +184,13 @@ input[type="button"] + span{
 
 #choix input{
 	color: #be4d47;
+	cursor:  pointer;
+}
+
+/*@JEREM : classe quand le input est sélectionné (dans la roue), à remplir correctement*/
+.selected{
+	background-color:grey;
+	cursor:  pointer;
 }
 
 #roue{

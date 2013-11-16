@@ -43,18 +43,17 @@ $(document).ready(function(){
 	 * - Sinon, on affiche simplement la carte mapBox selon
 	 *   les restaurants spécifiés et selon la position de l'utilisateur
 	 *
-	 * @see  spin()
 	 * @see  init_Foursquare()
 	 * @see  afficher_carte()
 	 * @see  init_map()
 	 */
-	$.rotation_complete = function(){
+	$.rotation_complete = function(resultatRoue){
 		if(getTokenUrl()!=''){	
 			console.log('Il y a un token dans l\'url...');
 			init_Foursquare();
 		}else{
 			transition_carte();
-			init_map();
+			init_map(resultatRoue);
 		}
 	};
 
@@ -164,12 +163,13 @@ $(document).ready(function(){
 	 * @see  carte.getPointsPlaces()
 	 * @return {rien} Pas de renvoi
 	 */
-	function init_map(){
+	function init_map(resultatRoue){
 		if(userLocation.longitude!='' && userLocation.latitude!=''){
 			var params = {
 			    zoom : 17,
 			    map : "map",
-			    recherche : "restaurant",
+			    recherche : resultatRoue,
+			 /*   recherche : "restaurant",*/
 			    center : {
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude
