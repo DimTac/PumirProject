@@ -25,6 +25,7 @@
         restoLength = 10, 
         resultatRoue = null,
         restoArray = paramsRoue.restoArray;
+        restoArraySrc = paramsRoue.restoArraySrc;
 
         if($.isFunction(options)){
             callback = options;
@@ -34,6 +35,11 @@
          //////////// DECLARATION METHODES DE L'OBJET ////////////
         var methods = {
             init: function() {
+                var children = $("#choix > input");
+                for (var i = 0; i < restoArray.length; i++) {
+                    console.log(children.eq(i));
+                    children.eq(i).val(restoArray[i]);
+                };
                 methods.getContext();
                 methods.setup();
                 drawroue();                
@@ -79,19 +85,6 @@
 
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
             back : function(){
-                // $("#affichage").animate(
-                //     {"margin-left":"80%"},
-                //     {
-                //       duration:500,
-                //     }).animate(
-                //     {"width":"20%"},
-                //     {
-                //       duration:500,
-                //     });
-                //   $("#panel").css('width', '100%');
-                //   $("#map").css('width', '0%');
-                //   $("#panel-results").fadeOut(500);
-                //   $("#panel-roue").fadeIn(500);
                 $("#panel").delay(1000).animate(
                     {"margin-left":"75%"},
                     {duration:500}
@@ -205,12 +198,11 @@
             ctx.lineWidth = paramsRoue.roueBorderWidth;
             ctx.font = paramsRoue.roueTextFont;            
             ctx.clearRect(0,0,500,500);
-            var text = null, 
-            i = 0,
+          /*  var picto = new Image(); */
             totalJoiner = restoArray.length;
 
             for(i = 0; i < totalJoiner; i++) {
-                text = restoArray[i];
+                text = restoArray[i];        
                 //On met le texte/picto qui correspond au type de resto           
                 var angle = startAngle + i * arc; 
                 //console.log(restoArray[i]+ " angle : "+ angle + " arc : "+ arc+ " startangle "+ startAngle);      
@@ -241,6 +233,12 @@
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
                 
                 ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+
+                /*picto.onload = function() {
+                     ctx.drawImage(picto, 0, 0, 50, 50);
+                }
+                picto.src = "img/"+restoArraySrc[i];*/
+                
                 ctx.restore();
                 ctx.closePath();
             }     /*
