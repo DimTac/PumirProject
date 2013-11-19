@@ -1,0 +1,18 @@
+diff a/js/main.js b/js/main.js	(rejected hunks)
+@@ -14,8 +14,14 @@
+ 
+ $(document).ready(function(){
+ 
+-	var userLocation    = {longitude : '', latitude : ''};
+-	var json_foursquare = {};
++	/**
++	*
++	*	GESTION DE LA ROUE
++	*
++	*/
++	var params = {};
++	roue.init(params);
++
+ 
+ 	/* 
+ 	 * S'il n'y a pas de token dans l'url, c'est que

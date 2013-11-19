@@ -15,7 +15,7 @@
  * Identifiants foursquare de l'application :
  *    Client_id : 1LZQR0XMLY0L0XQ5JA44HQ2QTG15GHBKUQ4CE5K2TOA1UH0Z
  *    Secret    : YNEV10LLQZT1VOHLTFWAYWZQ5WREYX31ATVS0THGOU34CNR4    
-*/
+ */
 
 	var Foursquare = {
 
@@ -43,7 +43,7 @@
 		/**
 		 * Initialise les coordonnées GPS de l'utilisateur
 		 * s'il accepte la géolocalisation
-		 * @return {String} Coordonnées GPS formatées
+		 * @return {callback} Renvoie le callback utilisateur avec les coordonnées
 		 */
 		goGetLocation : function(){
 			var that = this;	// Pour les fonctions de callback
@@ -212,6 +212,15 @@
 		goGetToken : function(){
 			window.location.replace("https://foursquare.com/oauth2/authenticate?client_id="+this.property.client_id+"&response_type=token&redirect_uri=http://wheelunch.fr/panel-roue.html");
 			// &display=webpopup
+		},
+
+		/**
+		 * Setter du token
+		 * @param  {String} token Le token à initialiser
+		 * @return {rien}       Pas de retour
+		 */
+		settingToken : function(token){
+			this.property.token = token;
 		},
 
 		/**
