@@ -166,16 +166,17 @@ $(document).ready(function(){
 	function init_map(resultatRoue){
 		if(userLocation.longitude!='' && userLocation.latitude!=''){
 			var params = {
+				//radius: perimetreCarte,
 			    zoom : 17,
 			    map : "map",
-			    recherche : resultatRoue,
+			    keyword : resultatRoue,
 			 /*   recherche : "restaurant",*/
 			    center : {
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude
 			    },
 			    rechercheOk : function(geoJSON, pos){					      
-			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte   
+			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte 
 			    }
 			  };
 			carte.init(params);

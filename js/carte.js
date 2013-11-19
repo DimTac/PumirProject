@@ -6,7 +6,9 @@ var carte = {
   defaults:
   {
     map: "#map",
-    recherche:"food",
+    recherche:"restaurant",
+    keyword: "pizza",
+    radius: 900,
     zoom: 16,
     center: {latitude:48.857713,longitude:2.347271},
     rechercheOk: function(){}
@@ -22,7 +24,7 @@ var carte = {
   // Méthode de recherche
   getPointsPlaces: function()
   {
-    console.log("Recherche des restos a proximité de : "+this.parametres.center.latitude+" avec la recherche = "+this.defaults.recherche);
+    console.log("Recherche des restos a proximité de : "+this.parametres.center.latitude+" avec la recherche = "+this.parametres.keyword);
     
     // Déclaration de la position
     var position = new google.maps.LatLng(
@@ -36,9 +38,9 @@ var carte = {
     //Requete
     var request = {
       location: position,
-      radius: 200,
-      types: [this.parametres.recherche]
-
+      radius: [this.parametres.radius],
+      types: [this.parametres.recherche],
+      keyword: [this.parametres.keyword]
     };
 
     //Declaration de l'objet service
