@@ -1,3 +1,11 @@
+/*  Code inspired (and translated) from a JQuery Plug-in :
+ *  @author Roy Yu | iroy2000 [at] gmail.com 
+ *  @description: This jquery plugin will create a tourne wheel and let you to add players at run time. 
+ *  http://iroylabs.blogspot.com/2011/06/latest-jquery-plugin.html
+ 
+ *   USES JQUERY OBJECT + CANVAS DRAWING :) 
+ */
+
 
 (function($){
     $.fn.rouetourne = function(options, callback){
