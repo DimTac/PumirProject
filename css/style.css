@@ -261,7 +261,7 @@ input[type="button"] + span{
 	display: none;
 	background-color: rgba(100,100,100,0.8);
 	/* Fallback for web browsers that doesn't support RGBa */
-	background: rgb(0, 0, 0);
+	background: rgb(0, 0, 0.6);
 }
 
 

@@ -9,8 +9,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" type="text/css" href="reset.css" />
+    
     <meta property="og:title" content="Wheelunch - Tournez, Trouvez, Lunchez !"/>
     <meta property="og:image" content="http://www.wheelunch.fr/img/og_fb.png"/>
     <meta property="og:type" content="website" />
@@ -76,96 +75,61 @@
                 </div>
 
                 <div id="panel-results">
-                  <input type="button" id="back" value="< Je ne suis pas satisfait">
+                  <input type="button" id="back" value="< Retour">
                   <ul id="liste">
                     <li id="test">
-                      <div class="image">
-                        <img src="" alt="" >
-                      </div>
-                      <div>
-                        <div class="infos">
-                          <h2>Restaurant</h2>
-                          <p>adresse</p>
-                          <p>prix</p>
-                          <p>note</p>
-                        </div>
-                        <div class="distance">
-                          <p>distance</p>
-                        </div>
-                        <hr>
-                      </div>
-                    </li> 
 
-<!--                     <li>
-                      <div id="image">
-                        <img src="" alt="" >
-                      </div>
-                      <div>
-                        <div id="infos">
-                          <h2>Restaurant</h2>
-                          <p>adresse</p>
-                          <p>prix</p>
-                          <p>note</p>
-                        </div>
-                        <div id="distance">
-                          <p>distance</p>
-                        </div>
-                        <hr>
-                      </div>
-                    </li>  -->
+                    </li> 
                   </ul>
                 </div>
 
             </div>
-                <div id="details-restaurant">
-                  <div id="content">
-                    <div id="resto">
-                                          <li id="test">
-                      <div class="image">
-                        <img src="" alt="" >
-                      </div>
-                      <div>
-                        <div class="infos">
-                          <h2>Restaurant</h2>
-                          <p>adresse</p>
-                          <p>prix</p>
-                          <p>note</p>
-                        </div>
-                        <div class="distance">
-                          <p>distance</p>
-                        </div>
-                        <hr>
-                      </div>
-                    </li> 
-                    </div>
-                    <div id="comments">
-                    </div>
-                  </div>
-                  <div id="groupon">
-                  </div>
-                </div>
 
-            <!-- <div id="map"> -->
-                <div id="resultats"></div>
-                <div id="map" class="dark"></div>
-                <div id="geolocate"></div>
-            <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
+            <div id="resultats"></div>
+            <div id="map" class="dark"></div>
+            <div id="geolocate"></div>
+
+
       <script type="text/javascript">
-      if ( document.addEventListener && window.addEventListener ) {
+      /*if ( document.addEventListener && window.addEventListener ) {
           //Pour IE9
           document.getElementById('test').addEventListener('click', function(e){
             this.style["background-color"] = "#ddd";
           });
-      }
+      }*/
       </script>
+
       <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
-      <script src='js/roueTourne.js'></script>
+
       <script src='js/roue.js'></script>
+
+      <script type='text/javascript'>
+        // Quelle utilité ?
+        $(document).ready(function()
+        {
+           $('#canvas').rouetourne(
+           {
+               restoArray : ['Chinois',
+               'Japonais',
+               'Kebab',
+               'Brasserie',
+               'Pizza',
+               'Indien',
+               'Crêperie',
+               'Sandwich',
+               'Bio-tibétain',
+               'Chez maman']
+           });
+        });
+
+
+      </script>
+
+
       <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
+
       <script type="text/javascript">
         window.compteur = 0;
         $('#moins').bind('click', function(evt){

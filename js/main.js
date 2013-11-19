@@ -14,8 +14,14 @@
 
 $(document).ready(function(){
 
-	var userLocation    = {longitude : '', latitude : ''};
-	var json_foursquare = {};
+	/**
+	*
+	*	GESTION DE LA ROUE
+	*
+	*/
+	var params = {};
+	roue.init(params);
+
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -26,6 +32,9 @@ $(document).ready(function(){
 	 * @see  GeoLocation.init()
 	 * @see  GeoLocation.getLocation()
 	 */
+
+	var userLocation    = {longitude : '', latitude : ''};
+	var json_foursquare = {};	 
 	if(getTokenUrl()==''){
 		GeoLocation.init({
 			callback_user : function(pos){
@@ -43,19 +52,26 @@ $(document).ready(function(){
 	 * - Sinon, on affiche simplement la carte mapBox selon
 	 *   les restaurants spécifiés et selon la position de l'utilisateur
 	 *
+	 * @see  spin()
 	 * @see  init_Foursquare()
 	 * @see  afficher_carte()
 	 * @see  init_map()
 	 */
-	$.rotation_complete = function(resultatRoue){
+	$("#go").on('click',function(e){	
 		if(getTokenUrl()!=''){	
-			console.log('Il y a un token dans l\'url...');
+			// Si le token n'existe pas en localstorage, on l'enregistre pour la prochaine fois
+			if(localStorage.getItem('token_foursquare') == null){
+				console.log('Le token n\'existe pas en localStorage - enregistrement...');
+				localStorage.setItem('token_foursquare', getTokenUrl());
+			}else{
+				console.log('Le token existe en localStorage !');
+			}
 			init_Foursquare();
 		}else{
 			transition_carte();
-			init_map(resultatRoue);
+			init_map();
 		}
-	};
+	});
 
 	/**
 	 * Récupère le token présent dans l'url
@@ -168,7 +184,7 @@ $(document).ready(function(){
 			var params = {
 			    zoom : 17,
 			    map : "map",
-			    recherche : resultatRoue,
+			    keyword : resultatRoue,
 			 /*   recherche : "restaurant",*/
 			    center : {
 			      latitude : userLocation.latitude,
@@ -176,7 +192,8 @@ $(document).ready(function(){
 			    },
 			    rechercheOk : function(geoJSON, pos){					      
 			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte   
-			    }
+			    },
+			    pasDeResto : afficher_modale
 			  };
 			carte.init(params);
 			carte.getPointsPlaces();
@@ -200,4 +217,43 @@ $(document).ready(function(){
 	    $("#panel-results").delay(1500).fadeIn(500);
 	}
 
+	/**
+	 * Si l'utilisateur n'a pas de restaurants à proximité,
+	 * on ouvre une fenêtre modale lui proposant de cuisiner
+	 * lui-même un plat en rapport avec le mot-clef trouvé par la roue.
+	 * On utilise un timeout de façon à laisser les animations
+	 * CSS se faire avant d'afficher la modale.
+	 * 
+	 * @param  {String} mot_clef Le mot-clef retourné par la roue
+	 * @return {rien}          Pas de retour
+	 */
+	function afficher_modale(mot_clef){
+	  var chaine = '';
+	  setTimeout(function(){
+	    $.getJSON( "recettes.json", function( data ) {
+	          chaine += '<div class="modal fade" id="modaleRecette">';
+	          chaine += '<div class="modal-dialog">';
+	          chaine += '<div class="modal-content">';
+	            chaine += '<div class="modal-header">';
+	              chaine += '<h4 class="modal-title">Aucun restaurant '+mot_clef+' trouvé à proximité...</h4>';
+	            chaine += '</div>';
+	            chaine += '<div class="modal-body">';
+	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+data.chinois.url+'">recette de '+data.chinois.nom+'</a> !</h4>';
+	              chaine += '<div id="recette">';
+	                //chaine += '<img src="'+data.chinois.image+'" alt="'+data.chinois.nom+'"/>';
+	                chaine += '<br />'+data.chinois.url_video;
+	                //chaine += '<video id="our-video" width="500" height="315" controls><source src="http://www.youtube.com/watch?v=DBnmUHm9n9g"></video>';
+	               chaine += '</div>';
+	            chaine += '</div>';
+	            chaine += '<div class="modal-footer">';
+	              chaine += '<button type="button" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
+	            chaine += '</div>';
+	          chaine += '</div>';
+	          chaine += '</div>';
+	          chaine += '</div>';
+	          $("#panel-results").append(chaine);
+	          $('#modaleRecette').modal();
+	      });
+	  }, 1000);
+	}
 });
