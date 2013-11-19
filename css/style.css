@@ -183,7 +183,7 @@ input[type="button"] + span{
 }
 
 #choix input{
-	cursor: pointer;
+	cursor:  pointer;
 	color: #be4d47;
 	border: 1px solid #ddd;
 }
@@ -191,7 +191,6 @@ input[type="button"] + span{
 /*@JEREM : classe quand le input est sélectionné (dans la roue), à remplir correctement*/
 .selected{
 	background-color: rgba(255,255,255,0.3);
-	background: rgb(255,255,255);
 	cursor: pointer;
 	color: #000 !important;
 	border : none !important;
@@ -208,19 +207,13 @@ input[type="button"] + span{
 
 #affichage{
 	position: absolute;
-	width: 25%;
+	width: 20%;
 	min-width: 200px;
 	height: 100%;
-	margin-left: 75%;
+	margin-left: 80%;
 }
 
 #panel{
-/*	position: absolute;	
-	width: 100%;
-	min-width: 200px;
-	height: 100%;*/
-	/*background-color: #ccc;*/
-	/*box-shadow: 1px 0 0 #333;*/
 	position: absolute;
 	width: 25%;
 	min-width: 200px;
@@ -233,15 +226,20 @@ input[type="button"] + span{
 	position: absolute;	
 	width: 100%;
 	height: 100%;	
+	margin-left: 20%;
 	background-color: white;
+	/*display: none;*/
+	/*background-color: #119955;*/
+	/*visibility:hidden;*/
 	display: none;
-	z-index : 1;
+	z-index: 1;
 }
 
 #panel-roue{
 	height: 100%;
 	/*opacity: 1;*/
 	display: block;
+	background-color: rgba(100,100,100,0.8);
 }
 
 #panel-roue>div:last-of-type{
@@ -259,11 +257,9 @@ input[type="button"] + span{
 	/*visibility: hidden;*/
 	/*opacity: 0;*/
 	display: none;
-	background-color: rgba(100,100,100,0.8);
 	/* Fallback for web browsers that doesn't support RGBa */
 	background: rgb(0, 0, 0.6);
 }
-
 
 div > span{
 	display: inline-block;
@@ -368,6 +364,11 @@ div > span{
 	width: 15%;
 	display: inline-block;
 }
+#fleche{
+	position:absolute;
+	left:25%;
+	top:50%;
+}
 
 #details-restaurant{
 	z-index: 2;
@@ -377,5 +378,4 @@ div > span{
 	height: 25%;
 	width: 75%;
 	background-color: rgba(255,255,255,0.8);
-	background-color: rgb(255,255,255);
 }
