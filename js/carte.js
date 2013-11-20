@@ -25,7 +25,7 @@ var carte = {
   // Méthode de recherche
   getPointsPlaces: function()
   {
-    console.log("Recherche des restos a proximité de : "+this.parametres.center.latitude+" avec la recherche = "+this.defaults.keyword);
+    console.log("Recherche des restos a proximité de : "+this.parametres.center.latitude+" avec la recherche = "+this.defaults.keyword+" dans un périmètre de "+this.defaults.radius+"m");
     
     // Déclaration de la position
     var position = new google.maps.LatLng(
@@ -51,9 +51,9 @@ var carte = {
       request, 
       function(data,status)
       {
-        console.log('');
+/*        console.log('');
         console.log(data);
-        console.log('');
+        console.log('');*/
         // Adaptation des points pour MapBox
         geoJSON = carte.transformationPointsMapBox(data);
         // Envoi du callback OK et du geoJSON +
@@ -140,14 +140,18 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
-      chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
-      chaine += '</div>';
+      chaine += '<p>'+tableauMarkers[i].feature.properties.adresse+'</p>';
+      chaine += '</div><hr />';
       $("#panel-results").append(chaine);
       chaine = '';
     }
     $('.espace').each(function(){
       $(this).on('click', function(){
         map._layers[$(this).attr('data-leafletId')].openPopup();
+        $("#panel-results div").removeClass('resto-select');
+        $(this).toggleClass('resto-select');
+
+        $("#details-restaurant").show();
       });      
     });
   }else{
@@ -157,5 +161,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
 }
 
 function selectionRestaurantsPanel(marker){
-  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").css('color', 'red');
+  $("#panel-results div").removeClass('resto-select');
+  $("#details-restaurant").show();
+  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
 }
