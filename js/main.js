@@ -49,7 +49,13 @@ $(document).ready(function(){
 	 */
 	$.rotation_complete = function(resultatRoue){
 		if(getTokenUrl()!=''){	
-			console.log('Il y a un token dans l\'url...');
+			// Si le token n'existe pas en localstorage, on l'enregistre pour la prochaine fois
+			if(localStorage.getItem('token_foursquare') == null){
+				console.log('Le token n\'existe pas en localStorage - enregistrement...');
+				localStorage.setItem('token_foursquare', getTokenUrl());
+			}else{
+				console.log('Le token existe en localStorage !');
+			}
 			init_Foursquare();
 		}else{
 			transition_carte();
@@ -200,5 +206,45 @@ $(document).ready(function(){
 	    $("#panel-roue").delay(1500).fadeOut(500);
 	    $("#panel-results").delay(1500).fadeIn(500);
 	}
+
+	/**
+	 * Si l'utilisateur n'a pas de restaurants à proximité,
+	 * on ouvre une fenêtre modale lui proposant de cuisiner
+	 * lui-même un plat en rapport avec le mot-clef trouvé par la roue.
+	 * On utilise un timeout de façon à laisser les animations
+	 * CSS se faire avant d'afficher la modale.
+	 * 
+	 * @param  {String} mot_clef Le mot-clef retourné par la roue
+	 * @return {rien}          Pas de retour
+	 */
+	function afficher_modale(mot_clef){
+	  var chaine = '';
+	  setTimeout(function(){
+	    $.getJSON( "recettes.json", function( data ) {
+	          chaine += '<div class="modal fade" id="modaleRecette">';
+	          chaine += '<div class="modal-dialog">';
+	          chaine += '<div class="modal-content">';
+	            chaine += '<div class="modal-header">';
+	              chaine += '<h4 class="modal-title">Aucun restaurant '+mot_clef+' trouvé à proximité...</h4>';
+	            chaine += '</div>';
+	            chaine += '<div class="modal-body">';
+	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+data.chinois.url+'">recette de '+data.chinois.nom+'</a> !</h4>';
+	              chaine += '<div id="recette">';
+	                //chaine += '<img src="'+data.chinois.image+'" alt="'+data.chinois.nom+'"/>';
+	                chaine += '<br />'+data.chinois.url_video;
+	                //chaine += '<video id="our-video" width="500" height="315" controls><source src="http://www.youtube.com/watch?v=DBnmUHm9n9g"></video>';
+	               chaine += '</div>';
+	            chaine += '</div>';
+	            chaine += '<div class="modal-footer">';
+	              chaine += '<button type="button" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
+	            chaine += '</div>';
+	          chaine += '</div>';
+	          chaine += '</div>';
+	          chaine += '</div>';
+	          $("#panel-results").append(chaine);
+	          $('#modaleRecette').modal();
+	      });
+	  }, 1000);
+	}	
 
 });

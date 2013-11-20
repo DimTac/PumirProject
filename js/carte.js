@@ -79,7 +79,8 @@ var carte = {
         {
           title: data[i].name,
           adresse : data[i].vicinity,
-          description: 'Description',
+          //ref_photo : data[i].reference_picture,
+          //ref_avis : data[i].reference_avis,
           'marker-size': 'medium',
           'marker-color':'#046380',
           'marker-symbol': 'restaurant'
