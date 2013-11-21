@@ -29,11 +29,16 @@ var carte = {
   {
     console.log("Recherche des restos a proximité de : "+this.parametres.center.latitude+" avec la recherche = "+this.defaults.keyword+" dans un périmètre de "+this.defaults.radius+"m");
     
-    // Déclaration de la position
-    var position = new google.maps.LatLng(
-      this.parametres.center.latitude,
-      this.parametres.center.longitude
-    );
+    if(!parametre_existe('dev')){
+      // Déclaration de la position
+      var position = new google.maps.LatLng(
+        this.parametres.center.latitude,
+        this.parametres.center.longitude
+      );
+    }else{
+      console.log('Mode développement en campagne activé');
+      var position = new google.maps.LatLng('49.255704','-0.37244');  // Mathieu pour test dev
+    }
 
     //Declaration d'un objet carte
     tap = new google.maps.Map(document.getElementById('resultats'));
@@ -56,12 +61,6 @@ var carte = {
       request, 
       function(data,status)
       {
-<<<<<<< HEAD
-=======
-/*        console.log('');
-        console.log(data);
-        console.log('');*/
->>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
         // Adaptation des points pour MapBox
         geoJSON = carte.transformationPointsMapBox(data);
         // Envoi du callback OK et du geoJSON +
@@ -122,6 +121,24 @@ var carte = {
 };
 
 /**
+ * Vérifie qu'un paramètre entré existe dans l'url,
+ * ici utilisé pour vérifier que le mode dev est activé
+ * 
+ * @param  {String} parametre Le parametre à trouver
+ * @return {booléen}          La valeur, vraie ou fausse
+ */
+function parametre_existe(parametre){
+  var params = location.search.substr(1, location.search.length).split('&');
+  var tmp    = '';
+  for(var i=0; i<params.length; i++){
+    tmp = params[i].split('=');
+    if(tmp[0] == parametre) // Nom du paramètre
+      return true;
+  }
+  return false;
+}
+
+/**
  * Initialise un tableau ordonné contenant
  * les informations reçues du JSON de base
  * (inutilisable car l'index de l'élément est 
@@ -178,30 +195,17 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
-<<<<<<< HEAD
       chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
       chaine += '</div>';
       $("#panel-results").append(chaine); // Ajoute les restos au panel de gauche
-=======
-      chaine += '<p>'+tableauMarkers[i].feature.properties.adresse+'</p>';
-      chaine += '</div><hr />';
-      $("#panel-results").append(chaine);
->>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
       chaine = '';
     }
     $('.espace').each(function(){
       $(this).on('click', function(){
         map._layers[$(this).attr('data-leafletId')].openPopup();
-<<<<<<< HEAD
         detail_json = geoJSON[$('#panel-results div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
         $("#details-restaurant").delay(100).fadeIn(100);      
-=======
-        $("#panel-results div").removeClass('resto-select');
-        $(this).toggleClass('resto-select');
-
-        $("#details-restaurant").show();
->>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
       });      
     });
   }else{
@@ -325,8 +329,9 @@ function afficher_etoiles(nb){
  * @return {rien}        Par de return
  */
 function selectionRestaurantsPanel(marker){
-<<<<<<< HEAD
-  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").css('color', 'red');
+  $("#panel-results div").removeClass('resto-select');
+  $("#details-restaurant").show();
+  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
 }
 
 /**
@@ -370,9 +375,4 @@ function distance(lat_a_degre, lon_a_degre, lat_b_degre, lon_b_degre){
  */
 function convertRad(input){
   return (Math.PI * input)/180;
-=======
-  $("#panel-results div").removeClass('resto-select');
-  $("#details-restaurant").show();
-  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
->>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
 }

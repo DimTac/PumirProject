@@ -3,48 +3,54 @@
         "nom":"Nems",
         "url":"http://www.marmiton.org/recettes/recette_nems_21488.aspx",
         "image":"http://images.marmitoncdn.org/recipephotos/multiphoto/fe/fefc0927-ae3a-44e1-be7f-5466f850fb8a_normal.jpg",
-        "url_video":"<iframe width=\"100%\" height=\"315\" src=\"http://www.youtube.com/embed/DBnmUHm9n9g?rel=0\" frameborder=\"0\"></iframe>"
+        "url_video":"recette_nems.mp4"
     },
     "japonais": {
         "nom": "Sushis",
         "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
         "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "url_video":"recette_sushis.mp4"
+    },
+    "asiatique": {
+        "nom": "Sushis",
+        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
+        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
+        "url_video":"recette_nems.mp4"
     },
     "kebab": {
         "nom": "Kebab",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_kebab.mp4"
     },
     "brasserie": {
-        "nom": "Brasserie",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "nom": "b",
+        "url": "d",
+        "image": "f",
+        "url_video":""
     },
     "pizza": {
-        "nom": "Pizza",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "nom": "b",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_pizza.mp4"
     },
     "indien": {
-        "nom": "Indien",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "nom": "b",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_samossa.mp4"
     },
     "creperie": {
-        "nom": "creperie",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "nom": "b",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_galette.mp4"
     },
     "sandwitch": {
-        "nom": "Sandwich",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
-        "url_video":"http://www.marmiton.org/pratique/techniques-culinaires-video-cuisine_sushi-faire-des-sushis.aspx"
+        "nom": "b",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_sandwitch.mp4"
     }    
 }
