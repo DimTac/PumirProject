@@ -206,7 +206,7 @@ $(document).ready(function(){
 		    {"margin-left":"0%"},
 		    {duration:500}
 	    );
-	    $("#panel-roue").delay(1500).fadeOut(500);
+
 	    $("#panel-results").delay(1500).fadeIn(500);
 	}
 

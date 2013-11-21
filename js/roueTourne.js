@@ -27,6 +27,7 @@
         restoArray = paramsRoue.restoArray;
         restoArraySrc = paramsRoue.restoArraySrc;
         restoArraySlogan = paramsRoue.restoArraySlogan;
+        var canvas = document.getElementById("canvas");
 
         if($.isFunction(options)){
             callback = options;
@@ -70,8 +71,6 @@
             getContext: function() {  
                 if(ctx !== null)
                     return ctx;
-
-                 var canvas = document.getElementById("canvas");
                  var G_vmlCanvasManager;
 
                 if (G_vmlCanvasManager != undefined) { // if IE9
@@ -92,7 +91,7 @@
 
                 $("#details-restaurant").fadeOut(1000);
                 $("#panel-results").delay(1500).fadeOut(500);
-                $("#panel-roue").delay(1500).fadeIn(500);
+
                 $('#map').fadeOut(1000);
                   $(paramsRoue.restoResultatDiv).fadeIn(1000);
                   $("#canvas").fadeIn(1000);
@@ -214,21 +213,19 @@
                 });
              ctx.restore();
             }         
-/*        
+       
         /////////// DESSIN DE LA FLECHE ////////////////////  
         function drawArrow() {
-            ctx.fillStyle = paramsRoue.arrowColor;
-            ctx.beginPath();
-            ctx.moveTo(0 - 4, 250 - (paramsRoue.outterRadius + 15));
-            ctx.lineTo(0 + 4, 250 - (paramsRoue.outterRadius + 15));
-            ctx.lineTo(0 + 4, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 + 9, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 + 0, 250 - (paramsRoue.outterRadius - 23));
-            ctx.lineTo(0 - 9, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 - 4, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 - 4, 250 - (paramsRoue.outterRadius + 15));
-            ctx.fill();               
-        }*/
+            var posX = ($(canvas).width())-135;
+            var posY = ($(canvas).height())-590;
+            console.log(posY);
+            console.log(posX);
+            var fleche=new Image();
+            fleche.onload = function() {
+                     ctx.drawImage(fleche, posX, posY);
+            }
+            fleche.src = "img/fleche.png";        
+        }
 
         /////////// DESSIN DE LA ROUE ////////////////////      
         function drawroue() {
@@ -236,10 +233,10 @@
             ctx.lineWidth = paramsRoue.roueBorderWidth;
             ctx.font = paramsRoue.roueTextFont;            
             ctx.clearRect(0,0,500,500);
-          /*  var picto = new Image(); */
             totalJoiner = restoArray.length;
 
             for(i = 0; i < totalJoiner; i++) {
+           /*     var picto=new Image();*/
                 text = restoArray[i];        
                 //On met le texte/picto qui correspond au type de resto           
                 var angle = startAngle + i * arc; 
@@ -265,22 +262,19 @@
                 ctx.save();
 
                 /////////// TRAITEMENT DU TEXTE SUR LA ROUE ////////////////////
-
-                ctx.fillStyle     = paramsRoue.roueTextColor;
-                ctx.translate(0 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
-                ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                
-                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-
-                /*picto.onload = function() {
-                     ctx.drawImage(picto, 0, 0, 50, 50);
+            /*    picto.onload = function() {
+                     ctx.drawImage(picto, i + Math.cos(angle + arc / 2) * paramsRoue.textRadius, i*400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
                 }
                 picto.src = "img/"+restoArraySrc[i];*/
-                
+                ctx.fillStyle     = paramsRoue.roueTextColor;
+                ctx.translate(i + Math.cos(angle + arc / 2) * paramsRoue.textRadius, i*400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
+                ctx.rotate(angle + arc / 2 + Math.PI / 2);
+              ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+         
                 ctx.restore();
                 ctx.closePath();
-            }     /*
-                drawArrow();*/
+            }     
+                drawArrow();
         }          
 
         /////////// ANIMATION DE LA ROUE QUAND ELLE TOURNE ////////////////////  
