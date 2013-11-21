@@ -169,13 +169,14 @@ $(document).ready(function(){
 	 * @see  carte.getPointsPlaces()
 	 * @return {rien} Pas de renvoi
 	 */
-	function init_map(resultatRoue){
+	function init_map(resultatRoue,radiusPanel){
 		if(userLocation.longitude!='' && userLocation.latitude!=''){
 			var params = {
 				//radius: perimetreCarte,
 			    zoom : 17,
 			    map : "map",
 			    keyword : resultatRoue,
+			    radius : radiusPanel,
 			 /*   recherche : "restaurant",*/
 			    center : {
 			      latitude : userLocation.latitude,
@@ -183,7 +184,9 @@ $(document).ready(function(){
 			    },
 			    rechercheOk : function(geoJSON, pos){					      
 			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte 
-			    }
+
+			    },
+			    pasDeResto : afficher_modale
 			  };
 			carte.init(params);
 			carte.getPointsPlaces();

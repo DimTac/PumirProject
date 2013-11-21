@@ -10,7 +10,6 @@
     <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" type="text/css" href="reset.css" />
     <meta property="og:title" content="Wheelunch - Tournez, Trouvez, Lunchez !"/>
     <meta property="og:image" content="http://www.wheelunch.fr/img/og_fb.png"/>
     <meta property="og:type" content="website" />
@@ -37,9 +36,8 @@
         <div id="roue">
                <canvas id="canvas" width="500px" height="1000px"></canvas>
                <img id="fleche" src="img/fleche.png" alt="fleche">
-               <div id="restoDiv">
-                  <img src="img/logo.png" alt="logo">
-                  <p></p>
+               <img id="logo" src="img/logo.png" alt="logo">
+                <div id="restoDiv">
                </div>
         </div>
         
@@ -50,7 +48,7 @@
                   <div id="transport">
                     <input type="button" value="Avec transport">
                     <input type="button" value="Sans transport">
-                    <div>ou</div>
+                    <div><p>ou</p></div>
                   </div>
                   
                   <div id="budget">
@@ -77,15 +75,12 @@
                 </div>
 
                 <div id="panel-results">
-                  <input type="button" id="back" value="< Je ne suis pas satisfait">
-                  <ul id="liste">
-                    <li id="test">
-                    </li> 
-                  </ul>
+                     <input type="button" id="back" value="< Je ne suis pas satisfait">
                 </div>
 
             </div>
-                <div id="details-restaurant">
+                <div id="details-restaurant" style="display:none">
+                  <img id="close" src="img/close.png" alt="close panel">
                   <div id="content">
                     <div id="resto">
                         <p>100m</p>
@@ -97,7 +92,7 @@
                           <div id="other">
                           <h3>Partager votre choix :</h3>
                           <!-- Partages FB, G+, Twitter, Mail -->
-                         <!--  <h3>Tickets resto, ou autres</p> -->
+                         <!--  <p>Tickets resto, ou autres</p> -->
                         </div>
                       </div>
                     <div id="comments">
@@ -117,9 +112,9 @@
       <script type="text/javascript">
       if ( document.addEventListener && window.addEventListener ) {
           //Pour IE9
-          document.getElementById('test').addEventListener('click', function(e){
+       /*   document.getElementById('test').addEventListener('click', function(e){
             this.style["background-color"] = "#ddd";
-          });
+          });*/
       }
       </script>
       <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
@@ -129,6 +124,17 @@
       <script src='js/roue.js'></script>
       <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
       <script type="text/javascript">
+
+        $('input[value="Avec transport"]').bind('click', function(evt){
+             $('input[value="Sans transport"]').removeClass('selectTransport');
+             $(this).toggleClass('selectTransport');
+        });
+
+        $('input[value="Sans transport"]').bind('click', function(evt){
+             $('input[value="Avec transport"]').removeClass('selectTransport');
+             $(this).toggleClass('selectTransport');
+        });
+
         window.compteur = 0;
         $('#moins').bind('click', function(evt){
           evt.preventDefault();
@@ -151,6 +157,12 @@
             $('#budget div').removeClass().addClass("budget"+window.compteur);   
           }
         });
+
+         $('#close').bind('click', function(evt){
+          evt.preventDefault();
+          $("#details-restaurant").hide();
+        });
+
       </script>
     </body>
 </html>

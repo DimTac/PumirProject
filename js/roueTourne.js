@@ -26,6 +26,7 @@
         resultatRoue = null,
         restoArray = paramsRoue.restoArray;
         restoArraySrc = paramsRoue.restoArraySrc;
+        restoArraySlogan = paramsRoue.restoArraySlogan;
 
         if($.isFunction(options)){
             callback = options;
@@ -37,7 +38,6 @@
             init: function() {
                 var children = $("#choix > input");
                 for (var i = 0; i < restoArray.length; i++) {
-                    console.log(children.eq(i));
                     children.eq(i).val(restoArray[i]);
                 };
                 methods.getContext();
@@ -89,12 +89,15 @@
                     {"margin-left":"75%"},
                     {duration:500}
                 );
+
+                $("#details-restaurant").fadeOut(1000);
                 $("#panel-results").delay(1500).fadeOut(500);
                 $("#panel-roue").delay(1500).fadeIn(500);
                 $('#map').fadeOut(1000);
-                  $(paramsRoue.restoResultatDiv+">img").fadeIn(1200);
+                  $(paramsRoue.restoResultatDiv).fadeIn(1000);
                   $("#canvas").fadeIn(1000);
                   $("#fleche").fadeIn(750);
+                  $(paramsRoue.logo).fadeIn(500);
 
                   modifResto=true;
             },
@@ -121,16 +124,24 @@
                     //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
                     if ((!trouve)&&(restoArray.length<10)){
                         $(typeRestoEnCours).toggleClass('selected');
+                        $(typeRestoEnCours).append("<img src='/img/selected.png' alt='selected'>");
+
                         restoArray.push($restoAjout);
+                        restoArraySrc.push('img/'+$restoAjout+'.png');
+                       /* restoArraySlogan.push();
+                            !!!!!!!!!!!!!!!!!!!!!!!!TROUVER UNE SOLUTION!!!!!!!!!!!!!!!!!!!!!!!
+                       */
                         restoLength = $restoAjout.length;
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
                     }
                     
                     //Sinon on le supprime (sauf si le tableau contient moins de deux éléments, auquel cas on n'enlève pas les deux derniers éléments)
-                    else if ((trouve)&&(restoArray.length>2)){
+                    else if ((trouve)&&(restoArray.length>4)){
                         $(typeRestoEnCours).toggleClass('selected');
                         restoArray.splice(index, 1);
+                        restoArraySlogan.splice(index, 1);
+                        restoArraySrc.splice(index, 1);
                         restoLength = restoArray.length;
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
@@ -159,22 +170,49 @@
                 var degrees = startAngle * 180 / Math.PI + 90;
                 var arcd = arc * 180 / Math.PI;
                 var index = Math.floor((360 - degrees % 360) / arcd);
+                var chaine = "";
+                var radiusPanel = 900;
+                modifResto = true
                 ctx.save();
 
                 ctx.font = paramsRoue.resultTextFont;
                 resultatRoue = restoArray[index];
+                resultatRoueSlogan = restoArraySlogan[index];
+                resultatRoueSrc = restoArraySrc[index];
 
-                //Affichage, à la place du logo, du type de resto gagnant :
-                 $(paramsRoue.restoResultatDiv).children().fadeOut(0, function() {
-                    $(paramsRoue.restoResultatDiv+">p").text(resultatRoue).fadeIn(100);
+                if ($('input[value="Avec transport"]').hasClass('selectTransport')){ 
+                //Si l'utilisateur a signalé qu'il avait un transport, on étend le périmètre de recherche
+                    radiusPanel = 2000;
+                }
+
+                $(paramsRoue.restoResultatDiv).empty();
+                
+                $(paramsRoue.logo).fadeOut(0, function() {
+                     chaine += '<div id="resultat">';
+                   /*  chaine += '<img src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';*/
+                      chaine += '<img src=img/viande.png alt='+resultatRoue+'>';
+                      chaine += '<h1>'+resultatRoue+'</h1>';
+                      chaine += '<p>'+resultatRoueSlogan+'</p>';
+                      chaine += '<button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button><button id="relancer">Relancer<img src="img/reload.png" alt="next"></button>'
+                      chaine += '</div>';                     
+                      $(paramsRoue.restoResultatDiv).append(chaine);
+                      chaine = '';
                   });
 
-                 $(paramsRoue.restoResultatDiv+">p").fadeOut(0, function() {
-                    $.rotation_complete(resultatRoue);
+                $("#relancer").bind('click', function(e){
+                    e.preventDefault();
+                    methods.tourne();
+                });
+
+                $("#bonchoix").bind('click', function(e){
+                    e.preventDefault();
+                    $.rotation_complete(resultatRoue,radiusPanel);
+                    $(paramsRoue.restoResultatDiv).fadeOut(500);
                     $("#canvas").fadeOut(500);
                     $("#fleche").fadeOut(500);
-                    ctx.restore();
-                  });
+                    $("#restoDiv").empty();
+                });
+             ctx.restore();
             }         
 /*        
         /////////// DESSIN DE LA FLECHE ////////////////////  
@@ -266,7 +304,9 @@
         roueBorderColor: 'white',
         roueBorderWidth : 30, 
         roueTextFont : '22px sans-serif', 
-        roueTextColor: 'white', /*
+        roueTextColor: 'white',
+        logo: '#logo',
+         /*
         roueTextShadowColor : 'none',*/
         resultTextFont : '30px sans-serif', 
         arrowColor :'black',
