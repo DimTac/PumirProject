@@ -56,6 +56,12 @@ var carte = {
       request, 
       function(data,status)
       {
+<<<<<<< HEAD
+=======
+/*        console.log('');
+        console.log(data);
+        console.log('');*/
+>>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
         // Adaptation des points pour MapBox
         geoJSON = carte.transformationPointsMapBox(data);
         // Envoi du callback OK et du geoJSON +
@@ -172,17 +178,30 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
+<<<<<<< HEAD
       chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
       chaine += '</div>';
       $("#panel-results").append(chaine); // Ajoute les restos au panel de gauche
+=======
+      chaine += '<p>'+tableauMarkers[i].feature.properties.adresse+'</p>';
+      chaine += '</div><hr />';
+      $("#panel-results").append(chaine);
+>>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
       chaine = '';
     }
     $('.espace').each(function(){
       $(this).on('click', function(){
         map._layers[$(this).attr('data-leafletId')].openPopup();
+<<<<<<< HEAD
         detail_json = geoJSON[$('#panel-results div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
         $("#details-restaurant").delay(100).fadeIn(100);      
+=======
+        $("#panel-results div").removeClass('resto-select');
+        $(this).toggleClass('resto-select');
+
+        $("#details-restaurant").show();
+>>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
       });      
     });
   }else{
@@ -306,6 +325,7 @@ function afficher_etoiles(nb){
  * @return {rien}        Par de return
  */
 function selectionRestaurantsPanel(marker){
+<<<<<<< HEAD
   $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").css('color', 'red');
 }
 
@@ -350,4 +370,9 @@ function distance(lat_a_degre, lon_a_degre, lat_b_degre, lon_b_degre){
  */
 function convertRad(input){
   return (Math.PI * input)/180;
+=======
+  $("#panel-results div").removeClass('resto-select');
+  $("#details-restaurant").show();
+  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
+>>>>>>> b4726e926090926a577e5aed74e3eb06eb14ae6e
 }
