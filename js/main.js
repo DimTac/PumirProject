@@ -16,6 +16,7 @@ $(document).ready(function(){
 
 	var userLocation    = {longitude : '', latitude : ''};
 	var json_foursquare = {};
+	var carte_initialisee = false;
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -182,9 +183,12 @@ $(document).ready(function(){
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude
 			    },
-			    rechercheOk : function(geoJSON, pos){					      
-			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte 
-
+			    rechercheOk : function(geoJSON, pos){	
+			      if(carte_initialisee==false){
+				   	carte.init_map(pos);
+				   	carte_initialisee = true;
+				  }
+			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte
 			    },
 			    pasDeResto : afficher_modale
 			  };

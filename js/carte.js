@@ -1,7 +1,7 @@
 var jsonObj       = [];
 var carte_globale = {}; // points places globale
-var map_globale   = {};   // carte mapbox globale
-var detail_json   = {};
+var map_globale   = {}; // carte mapbox globale
+var detail_json   = {}; // json contenant le détail d'un resto
 
 var carte = {
 
@@ -23,6 +23,18 @@ var carte = {
   {
     this.parametres = $.extend(this.defaults,options); 
     console.log('Initialisation de la carte effectuée - coordonnées : '+this.parametres.center.latitude+', '+this.parametres.center.longitude);
+  },
+
+  init_map: function(pos){
+    var map = L.mapbox.map(
+      this.parametres.map, 
+      'examples.map-9ijuk24y'
+      )
+      .setView(
+        [pos.latitude ,pos.longitude], 
+        carte.parametres.zoom
+    );
+    map_globale = map;
   },
 
   // Méthode de recherche
@@ -73,8 +85,10 @@ var carte = {
   // Méthode de transformation du json en geoJSON
   transformationPointsMapBox: function(data)
   {
-    for (var i = 0; i < data.length; i++)
-    {
+    /* remise à zero du json si on redemande la roue plus tard
+    pour ne pas cumuler tous les points */
+    jsonObj = [];
+    for (var i = 0; i < data.length; i++){
       jsonObj.push({
         type:'Feature',
         geometry:
@@ -100,22 +114,12 @@ var carte = {
   // Affichage de la carte et des points
   affichagePointsCarte: function(geoJSON,pos)
   {
-    var map = L.mapbox.map(
-      this.parametres.map, 
-      'examples.map-9ijuk24y'
-      )
-      .setView(
-        [pos.latitude ,pos.longitude], 
-        carte.parametres.zoom
-      );
-    map_globale = map;
-
     // Ajout des points de Google Places
-    map.markerLayer.setGeoJSON(geoJSON);
+    map_globale.markerLayer.setGeoJSON(geoJSON);
 
-    affichageRestaurantsPanel(geoJSON, map.markerLayer, map);  
+    affichageRestaurantsPanel(geoJSON, map_globale.markerLayer, map_globale);  
 
-    map.markerLayer.on('click',function(e){
+    map_globale.markerLayer.on('click',function(e){
       selectionRestaurantsPanel(e);
     });
   }
@@ -193,9 +197,11 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
   var tableauMarkers = setTableauLayerMarkers(markers); // retourne un tableau formaté
   var chaine         = '';
   var point          = {};
-  console.log(tableauMarkers);
 
   if(sizeOf(tableauMarkers) > 0){
+    console.log('Nombre d\'éléments trouvés:'+sizeOf(tableauMarkers));
+    $("#details-restaurant").html('');
+    $('#panel-results .espace').remove();
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
@@ -205,8 +211,11 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine = '';
     }
     $('.espace').each(function(){
+      var that=$(this);
       $(this).on('click', function(){
-        point = map._layers[$(this).attr('data-leafletId')];
+        $('.espace').removeClass('resto-select');
+        that.toggleClass('resto-select');
+        point = map_globale._layers[$(this).attr('data-leafletId')];
         point.openPopup();
         map_globale.panTo(point.getLatLng());
         detail_json = geoJSON[$('#panel-results div').index($(this))];
@@ -234,8 +243,6 @@ function recherche_details(ref_detail){
     reference: ref_detail,
     language: 'fr'
   };
-  console.log("Carte Global ");
-  console.log(carte_globale);
   service = new google.maps.places.PlacesService(carte_globale);
   service.getDetails(request, callback_details);
 }
@@ -264,15 +271,13 @@ function callback_details(json_detail, status){
   var compte_google   = '';
   var date_comment    = '';
   var chaine_comments = '';
-  var date            = {};
-  console.log(json_detail);
 
   if(status=='OK'){
     chaine += '<div id="content">';
       chaine += '<div id="resto">';
         chaine += '<p>Distance à vol d\'oiseau : '+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
-        chaine += '<img src="'+url_image+'" alt="'+detail_json.properties.title+'" >';
-        chaine += '<h2>'+detail_json.properties.title+'</h2>';
+        chaine += '<img src="'+url_image+'" alt="'+json_detail.name+'" >';
+        chaine += '<h2>'+json_detail.name+'</h2>';
         chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
         chaine += (rating!=null) ? 'Note globale : '+afficher_etoiles(rating)+'</p><hr />' : '';
         chaine += '<div id="comments">';
@@ -338,7 +343,8 @@ function selectionRestaurantsPanel(marker){
   $("#panel-results div").removeClass('resto-select');
   $("#details-restaurant").show();
   $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
-  map_globale.panTo(marker.layer.getLatLng());
+  map_globale.panTo(marker.latlng);
+  recherche_details(marker.layer.feature.properties.ref_photo);
 }
 
 /**
@@ -366,7 +372,7 @@ function distance_vol_oiseau(coordA, coordB){
  * @return {float}             La distance calculée
  */
 function distance(lat_a_degre, lon_a_degre, lat_b_degre, lon_b_degre){
-  var R = 6378000; //Rayon de la terre en mètres
+  var R     = 6378000; //Rayon de la terre en mètres
   var lat_a = convertRad(lat_a_degre);
   var lon_a = convertRad(lon_a_degre);
   var lat_b = convertRad(lat_b_degre);
