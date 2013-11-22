@@ -1,5 +1,6 @@
 var jsonObj       = [];
-var carte_globale = {};
+var carte_globale = {}; // points places globale
+var map_globale   = {};   // carte mapbox globale
 var detail_json   = {};
 
 var carte = {
@@ -107,6 +108,7 @@ var carte = {
         [pos.latitude ,pos.longitude], 
         carte.parametres.zoom
       );
+    map_globale = map;
 
     // Ajout des points de Google Places
     map.markerLayer.setGeoJSON(geoJSON);
@@ -189,8 +191,10 @@ function sizeOf(tableau){
  */
 function affichageRestaurantsPanel(geoJSON, markers, map){ 
   var tableauMarkers = setTableauLayerMarkers(markers); // retourne un tableau formaté
+  var chaine         = '';
+  var point          = {};
   console.log(tableauMarkers);
-  var chaine = '';
+
   if(sizeOf(tableauMarkers) > 0){
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
@@ -202,7 +206,9 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     }
     $('.espace').each(function(){
       $(this).on('click', function(){
-        map._layers[$(this).attr('data-leafletId')].openPopup();
+        point = map._layers[$(this).attr('data-leafletId')];
+        point.openPopup();
+        map_globale.panTo(point.getLatLng());
         detail_json = geoJSON[$('#panel-results div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
         $("#details-restaurant").delay(100).fadeIn(100);      
@@ -332,6 +338,7 @@ function selectionRestaurantsPanel(marker){
   $("#panel-results div").removeClass('resto-select');
   $("#details-restaurant").show();
   $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
+  map_globale.panTo(marker.layer.getLatLng());
 }
 
 /**
