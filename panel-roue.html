@@ -24,6 +24,9 @@
     <script src='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.standalone.js'></script>
     <link href='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
 
+    <!-- Custom scrollbars CSS -->
+    <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" />
+
     <!-- JS Scripts -->
     <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>    
@@ -160,12 +163,17 @@
           }
         });
 
-         $('#close').bind('click', function(evt){
+         $('#close').on('click', function(evt){
           evt.preventDefault();
           $("#details-restaurant").hide();
         });
 
       </script>
+
+      <script>!window.jQuery && document.write(unescape('%3Cscript src="js/minified/jquery-1.9.1.min.js"%3E%3C/script%3E'))</script>
+      <!-- custom scrollbars plugin -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/scroll.js"></script>
     </body>
 </html>
 
