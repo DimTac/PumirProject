@@ -17,6 +17,7 @@ $(document).ready(function(){
 	var userLocation    = {longitude : '', latitude : ''};
 	var json_foursquare = {};
 	var carte_initialisee = false;
+	var trajet            = {};
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -195,6 +196,52 @@ $(document).ready(function(){
 			carte.init(params);
 			carte.getPointsPlaces();
 		}
+	}
+
+	/**
+	 * Fonction lancée au clic sur l'image du détail
+	 * d'un restaurant. Ceci permet d'aller chercher
+	 * l'itinéraire entre notre point et ce resto.
+	 * @param  {Event} e L'évènement au clic
+	 * @return {rien}   Pas de return
+	 */
+	$('#details-restaurant').on('click', '#itineraire', function(e){
+	  e.preventDefault();
+	  var A_longitude = $(this).attr('data-aLong');
+	  var A_latitude = $(this).attr('data-aLat');
+	  var B_longitude = $(this).attr('data-bLong');
+	  var B_latitude = $(this).attr('data-bLat');
+	  var A = {latitude:A_latitude, longitude: A_longitude};
+	  var B = {latitude:B_latitude, longitude: B_longitude};
+	  console.log(A_latitude+','+A_longitude+' - '+B_latitude+','+B_longitude);	  
+	  
+	  Itineraire.init({coordsA:A, coordsB:B, retourItineraire:itineraire_recu});
+	  Itineraire.getJsonDirection();
+	});
+
+	/**
+	 * Callback lancé à la récpetion du json
+	 * de l'itinéraire. 
+	 * 
+	 * @param  {Object} etapes Le json des étapes du trajet
+	 * @return {rien}        Pas de return
+	 */
+	function itineraire_recu(etapes){
+		var line_points      = [];
+		var polyline         = {};
+		var polyline_options = {
+	        color: '#000'
+	    };
+	    map_globale.removeLayer(trajet);
+	    trajet = L.featureGroup().addTo(map_globale);
+
+		for(var i=0; i<etapes.length; i++){
+			if(i<(etapes.length-2))
+				line_points[i] = [etapes[i].start_point.ob, etapes[i].start_point.pb];
+			else
+				line_points[i] = [etapes[i].end_point.ob, etapes[i].end_point.pb];
+		}
+		polyline = L.polyline(line_points, polyline_options).addTo(trajet);
 	}
 
 	/**
