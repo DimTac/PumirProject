@@ -207,7 +207,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
       chaine += '</div>';
-      $("#panel-results").append(chaine); // Ajoute les restos au panel de gauche
+      $(".mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
     $('.espace').each(function(){
@@ -218,7 +218,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
         point = map_globale._layers[$(this).attr('data-leafletId')];
         point.openPopup();
         map_globale.panTo(point.getLatLng());
-        detail_json = geoJSON[$('#panel-results div').index($(this))];
+        detail_json = geoJSON[$('#resultats-restaurants div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
         $("#details-restaurant").delay(100).fadeIn(100);      
       });      
@@ -340,11 +340,12 @@ function afficher_etoiles(nb){
  * @return {rien}        Par de return
  */
 function selectionRestaurantsPanel(marker){
-  $("#panel-results div").removeClass('resto-select');
+  $("#resultats-restaurants div").removeClass('resto-select');
   $("#details-restaurant").show();
-  $("#panel-results div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
+  $("#resultats-restaurants div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
   map_globale.panTo(marker.latlng);
   recherche_details(marker.layer.feature.properties.ref_photo);
+  $("#resultats-restaurants").mCustomScrollbar("scrollTo",".resto-select");
 }
 
 /**
