@@ -186,7 +186,7 @@ input[type="button"] + span{
 
 #budget{
 	position: relative;
-	height: 130px;
+	height: auto;
 }
 #budget input{
 	width: 15%;
@@ -519,9 +519,9 @@ input[type="button"] + span{
 	background: -moz-linear-gradient(top,  #473b3b,  #3d3333);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#473b3b', endColorstr='#3d3333');
 	cursor:pointer;
-	border-radius: 9px 0px 0px 9px; 
-	-moz-border-radius: 9px 0px 0px 9px; 
-	-webkit-border-radius: 9px 0px 0px 9px; 
+	border-radius: 0px 9px 9px 0px; 
+	-moz-border-radius: 0px 9px 9px 0px; 
+	-webkit-border-radius: 0px 9px 9px 0px;  
 }
 
 #bonchoix img, #relancer img{
@@ -537,7 +537,7 @@ input[type="button"] + span{
 	text-transform: uppercase;
 	text-align: center;
 	width:auto;
-	padding-left: 55px;/*
+	padding-left: 40px;/*
 	padding-right: 40px;*/
 	padding-top:30px;
 	padding-bottom:30px;
@@ -546,7 +546,110 @@ input[type="button"] + span{
 	background: -moz-linear-gradient(top,  #a84741,  #9a3d37);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#a84741', endColorstr='#9a3d37');
 	cursor:pointer;
-	border-radius: 0px 9px 9px 0px; 
-	-moz-border-radius: 0px 9px 9px 0px; 
-	-webkit-border-radius: 0px 9px 9px 0px; 
+	border-radius: 9px 0px 0px 9px; 
+	-moz-border-radius: 9px 0px 0px 9px; 
+	-webkit-border-radius: 9px 0px 0px 9px;
+}
+
+
+
+														/*			RESPONSIVE	TABLETTE / PETIT DESKTOP		*/
+
+@media (max-width: 1250px) {
+	#transport :nth-child(3){
+		display:none;
+	}
+	#canvas{
+		position:absolute;
+		top:0;
+		left:0;
+		width:400px;	
+	}
+	#transport{
+		height:50px;
+	}
+}
+
+@media (max-width: 1220px) {
+	#restoDiv p{
+		font-size: 1.2em;
+	}
+	#restoDiv h1{
+		font-size: 4.5em;
+	}
+	#relancer,#bonchoix{
+		width:auto;
+		font-size: 1em;
+		padding-left: 22px;
+		padding-right: 20px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+	#bonchoix img, #relancer img{
+		margin-right: 0;
+	}
+	#back{
+		font-size:1em;
+		height:auto;
+	}
+}
+
+@media (max-width: 1110px) {
+	.budget0, #plus, #moins{
+		height:50px !important;
+	}
+	#choix input {
+		font-size: 0.6em;
+		padding: 0 0 0 0 !important;
+	}
+	.budget, .envie{
+		font-size: 0.8em;
+	}
+	#go{
+		font-size: 1em;
+		height:auto;
+	}
+	#transport {
+		font-size: 0.8em;
+	}
+	#canvas{
+		position:absolute;
+		top:0;
+		left:0;
+		width:300px;	
+	}
+	#restoDiv p{
+		font-size: 1em;
+	}
+	#restoDiv h1{
+		font-size: 3em;
+	}
+	.pictoResultat{
+		width:75px;
+		height:75px;
+	}
+	#panel-results h3{
+		font-size: 0.9em;
+	}
+	#panel-results h5{
+		font-size: 0.8em;
+		margin-left: 15%;
+	}
+	#relancer,#bonchoix{
+		width:auto;
+		font-size: 0.8em;
+		padding-left: 22px;
+		padding-right: 20px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+	#bonchoix img, #relancer img{
+		margin-right: 0;
+	}
+	#bonchoix{
+		height:49px;
+	}
+	#panel{
+		width:150px;
+	}
 }
