@@ -22,7 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family: Raleway;
+	font-family: 'Open Sans', sans-serif;
 }
 
 button
@@ -362,9 +362,15 @@ div > span{
 	text-align: center;
 }
 
+.pictoResultat{
+	width:100px;
+	height:100px;
+	margin-bottom:30px;
+}
+
 #restoDiv h1{
 	color:#ffffff;
-	font-size: 8em;
+	font-size: 6em;
 	text-transform: uppercase;
 	font-weight: bold;
 }
@@ -372,7 +378,7 @@ div > span{
 #restoDiv p{
 	margin-top:-10px;
 	color:#ffd629;
-	font-size: 3em;
+	font-size: 2em;
 }
 
 #close{

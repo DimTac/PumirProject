@@ -91,7 +91,7 @@
 
                 $("#details-restaurant").fadeOut(1000);
                 $("#panel-results").delay(1500).fadeOut(500);
-
+                $("#panel-roue").delay(1500).fadeIn(500);
                 $('#map').fadeOut(1000);
                   $(paramsRoue.restoResultatDiv).fadeIn(1000);
                   $("#canvas").fadeIn(1000);
@@ -189,7 +189,7 @@
                 $(paramsRoue.logo).fadeOut(0, function() {
                      chaine += '<div id="resultat">';
                    /*  chaine += '<img src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';*/
-                      chaine += '<img src=img/viande.png alt='+resultatRoue+'>';
+                      chaine += '<img class="pictoResultat" src=img/viande.png alt='+resultatRoue+'>';
                       chaine += '<h1>'+resultatRoue+'</h1>';
                       chaine += '<p>'+resultatRoueSlogan+'</p>';
                       chaine += '<button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button><button id="relancer">Relancer<img src="img/reload.png" alt="next"></button>'
@@ -233,10 +233,10 @@
             ctx.lineWidth = paramsRoue.roueBorderWidth;
             ctx.font = paramsRoue.roueTextFont;            
             ctx.clearRect(0,0,500,500);
+          /*  var picto = new Image(); */
             totalJoiner = restoArray.length;
 
             for(i = 0; i < totalJoiner; i++) {
-           /*     var picto=new Image();*/
                 text = restoArray[i];        
                 //On met le texte/picto qui correspond au type de resto           
                 var angle = startAngle + i * arc; 
@@ -262,15 +262,18 @@
                 ctx.save();
 
                 /////////// TRAITEMENT DU TEXTE SUR LA ROUE ////////////////////
-            /*    picto.onload = function() {
-                     ctx.drawImage(picto, i + Math.cos(angle + arc / 2) * paramsRoue.textRadius, i*400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
+
+                ctx.fillStyle     = paramsRoue.roueTextColor;
+                ctx.translate(0 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
+                ctx.rotate(angle + arc / 2 + Math.PI / 2);
+                
+                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+
+                /*picto.onload = function() {
+                     ctx.drawImage(picto, 0, 0, 50, 50);
                 }
                 picto.src = "img/"+restoArraySrc[i];*/
-                ctx.fillStyle     = paramsRoue.roueTextColor;
-                ctx.translate(i + Math.cos(angle + arc / 2) * paramsRoue.textRadius, i*400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
-                ctx.rotate(angle + arc / 2 + Math.PI / 2);
-              ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-         
+                
                 ctx.restore();
                 ctx.closePath();
             }     
