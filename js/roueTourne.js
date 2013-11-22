@@ -190,7 +190,7 @@
                       chaine += '<img class="pictoResultat" src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';
                       chaine += '<h1>'+resultatRoue+'</h1>';
                       chaine += '<p>'+resultatRoueSlogan+'</p>';
-                      chaine += '<button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button><button id="relancer">Relancer<img src="img/reload.png" alt="next"></button>';
+                      chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>';
                       chaine += '</div>';                     
                       $(paramsRoue.restoResultatDiv).append(chaine);
                       chaine = '';
