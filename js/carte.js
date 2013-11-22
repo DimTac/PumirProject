@@ -210,6 +210,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       $(".mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
+    
     $('.espace').each(function(){
       var that=$(this);
       $(this).on('click', function(){
@@ -299,6 +300,7 @@ function callback_details(json_detail, status){
         }
         chaine += '<div>';
       chaine += '</div>';
+    chaine += '</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
