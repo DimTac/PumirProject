@@ -203,6 +203,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     $("#content").html('');
     $('#panel-results .espace').remove();
     for(var i=0; i<sizeOf(tableauMarkers); i++){
+      console.log("Boucle"+i+" Taille : "+sizeOf(tableauMarkers));
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
