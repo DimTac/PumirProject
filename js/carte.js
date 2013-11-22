@@ -200,7 +200,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
 
   if(sizeOf(tableauMarkers) > 0){
     console.log('Nombre d\'éléments trouvés:'+sizeOf(tableauMarkers));
-    $("#details-restaurant").html('');
+    $("#content").html('');
     $('#panel-results .espace').remove();
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
@@ -273,7 +273,6 @@ function callback_details(json_detail, status){
   var chaine_comments = '';
 
   if(status=='OK'){
-    chaine += '<div id="content">';
       chaine += '<div id="resto">';
         chaine += '<p>Distance à vol d\'oiseau : '+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
         chaine += '<img src="'+url_image+'" alt="'+json_detail.name+'" >';
@@ -299,11 +298,10 @@ function callback_details(json_detail, status){
         }
         chaine += '<div>';
       chaine += '</div>';
-    chaine += '</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
-  $('#details-restaurant').html(chaine);
+  $('#content').html(chaine);
 }
 
 /**
