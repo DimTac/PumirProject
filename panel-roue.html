@@ -28,7 +28,15 @@
     <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>    
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
-            
+    <script type="text/javascript">
+      var isMobile = function() {
+           //console.log("Navigator: " + navigator.userAgent);
+           return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
+         };
+        if(isMobile()) {
+               window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
+        }
+  </script>     
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
     </head>
     <body>
