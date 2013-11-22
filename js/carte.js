@@ -275,7 +275,8 @@ function callback_details(json_detail, status){
   if(status=='OK'){
       chaine += '<div id="resto">';
         chaine += '<p>Distance à vol d\'oiseau : '+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
-        chaine += '<img src="'+url_image+'" alt="'+json_detail.name+'" >';
+        chaine += '<a href="" id="itineraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
+        chaine += '<img src="'+url_image+'" alt="'+json_detail.name+'" ></a>';
         chaine += '<h2>'+json_detail.name+'</h2>';
         chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
         chaine += (rating!=null) ? 'Note globale : '+afficher_etoiles(rating)+'</p><hr />' : '';
