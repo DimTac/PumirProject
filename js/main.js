@@ -16,6 +16,7 @@ $(document).ready(function(){
 
 	var userLocation    = {longitude : '', latitude : ''};
 	var json_foursquare = {};
+	var carte_initialisee = false;
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -182,9 +183,14 @@ $(document).ready(function(){
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude
 			    },
-			    rechercheOk : function(geoJSON, pos){					      
-			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte 
-			    }
+			    rechercheOk : function(geoJSON, pos){	
+			      if(carte_initialisee==false){
+				   	carte.init_map(pos);
+				   	carte_initialisee = true;
+				  }
+			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte
+			    },
+			    pasDeResto : afficher_modale
 			  };
 			carte.init(params);
 			carte.getPointsPlaces();
@@ -220,32 +226,51 @@ $(document).ready(function(){
 	 */
 	function afficher_modale(mot_clef){
 	  var chaine = '';
+	  var json = {};
 	  setTimeout(function(){
 	    $.getJSON( "recettes.json", function( data ) {
+	    	json = get_json_mot_clef(mot_clef, data);
 	          chaine += '<div class="modal fade" id="modaleRecette">';
 	          chaine += '<div class="modal-dialog">';
 	          chaine += '<div class="modal-content">';
-	            chaine += '<div class="modal-header">';
+	            chaine += '<div class="modal-header" style="background-color:#be4c46;color:white;">';
 	              chaine += '<h4 class="modal-title">Aucun restaurant '+mot_clef+' trouvé à proximité...</h4>';
 	            chaine += '</div>';
 	            chaine += '<div class="modal-body">';
-	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+data.chinois.url+'">recette de '+data.chinois.nom+'</a> !</h4>';
+	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
 	              chaine += '<div id="recette">';
-	                //chaine += '<img src="'+data.chinois.image+'" alt="'+data.chinois.nom+'"/>';
-	                chaine += '<br />'+data.chinois.url_video;
-	                //chaine += '<video id="our-video" width="500" height="315" controls><source src="http://www.youtube.com/watch?v=DBnmUHm9n9g"></video>';
+	                console.log(json.url_video);
+	                chaine += '<video style="margin:0 auto;" width="550" height="240" controls="controls"><source src="http://wheelunch.fr/_pierre/assets/'+json.url_video+'" type="video/mp4" />'+mot_clef+'</video>';
 	               chaine += '</div>';
 	            chaine += '</div>';
-	            chaine += '<div class="modal-footer">';
+	            chaine += '<div class="modal-footer" style="background-color:#be4c46;">';
 	              chaine += '<button type="button" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
 	            chaine += '</div>';
 	          chaine += '</div>';
 	          chaine += '</div>';
 	          chaine += '</div>';
-	          $("#panel-results").append(chaine);
+	          console.debug(chaine);
+	          $("#modale_campagne").append(chaine);
 	          $('#modaleRecette').modal();
+	          $('.modal-backdrop').css('display', 'none');
 	      });
 	  }, 1000);
 	}	
+
+	function get_json_mot_clef(mot_clef, data){
+		console.log('mot-clef : '+mot_clef);
+		if(mot_clef=='Japonais') return data.japonais;
+		else if(mot_clef=='Chinois') return data.chinois;
+		else if(mot_clef=='Asiatique') return data.asiatique;
+		else if(mot_clef=='Pizza') return data.pizza;
+		else if(mot_clef=='Sandwitch') return data.sandwitch;
+		else if(mot_clef=='Viande') return data.viande;
+		else if(mot_clef=='Poisson') return data.poisson;
+		else if(mot_clef=='Kebab') return data.kebab;
+		else if(mot_clef=='Crêperie') return data.creperie;
+		else if(mot_clef=='Brasserie') return data.brasserie;
+		else if(mot_clef=='Indien') return data.indien;
+		else return data.japonais;
+	}
 
 });
