@@ -201,7 +201,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
   if(sizeOf(tableauMarkers) > 0){
     console.log('Nombre d\'éléments trouvés:'+sizeOf(tableauMarkers));
     $("#content").html('');
-    $('#panel-results .espace').remove();
+    $('#resultats-restaurants .espace').remove();
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
@@ -210,6 +210,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       $(".mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
+    
     $('.espace').each(function(){
       var that=$(this);
       $(this).on('click', function(){
@@ -218,7 +219,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
         point = map_globale._layers[$(this).attr('data-leafletId')];
         point.openPopup();
         map_globale.panTo(point.getLatLng());
-        detail_json = geoJSON[$('#resultats-restaurants div').index($(this))];
+        detail_json = geoJSON[$('.mCSB_container div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
         $("#details-restaurant").delay(100).fadeIn(100);      
       });      
@@ -299,6 +300,7 @@ function callback_details(json_detail, status){
         }
         chaine += '<div>';
       chaine += '</div>';
+    chaine += '</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }

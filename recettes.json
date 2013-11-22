@@ -52,11 +52,17 @@
         "url": "d",
         "image": "f",
         "url_video":"recette_sandwitch.mp4"
-    } 
+    },
+    "viande": {
+        "nom": "b",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_sandwitch.mp4"
+    },
     "poisson": {
         "nom": "b",
         "url": "d",
         "image": "f",
         "url_video":"recette_galette.mp4"
-    },   
+    } 
 }
