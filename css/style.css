@@ -217,14 +217,15 @@ input[type="button"] + span{
 	cursor:  pointer;
 	color: #be4d47;
 	border: 1px solid #ddd;
+	background-color: #ffffff;
 }
 
-/*@JEREM : classe quand le input est sélectionné (dans la roue), à remplir correctement*/
 .selected{
-	background-color: rgba(255,255,255,0.3);
+	background-color: rgba(255,255,255,0.3) !important;
 	cursor: pointer;
 	color: #000 !important;
-	border : none !important;
+	border : 1px solid !important;
+	border-color:rgba(203,168,163,0.3) !important;
 }
 
 #roue{

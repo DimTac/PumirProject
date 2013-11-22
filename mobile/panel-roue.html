@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset='utf-8' />
+       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Wheelunch - Tournez, Trouvez, Lunchez !</title>
+    <link rel="shortcut icon" href="img/favicon.png" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+    <meta property="og:title" content="Wheelunch - Tournez, Trouvez, Lunchez !"/>
+    <meta property="og:image" content="http://www.wheelunch.fr/img/og_fb.png"/>
+    <meta property="og:type" content="website" />
+
+    <!-- Bootstrap Twitter -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- GoogleMaps c'est old school vive MapBox -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>     
+    <script src='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.standalone.js'></script>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
+
+    <!-- JS Scripts -->
+    <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="js/bootstrap.js"></script>    
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+            
+        <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+    </head>
+    <body>
+        <div id="trame"></div>
+<!--          <div id="roue">
+               <canvas id="canvas" width="250px" height="500"></canvas>
+               <img id="fleche" src="img/fleche.png" alt="fleche">
+        </div> -->
+        
+        <!-- <div id="affichage"> -->
+            <div id="panel">
+                <div id="panel-roue">
+
+                  <div id="transport">
+                    <input type="button" value="Avec transport">
+                    <input type="button" value="Sans transport">
+                  </div>
+                  
+                  <div id="budget">
+                      <span class="budget">Mon budget pour aujourd'hui</span>
+                      <input id="moins" type="button" value="-" onclick="">
+                      <div class="budget0"></div>
+                      <input id="plus" type="button" value="+" onclick="">
+                  </div>
+                  
+                  <div id="choix">
+                    <span class="envie">J'ai plutôt envie de manger</span>
+                    <input type="button" value="Chinois">
+                    <input type="button" value="Japonais">
+                    <input type="button" value="Kebab">
+                    <input type="button" value="Brasserie">
+                    <input type="button" value="Pizza">
+                    <input type="button" value="Indien">
+                    <input type="button" value="Crêperie">
+                    <input type="button" value="Sandwich">
+                    <input type="button" value="Bio-tibétain">
+                    <input type="button" value="Chez maman">
+                  </div>
+                  <input type="button" id="go" value="> Lancer la roue !"/>
+                </div>
+
+                <div id="panel-results">
+                  <input type="button" id="back" value="< Je ne suis pas satisfait">
+                  <ul id="liste">
+                    <li id="test">
+                      <div class="image">
+                        <img src="" alt="" >
+                      </div>
+                      <div>
+                        <div class="infos">
+                          <h2>Restaurant</h2>
+                          <p>adresse</p>
+                          <p>prix</p>
+                          <p>note</p>
+                        </div>
+                        <div class="distance">
+                          <p>distance</p>
+                        </div>
+                        <hr>
+                      </div>
+                    </li> 
+
+<!--                     <li>
+                      <div id="image">
+                        <img src="" alt="" >
+                      </div>
+                      <div>
+                        <div id="infos">
+                          <h2>Restaurant</h2>
+                          <p>adresse</p>
+                          <p>prix</p>
+                          <p>note</p>
+                        </div>
+                        <div id="distance">
+                          <p>distance</p>
+                        </div>
+                        <hr>
+                      </div>
+                    </li>  -->
+                  </ul>
+                </div>
+
+<!--             </div>
+                <div id="details-restaurant">
+                  <div id="content">
+                    <div id="resto">
+                      <div id="test2">
+                        <div class="image">
+                          <img src="" alt="" >
+                        </div>
+                        <div>
+                          <div class="infos">
+                            <h2>Restaurant</h2>
+                            <p>adresse</p>
+                            <p>prix</p>
+                            <p>note</p>
+                          </div>
+                          <div class="distance">
+                            <p>distance</p>
+                          </div>
+                          <hr>
+                        </div>
+                      </div> 
+                    </div>
+                    <div id="comments">
+                    </div>
+                  </div>
+                  <div id="groupon">
+                  </div>
+                </div> -->
+
+            <!-- <div id="map"> -->
+           <!--      <div id="resultats"></div>
+                <div id="map" class="dark"></div>
+                <div id="geolocate"></div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+      <script type="text/javascript">
+      if ( document.addEventListener && window.addEventListener ) {
+          //Pour IE9
+          document.getElementById('test').addEventListener('click', function(e){
+            this.style["background-color"] = "#ddd";
+          });
+      }
+      </script>
+      <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+      <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
+      <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
+      <script src='js/roueTourne.js'></script>
+      <script src='js/roue.js'></script>
+      <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
+      <script type="text/javascript">
+        window.compteur = 0;
+        $('#moins').bind('click', function(evt){
+          evt.preventDefault();
+          // evt.stopImmediatePropagation();
+          if(window.compteur == 0){
+            return;
+          }
+          else{
+            window.compteur--;
+            $('#budget div').removeClass().addClass("budget"+window.compteur);   
+          }
+        });
+
+        $('#plus').bind('click', function(evt){
+          evt.preventDefault();
+          // evt.stopImmediatePropagation();
+          if(window.compteur == 3){
+            return;
+          }
+          else{
+            window.compteur++;
+            $('#budget div').removeClass().addClass("budget"+window.compteur);   
+          }
+        });
+      </script>
+    </body>
+</html>
+

@@ -188,8 +188,7 @@
                 
                 $(paramsRoue.logo).fadeOut(0, function() {
                      chaine += '<div id="resultat">';
-                   /*  chaine += '<img src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';*/
-                      chaine += '<img class="pictoResultat" src=img/viande.png alt='+resultatRoue+'>';
+                      chaine += '<img class="pictoResultat" src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';
                       chaine += '<h1>'+resultatRoue+'</h1>';
                       chaine += '<p>'+resultatRoueSlogan+'</p>';
                       chaine += '<button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button><button id="relancer">Relancer<img src="img/reload.png" alt="next"></button>'
@@ -266,7 +265,7 @@
                 ctx.fillStyle     = paramsRoue.roueTextColor;
                 ctx.translate(0 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                
+                ctx.font = paramsRoue.roueTextFont;
                 ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
 
                 /*picto.onload = function() {
@@ -300,12 +299,9 @@
         backDeclencheur : '#back',
         roueBorderColor: 'white',
         roueBorderWidth : 30, 
-        roueTextFont : '22px sans-serif', 
+        roueTextFont : '17pt Open Sans', 
         roueTextColor: 'white',
         logo: '#logo',
-         /*
-        roueTextShadowColor : 'none',*/
-        resultTextFont : '30px sans-serif', 
         arrowColor :'black',
         typeRestoDeclencheur:'#choix :input',
         restoResultatDiv:'#restoDiv'
