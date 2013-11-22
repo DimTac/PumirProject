@@ -299,6 +299,7 @@ function callback_details(json_detail, status){
         }
         chaine += '<div>';
       chaine += '</div>';
+    chaine += '</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
