@@ -286,7 +286,6 @@ $(document).ready(function(){
 	            chaine += '<div class="modal-body">';
 	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
 	              chaine += '<div id="recette">';
-	                console.log(json.url_video);
 	                chaine += '<video style="margin:0 auto;" width="550" height="240" controls="controls"><source src="http://wheelunch.fr/_pierre/assets/'+json.url_video+'" type="video/mp4" />'+mot_clef+'</video>';
 	               chaine += '</div>';
 	            chaine += '</div>';
@@ -296,7 +295,6 @@ $(document).ready(function(){
 	          chaine += '</div>';
 	          chaine += '</div>';
 	          chaine += '</div>';
-	          console.debug(chaine);
 	          $("#modale_campagne").append(chaine);
 	          $('#modaleRecette').modal();
 	          $('.modal-backdrop').css('display', 'none');
