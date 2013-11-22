@@ -207,7 +207,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
       chaine += '</div>';
-      $(".mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
+      $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
     $('.espace').each(function(){
@@ -294,6 +294,7 @@ function callback_details(json_detail, status){
             chaine_comments += '</div><hr />';
           }
           chaine += chaine_comments;
+          chaine += '<div class="scroll-more">+</div>';
         }else{
           chaine += '<h3>Pas de commentaires postés sur ce restaurant</h3>';
         }
@@ -303,6 +304,31 @@ function callback_details(json_detail, status){
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
   $('#content').html(chaine);
+  $("#comments").mCustomScrollbar({
+    autoHideScrollbar:true,
+    theme:"light-thin",
+    advanced:{  
+      updateOnBrowserResize:true,   
+      updateOnContentResize:true   
+    },
+    scrollInertia : 0,
+    callbacks:{
+        onTotalScroll:function(){
+          $('#details-restaurant .scroll-more').fadeOut(0).addClass('off');
+        },
+        onScroll:function(){
+          if($('#details-restaurant .scroll-more').css('display') == 'none' && $('.scroll-more').hasClass('off') == true){
+            console.log('ok');
+            $('#details-restaurant .scroll-more').removeClass('off').stop().fadeIn(0);
+          }
+        }
+    }
+    $("#comments").mCustomScrollbar("update");
+    if($('#details-restaurant .mCSB_container').hasClass('mCS_no_scrollbar')){
+      $('#details-restaurant .scroll-more').fadeOut(0).addClass('off');
+    }
+  });
+
 }
 
 /**

@@ -217,8 +217,8 @@
         function drawArrow() {
             var posX = ($(canvas).width())-135;
             var posY = ($(canvas).height())-590;
-            console.log(posY);
-            console.log(posX);
+            // console.log(posY);
+            // console.log(posX);
             var fleche=new Image();
             fleche.onload = function() {
                      ctx.drawImage(fleche, posX, posY);
