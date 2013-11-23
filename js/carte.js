@@ -359,7 +359,7 @@ function afficher_etoiles(nb){
     chaine += '<img src="img/etoile-vote.png" alt="'+i+'" title="'+nb+'">';
   }
   for (var i = 0; i < 5-nb; i++) {
-    chaine += '<img src="img/etoile-novote.png" alt="">';
+    chaine += '<img src="img/etoile-novote.png" alt="" title="'+nb+'">';
   }
   return chaine;
 }
