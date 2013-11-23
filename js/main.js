@@ -276,6 +276,9 @@ $(document).ready(function(){
 	  var json = {};
 	  setTimeout(function(){
 	    $.getJSON( "recettes.json", function( data ) {
+	    	$("#modale_campagne").html('');
+	    	$("#content").html('');
+    		$('#resultats-restaurants .espace').remove();
 	    	json = get_json_mot_clef(mot_clef, data);
 	          chaine += '<div class="modal fade" id="modaleRecette">';
 	          chaine += '<div class="modal-dialog">';
