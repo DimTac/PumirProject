@@ -40,6 +40,7 @@
                 var children = $("#choix > input");
                 for (var i = 0; i < restoArray.length; i++) {
                     children.eq(i).val(restoArray[i]);
+                    children.eq(i).attr({slogan: restoArraySlogan[i]});
                 };
                 methods.getContext();
                 methods.setup();
@@ -123,15 +124,19 @@
                     if ((!trouve)&&(restoArray.length<10)){
                         $(typeRestoEnCours).toggleClass('selected');
                         $(typeRestoEnCours).append("<img src='/img/selected.png' alt='selected'>");
+                        var indexEnfant = ($(typeRestoEnCours).index())-1;
+                        var sloganEnfant = $(typeRestoEnCours).attr("slogan");
 
                         restoArray.push($restoAjout);
-                        restoArraySrc.push(+$restoAjout+'.png');
-                       /* restoArraySlogan.push();
-                            !!!!!!!!!!!!!!!!!!!!!!!!TROUVER UNE SOLUTION!!!!!!!!!!!!!!!!!!!!!!!
-                       */
+                        restoArraySrc.push('img/'+$restoAjout+'.png');
+                        if ($.inArray(sloganEnfant, restoArraySlogan)<=-1){
+                            restoArraySlogan.splice(indexEnfant,0,sloganEnfant);
+                            console.log(restoArraySlogan);
+                        }
                         restoLength = $restoAjout.length;
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
+                        compteur++;
                     }
                     
                     //Sinon on le supprime (sauf si le tableau contient moins de deux éléments, auquel cas on n'enlève pas les deux derniers éléments)
@@ -190,7 +195,7 @@
                       chaine += '<img class="pictoResultat" src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';
                       chaine += '<h1>'+resultatRoue+'</h1>';
                       chaine += '<p>'+resultatRoueSlogan+'</p>';
-                      chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>';
+                      chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>'
                       chaine += '</div>';                     
                       $(paramsRoue.restoResultatDiv).append(chaine);
                       chaine = '';
@@ -296,7 +301,7 @@
         backDeclencheur : '#back',
         roueBorderColor: 'white',
         roueBorderWidth : 30, 
-        roueTextFont : '24px "HandOfSean"', 
+        roueTextFont : '17pt Open Sans', 
         roueTextColor: 'white',
         logo: '#logo',
         arrowColor :'black',
