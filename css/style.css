@@ -3,6 +3,15 @@
    License: none (public domain)
 */
 
+@font-face {
+font-family: "HandOfSean";
+src: url(../font/hand_of_sean_demo-webfont.ttf);
+}
+
+.customFont{
+	font-family: "HandOfSean";
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -166,7 +175,7 @@ input{
 	top: 0;
 }
 
-#back img{
+#back img, #go img{
 	margin-right:15px;
 }
 
@@ -564,9 +573,6 @@ input[type="button"] + span{
 														/*			RESPONSIVE	TABLETTE / PETIT DESKTOP		*/
 
 @media (max-width: 1250px) {
-	#transport :nth-child(3){
-		display:none;
-	}
 	#canvas{
 		position:absolute;
 		top:0;
@@ -603,7 +609,7 @@ input[type="button"] + span{
 }
 
 @media (max-width: 1110px) {
-	#back img{
+	#back img, #go img{
 		width:15px;
 		height:15px;
 	}
