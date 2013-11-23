@@ -501,19 +501,23 @@ input[type="button"] + span{
 }
 
 #content{
-	/*overflow: auto;*/
+	height: 100%;
 }
 
 #comments{
 	width:33%;
 	height: 100%;
-	overflow: hidden;
 	position: absolute;
 	top: 0;
 	left: 65%;
 	padding-left: 5px;
 	padding-right: 10px;
 	border-left: 2px solid #be4d47;
+}
+
+#bloc-commentaires{
+	height: 100%;
+	overflow: auto;
 }
 
 #bonchoix {/*
