@@ -455,7 +455,7 @@ input[type="button"] + span{
 
 #resto{
 	margin-left:15px;
-	width:65%;
+	width:60%;
 }
 
 .imgResto{
@@ -501,13 +501,20 @@ input[type="button"] + span{
 }
 
 #comments{
-	width:33%;
+	width:38%;
 	height: 100%;
 	position: absolute;
 	top: 0;
-	left: 65%;
+	left: 60%;
 	padding-right: 10px;
 	border-left: 2px solid #be4d47;
+}
+
+#comments h3{
+	/*padding-left: 10px;*/
+	text-align: center;
+	font-size: 1.3em;
+	margin-top: 45px;
 }
 
 #bloc-commentaires{
