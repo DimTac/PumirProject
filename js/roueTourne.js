@@ -34,7 +34,7 @@
             options = {};
         } 
         
-         //////////// DECLARATION METHODES DE L'OBJET ////////////
+        //////////// DECLARATION METHODES DE L'OBJET ////////////
         var methods = {
             init: function() {
                 var children = $("#choix > input");
@@ -165,9 +165,12 @@
         function stopRotationRoue () {
                 clearTimeout(tourneTimeout);
                 //Quel type de resto va gagner ?
-                var degrees = startAngle * 180 / Math.PI + 90;
+                var degrees = startAngle * 180 / Math.PI + 360;
+                console.log(degrees);
                 var arcd = arc * 180 / Math.PI;
+                console.log(arcd);
                 var index = Math.floor((360 - degrees % 360) / arcd);
+                console.log(index);
                 var chaine = "";
                 var radiusPanel = 900;
                 modifResto = true
