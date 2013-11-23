@@ -123,7 +123,6 @@
                     //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
                     if ((!trouve)&&(restoArray.length<10)){
                         $(typeRestoEnCours).toggleClass('selected');
-                        $(typeRestoEnCours).append("<img src='/img/selected.png' alt='selected'>");
                         var indexEnfant = ($(typeRestoEnCours).index())-1;
                         var sloganEnfant = $(typeRestoEnCours).attr("slogan");
 
