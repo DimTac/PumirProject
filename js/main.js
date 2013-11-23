@@ -49,7 +49,7 @@ $(document).ready(function(){
 	 * @see  afficher_carte()
 	 * @see  init_map()
 	 */
-	$.rotation_complete = function(resultatRoue){
+	$.rotation_complete = function(resultatRoue, radiusPanel){
 		if(getTokenUrl()!=''){	
 			// Si le token n'existe pas en localstorage, on l'enregistre pour la prochaine fois
 			if(localStorage.getItem('token_foursquare') == null){
@@ -61,7 +61,7 @@ $(document).ready(function(){
 			init_Foursquare();
 		}else{
 			transition_carte();
-			init_map(resultatRoue);
+			init_map(resultatRoue, radiusPanel);
 		}
 	};
 
