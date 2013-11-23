@@ -283,6 +283,7 @@ function callback_details(json_detail, status){
         chaine += (rating!=null) ? 'Note globale : '+afficher_etoiles(rating)+'</p><hr />' : '';
         chaine += '<div id="comments">';
         if(comments != null){
+          chaine += '<div id="bloc-commentaires">'
           for(var i=0; i<comments.length; i++){
             compte_google = (typeof comments[i].author_url !== 'undefined') ? comments[i].author_url : null;
             date_comment  = getDateFormatee(new Date(comments[i].time * 1000));
@@ -295,18 +296,19 @@ function callback_details(json_detail, status){
             chaine_comments += '</div><hr />';
           }
           chaine += chaine_comments;
-          chaine += '<div class="scroll-more">+</div>';
+          chaine += '</div>'
         }else{
-          chaine += '<h3>Pas de commentaires postés sur ce restaurant</h3>';
+          chaine += '<h3 class="no-comment">Pas de commentaires postés sur ce restaurant</h3>';
         }
-        chaine += '<div>';
-      chaine += '</div>';
+      //   chaine += '<div>';
+      // chaine += '</div>';
+          chaine += '<div class="scroll-more">+</div>';
     chaine += '</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
   $('#content').html(chaine);
-  $("#comments").mCustomScrollbar({
+  $("#bloc-commentaires").mCustomScrollbar({
     autoHideScrollbar:true,
     theme:"light-thin",
     advanced:{  
@@ -320,16 +322,13 @@ function callback_details(json_detail, status){
         },
         onScroll:function(){
           if($('#details-restaurant .scroll-more').css('display') == 'none' && $('.scroll-more').hasClass('off') == true){
-            console.log('ok');
             $('#details-restaurant .scroll-more').removeClass('off').stop().fadeIn(0);
           }
         }
     }
-    $("#comments").mCustomScrollbar("update");
-    if($('#details-restaurant .mCSB_container').hasClass('mCS_no_scrollbar')){
-      $('#details-restaurant .scroll-more').fadeOut(0).addClass('off');
-    }
   });
+  checkIfScrollNeeded();
+
 
 }
 
