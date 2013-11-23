@@ -251,7 +251,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/lgpl.html.
 					mCustomScrollBoxH=mCustomScrollBox.height(),
 					mCSB_containerH=mCSB_container.outerHeight();
 			}
-			if(mCSB_containerH>mCustomScrollBoxH && !$this.data("horizontalScroll")){ /*content needs vertical scrolling*/
+			if(mCSB_containerH>=mCustomScrollBoxH && !$this.data("horizontalScroll")){ /*content needs vertical scrolling*/
 				mCSB_scrollTools.css("display","block");
 				var mCSB_draggerContainerH=mCSB_draggerContainer.height();
 				/*auto adjust scrollbar dragger length analogous to content*/

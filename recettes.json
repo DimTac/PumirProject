@@ -78,7 +78,7 @@
         "url_video":"recette_sandwitch.mp4",
         "url_video_ogg": "",
         "url_video_webm": ""
-    }
+    },
     "poisson": {
         "nom": "Poisson",
         "url": "d",
@@ -86,5 +86,5 @@
         "url_video":"recette_galette.mp4",
         "url_video_ogg": "",
         "url_video_webm": ""
-    },   
+    }
 }

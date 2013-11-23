@@ -31,15 +31,15 @@
     <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>    
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
-    <script type="text/javascript">
-      var isMobile = function() {
+  <script type="text/javascript">
+      /*var isMobile = function() {
            //console.log("Navigator: " + navigator.userAgent);
            return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
          };
         if(isMobile()) {
                window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
-        }
-  </script>     
+        }*/
+  </script>   
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
     </head>
     <body>
@@ -59,7 +59,7 @@
                   <div id="transport">
                     <input type="button" value="Avec transport">
                     <input type="button" value="Sans transport">
-                    <div><p>ou</p></div>
+                    <!-- <div><p>ou</p></div> -->
                   </div>
                   
                   <div id="budget">
@@ -86,34 +86,34 @@
                 </div>
 
                 <div id="panel-results">
-                    <input type="button" id="back" value="< Je ne suis pas satisfait">
+                    <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
                     <div id="resultats-restaurants"></div>
                     <div class="scroll-more">+</div>
                 </div>
 
             </div>
-                <div id="details-restaurant" style="display:none">
-                  <img id="close" src="img/close.png" alt="close panel">
-                  <div id="content">
-                    <div id="resto">
-                        <p>100m</p>
-                        <img src="img/resto.png" alt="resto_test" >
-                         <h2>Chez Marc & Babette</h2>
-                          <p>260 rue ton adresse<br>75011 - Paris</p>
-                          <hr>
-                          <p>10-15€</p>
-                          <div id="other">
-                          <h3>Partager votre choix :</h3>
-                          <!-- Partages FB, G+, Twitter, Mail -->
-                         <!--  <p>Tickets resto, ou autres</p> -->
-                        </div>
-                      </div>
-                    <div id="comments">
+              <div id="details-restaurant" style="display:none">
+                <img id="close" src="img/close.png" alt="close panel">
+                <div id="content">
+                  <div id="resto">
+                    <p>100m</p>
+                    <img src="img/resto.png" alt="resto_test" >
+                    <h2>Chez Marc & Babette</h2>
+                    <p>260 rue ton adresse<br>75011 - Paris</p>
+                    <hr>
+                    <p>10-15€</p>
+                    <div id="other">
+                      <h3>Partager votre choix :</h3>
+                      <!-- Partages FB, G+, Twitter, Mail -->
+                      <!--  <p>Tickets resto, ou autres</p> -->
                     </div>
                   </div>
-<!--                   <div id="groupon">
-                  </div> -->
+                  <div id="comments">
+                  </div>
                 </div>
+  <!--                   <div id="groupon">
+                    </div> -->
+              </div>
               <div id="modale_campagne"></div>
             <!-- <div id="map"> -->
                 <div id="resultats"></div>
@@ -130,12 +130,18 @@
           });*/
       }
       </script>
+
+      <script>!window.jQuery && document.write(unescape('%3Cscript src="js/minified/jquery-1.9.1.min.js"%3E%3C/script%3E'))</script>
+      <!-- custom scrollbars plugin -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/scroll.js"></script>
+
+      <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
       <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src='js/roueTourne.js'></script>
       <script src='js/roue.js'></script>
-      <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
       <script src="js/itineraire.js" type="text/javascript" charset="utf-8"></script> 
       <script type="text/javascript">
 
@@ -179,10 +185,7 @@
 
       </script>
 
-      <script>!window.jQuery && document.write(unescape('%3Cscript src="js/minified/jquery-1.9.1.min.js"%3E%3C/script%3E'))</script>
-      <!-- custom scrollbars plugin -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/scroll.js"></script>
+
     </body>
 </html>
 
