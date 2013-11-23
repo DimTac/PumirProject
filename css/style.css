@@ -327,6 +327,10 @@ input[type="button"] + span{
 	height: 85%;
 }
 
+#resultat{
+	margin-top: 100px;
+}
+
 .scroll-more{
 	position: absolute;
 	width: 100%;
@@ -411,7 +415,7 @@ input[type="button"] + span{
 
 #restoDiv h1{
 	color:#ffffff;
-	font-size: 6em;
+	font-size: 5em;
 	text-transform: uppercase;
 	font-weight: bold;
 }
@@ -583,26 +587,31 @@ input[type="button"] + span{
 	display: none;
 }*/
 
-#bonchoix {/*
-	text-shadow: -2px -1px 2px rgba(150, 150, 150, 1);*/
-	margin-top:50px;
+#bonchoix {
+	text-shadow: 0px -1px 0px #000;
+	margin-top:30px;
 	color: #ffffff;
 	text-transform: uppercase;
 	text-align: center;
 	width:auto;
 	padding-left: 40px;
-	padding-top:30px;/*
+	padding-top:24px;/*
 	padding-right: 40px;*/
-	padding-bottom:30px;
+	padding-bottom:24px;
 	height:40%;
 	background: -webkit-gradient(linear, left top, left bottom, from(#473b3b), to(#3d3333));
 	background: -moz-linear-gradient(top,  #473b3b,  #3d3333);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#473b3b', endColorstr='#3d3333');
 	cursor:pointer;
-	border-radius: 0px 9px 9px 0px; 
-	-moz-border-radius: 0px 9px 9px 0px; 
-	-webkit-border-radius: 0px 9px 9px 0px;  
+	box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
+	-moz-box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
+	-webkit-box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
+	
+	border-radius: 0px 2px 2px 0px; 
+	-moz-border-radius: 0px 2px 2px 0px; 
+	-webkit-border-radius: 0px 2px 2px 0px;  
 }
+
 
 #bonchoix img, #relancer img{
 	margin-left: 15px;
@@ -610,25 +619,30 @@ input[type="button"] + span{
 	margin-bottom:5px;
 }
 
-#relancer{/*
-	text-shadow: -2px -1px 2px rgba(150, 150, 150, 1);*/
-	margin-top:50px;
+#relancer{
+	text-shadow: 0px -1px 0px #000;
+	
+	margin-top:30px;
 	color: #ffffff;
 	text-transform: uppercase;
 	text-align: center;
 	width:auto;
 	padding-left: 40px;/*
 	padding-right: 40px;*/
-	padding-top:30px;
-	padding-bottom:30px;
+	padding-top:24px;
+	padding-bottom:24px;
 	height:40%;	
 	background: -webkit-gradient(linear, left top, left bottom, from(#a84741), to(#9a3d37));
 	background: -moz-linear-gradient(top,  #a84741,  #9a3d37);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#a84741', endColorstr='#9a3d37');
 	cursor:pointer;
-	border-radius: 9px 0px 0px 9px; 
-	-moz-border-radius: 9px 0px 0px 9px; 
-	-webkit-border-radius: 9px 0px 0px 9px;
+	box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
+	-moz-box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
+	-webkit-box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
+	border-radius: 2px 0px 0px 2px; 
+	-moz-border-radius: 2px 0px 0px 2px; 
+	-webkit-border-radius: 2px 0px 0px 2px;
+	
 }
 
 
@@ -705,10 +719,7 @@ input[type="button"] + span{
 	#restoDiv h1{
 		font-size: 3em;
 	}
-	.pictoResultat{
-		width:75px;
-		height:75px;
-	}
+
 	#panel-results h3{
 		font-size: 0.9em;
 	}
