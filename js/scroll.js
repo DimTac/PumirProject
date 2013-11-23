@@ -28,6 +28,10 @@ $('#panel-results .scroll-more').on('click', function(){
   $("#resultats-restaurants").mCustomScrollbar("scrollTo","bottom");
 });
 
+$('#details-restaurant .scroll-more').on('click', function(){
+  $("#bloc-commentaires").mCustomScrollbar("scrollTo","bottom");
+});
+
 var checkIfScrollNeeded = function(){
   console.log("checkifscroll");
   $("#bloc-commentaires").mCustomScrollbar("update");

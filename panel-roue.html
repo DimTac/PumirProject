@@ -58,7 +58,7 @@
 
                   <div id="transport">
                     <input type="button" value="Avec transport">
-                    <input type="button" value="Sans transport">
+                    <input type="button" value="Sans transport" class="selectTransport">
                     <!-- <div><p>ou</p></div> -->
                   </div>
                   
@@ -146,12 +146,12 @@
       <script type="text/javascript">
 
         $('input[value="Avec transport"]').bind('click', function(evt){
-             $('input[value="Sans transport"]').removeClass('selectTransport');
+             $('input[value="Sans transport"]').toggleClass('selectTransport');
              $(this).toggleClass('selectTransport');
         });
 
         $('input[value="Sans transport"]').bind('click', function(evt){
-             $('input[value="Avec transport"]').removeClass('selectTransport');
+             $('input[value="Avec transport"]').toggleClass('selectTransport');
              $(this).toggleClass('selectTransport');
         });
 
