@@ -48,7 +48,7 @@
                <canvas id="canvas" width="500px" height="1000px"></canvas>
 <!--                <img id="fleche" src="img/fleche.png" alt="fleche">
  -->               <img id="logo" src="img/logo.png" alt="logo">
-                <div id="restoDiv">
+                 <div id="restoDiv">
                </div>
         </div>
         
@@ -64,23 +64,23 @@
                   
                   <div id="budget">
                       <span class="budget">Mon budget pour aujourd'hui</span>
-                      <input id="moins" type="button" value="-" onclick="">
+                      <input id="moins" type="button" value="-">
                       <div class="budget0"></div>
-                      <input id="plus" type="button" value="+" onclick="">
+                      <input id="plus" type="button" value="+">
                   </div>
                   
                   <div id="choix">
                     <span class="envie">J'ai plutôt envie de manger</span>
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
                   </div>
                   <button id="go"> <img src="img/forward.png" alt="forward">Lancer la roue</button>
                 </div>
@@ -159,21 +159,27 @@
         $('#moins').bind('click', function(evt){
           evt.preventDefault();
           if(window.compteur == 0){
+            $('#moins').css('cursor', 'default');
             return;
           }
           else{
             window.compteur--;
+            $('#moins').css('cursor', 'pointer');
+            $('#budget div').empty();
             $('#budget div').removeClass().addClass("budget"+window.compteur);   
           }
         });
 
         $('#plus').bind('click', function(evt){
           evt.preventDefault();
-          if(window.compteur == 3){
+          if(window.compteur == 4){
+            $('#plus').css('cursor', 'default');
             return;
           }
           else{
             window.compteur++;
+            $('#plus').css('cursor', 'pointer');
+             $('#budget div').empty();
             $('#budget div').removeClass().addClass("budget"+window.compteur);   
           }
         });

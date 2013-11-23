@@ -207,30 +207,61 @@ input[type="button"] + span{
 	font-size: 2em;
 	float: left;
 }
+
+#moins, #plus{
+	border:1px solid #ccc9c9;
+	cursor:pointer;
+}
+
 #budget div{
 	width: 70%;
 	height: 80px;
 	float: left;
-	opacity: 0.50
 }
-.budget0{
-	/*background-color: #fff;*/
+.budget0 {
+	background-image:url(../img/peuimporte.png) ;
+	background-color: #f1eeed;
+	height:100%;
+	background-repeat:no-repeat;
+	background-position: 50% 50%;
 }
 .budget1{
-	background-color: #aaa;
+	background-image:url(../img/budget_1.png) ;
+	background-color: #f1eeed;
+	height:100%;
+	background-repeat:no-repeat;
+	background-position: 50% 50%;
 }
 .budget2{
-	background-color: #666;
+	background-image:url(../img/budget_2.png) ;
+	background-color: #f1eeed;
+	height:100%;
+	background-repeat:no-repeat;
+	background-position: 50% 50%;
 }
 .budget3{
-	background-color: #000;
+	background-image:url(../img/budget_3.png) ;
+	background-color: #f1eeed;
+	height:100%;
+	background-repeat:no-repeat;
+	background-position: 50% 50%;
+}
+.budget4{
+	background-image:url(../img/budget_4.png) ;
+	background-color: #f1eeed;
+	height:100%;
+	background-repeat:no-repeat;
+	background-position: 50% 50%;
 }
 
+
 #choix input{
-	cursor:  pointer;
 	color: #be4d47;
 	border: 1px solid #ddd;
 	background-color: #ffffff;
+	background-image:url(../img/selected.png) ;
+	background-position:142px 20px;
+	background-repeat:no-repeat;
 }
 
 .selected{
@@ -239,6 +270,7 @@ input[type="button"] + span{
 	color: #000 !important;
 	border : 1px solid !important;
 	border-color:rgba(203,168,163,0.3) !important;
+	background-image: none !important;
 }
 
 #roue{
@@ -338,22 +370,33 @@ input[type="button"] + span{
 	cursor: pointer;
 }
 
-.off{
-
+#layerNoir{
+	height:100%;
+	width:100%;
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:1 !important;
+	background-color:black;
+	filter: alpha(opacity=75); /* internet explorer */
+	-khtml-opacity: 0.75;      /* khtml, old safari */
+	-moz-opacity: 0.75;       /* mozilla, netscape */
+	opacity: 0.75;           /* fx, safari, opera */
 }
 
 .resto-select{
 	background-color: rgba(255,255,255,0.9);
 }
 
-.resto-select > p{
+.resto-select h5{
 	color:black;
+	margin-left:15px;
+	margin-bottom:15px;
 }
 
 .espace{
 	color:#ffffff;
 	padding-top: 15px;
-	padding-bottom: 15px;
 }
 
 #panel-roue div > span{
@@ -366,19 +409,19 @@ input[type="button"] + span{
 	vertical-align:middle;
 	font-size: 1em;
 	line-height: 50px;
-	padding-left: 3em;
+	padding-left: 5em;
 }
 
 .budget{
-	background-image: url('../img/money.svg');
-	background-position: center left;
+	background-image: url('../img/money-01.png');
+	background-position: center left 15px;
 	background-repeat: no-repeat;
 	background-size: 35px 35px;
 }
 
 .envie{
-	background-image: url('../img/food.svg');
-	background-position: center left;
+	background-image: url('../img/foud.png');
+	background-position: center left 15px;
 	background-repeat: no-repeat;
 	background-size: 35px 35px;
 }
@@ -629,6 +672,7 @@ input[type="button"] + span{
 	.budget0, .budget1, .budget2, .budget3, #plus, #moins{
 		height:50px !important;
 	}
+
 	#choix input {
 		font-size: 0.7em;
 		padding: 0 0 0 0 !important;
