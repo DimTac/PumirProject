@@ -214,7 +214,7 @@ input[type="button"] + span{
 	opacity: 0.50
 }
 .budget0{
-	background-color: #fff;
+	/*background-color: #fff;*/
 }
 .budget1{
 	background-color: #aaa;
@@ -417,6 +417,15 @@ input[type="button"] + span{
 	font-size: 2em;
 }
 
+.auteur{
+	color:#c45650 !important;
+	margin-bottom:10px !important;
+}
+
+#comment a{
+	font-weight: bold !important;
+}
+
 #close{
 	margin: 8px 8px 8px 8px;
 	float:right;
@@ -466,12 +475,16 @@ input[type="button"] + span{
 	width:65%;
 }
 
-#resto img{
+.imgResto{
 	height:135px;
 	width:127px;
 	margin-right:30px;
 	margin-top:5px;
 	float:left;
+}
+
+.ping{
+	margin-right:12px;
 }
 
 #resto p:first-child{

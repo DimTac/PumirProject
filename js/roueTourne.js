@@ -125,7 +125,7 @@
                         $(typeRestoEnCours).append("<img src='/img/selected.png' alt='selected'>");
 
                         restoArray.push($restoAjout);
-                        restoArraySrc.push('img/'+$restoAjout+'.png');
+                        restoArraySrc.push(+$restoAjout+'.png');
                        /* restoArraySlogan.push();
                             !!!!!!!!!!!!!!!!!!!!!!!!TROUVER UNE SOLUTION!!!!!!!!!!!!!!!!!!!!!!!
                        */
@@ -216,11 +216,6 @@
         function drawArrow() {
             var posX = ($(canvas).width())-135;
             var posY = ($(canvas).height())-590;
-<<<<<<< HEAD
-=======
-            // console.log(posY);
-            // console.log(posX);
->>>>>>> d6ac32a53fde22943b46650131fe5b3e7f75cf55
             var fleche=new Image();
             fleche.onload = function() {
                      ctx.drawImage(fleche, posX, posY);
