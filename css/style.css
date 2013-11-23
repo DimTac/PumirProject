@@ -389,10 +389,10 @@ input[type="button"] + span{
 	text-align: center;
 }
 
+/*Taille picto roue*/
 .pictoResultat{
 	width:100px;
 	height:100px;
-	margin-bottom:30px;
 }
 
 #restoDiv h1{
