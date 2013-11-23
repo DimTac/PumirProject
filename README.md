@@ -22,7 +22,7 @@ WheeLunch
     <td valign="middle">Pierre B.</td>
   </tr>
       <tr>
-    <td><img src="http://lorempixel.com/80/80/cats/"></td>
+    <td><img src="http://www.gravatar.com/avatar/292c4785a7a823f50fa27a53a96f5b4e"></td>
     <td valign="middle">Piere G.</td>
   </tr>
       <tr>
