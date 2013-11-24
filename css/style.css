@@ -494,9 +494,10 @@ input[type="button"] + span{
 	display: inline-block;
 }
 #fleche{
-	position:absolute;
-	left:25%;
-	top:50%;
+	position: fixed;
+	margin-left: 365px;
+	margin-top: 400px;
+	z-index: 1;
 }
 
 #details-restaurant{

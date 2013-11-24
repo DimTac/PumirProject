@@ -50,6 +50,7 @@
 
             /////////////// SET-UP DES EVENEMENTS QUI DECLENCHERONT LES METHODES //////////////// 
             setup: function() {
+
                 //Un click sur "tourneDeclencheur" (voir dans les options) fera tourner la roue
                 $(paramsRoue.tourneDeclencheur).bind('click', function(e){
                     e.preventDefault();
@@ -186,7 +187,6 @@
                 modifResto = true
                 ctx.save();
 
-                ctx.font = paramsRoue.resultTextFont;
                 resultatRoue = restoArray[index];
                 resultatRoueSlogan = restoArraySlogan[index];
                 resultatRoueSrc = restoArraySrc[index];
@@ -226,7 +226,7 @@
             }         
        
         /////////// DESSIN DE LA FLECHE ////////////////////  
-        function drawArrow() {
+     /*   function drawArrow() {
             var posX = ($(canvas).width())-135;
             var posY = ($(canvas).height())-590;
             var fleche=new Image();
@@ -234,13 +234,12 @@
                      ctx.drawImage(fleche, posX, posY);
             }
             fleche.src = "img/fleche.png";        
-        }
+        }*/
 
         /////////// DESSIN DE LA ROUE ////////////////////      
         function drawroue() {
             ctx.strokeStyle = paramsRoue.roueBorderColor;
-            ctx.lineWidth = paramsRoue.roueBorderWidth;
-            ctx.font = paramsRoue.roueTextFont;            
+            ctx.lineWidth = paramsRoue.roueBorderWidth;            
             ctx.clearRect(0,0,500,500);
           /*  var picto = new Image(); */
             totalJoiner = restoArray.length;
@@ -276,17 +275,11 @@
                 ctx.translate(0 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
                 ctx.font = paramsRoue.roueTextFont;
-                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-
-                /*picto.onload = function() {
-                     ctx.drawImage(picto, 0, 0, 50, 50);
-                }
-                picto.src = "img/"+restoArraySrc[i];*/
-                
+                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);                
                 ctx.restore();
                 ctx.closePath();
             }     
-                drawArrow();
+       /*         drawArrow();*/
         }          
 
         /////////// ANIMATION DE LA ROUE QUAND ELLE TOURNE ////////////////////  
