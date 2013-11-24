@@ -292,7 +292,6 @@ function callback_details(json_detail, status){
         chaine += (ouvert!=null) ? '<br />Ouvert en ce moment': '';
         chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
         chaine+= '</p>';
-
       chaine += '</div>';
         chaine += '<div id="comments">';
         if(comments != null){
