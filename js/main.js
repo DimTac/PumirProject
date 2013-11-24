@@ -304,14 +304,14 @@ $(document).ready(function(){
 	            chaine += '<div class="modal-body">';
 	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
 	              chaine += '<div id="recette">';
-	                chaine += '<video style="margin:0 auto;" width="550" height="240" controls="controls">';
+	                chaine += '<video id="video_player" style="margin:0 auto;" width="550" height="240" controls="controls">';
 	                chaine += '<source src="assets/'+json.url_video+'" type="video/mp4" />';
 	                chaine += '<source src="assets/'+json.url_video_webm+'" type="video/webm" />';
 	                chaine += '<source src="assets/'+json.url_video_ogg+'" type="video/ogg" />'+mot_clef+'</video>';
 	               chaine += '</div>';
 	            chaine += '</div>';
 	            chaine += '<div class="modal-footer" style="background-color:#be4c46;">';
-	              chaine += '<button type="button" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
+	              chaine += '<button type="button" id="fermer_modale" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
 	            chaine += '</div>';
 	          chaine += '</div>';
 	          chaine += '</div>';

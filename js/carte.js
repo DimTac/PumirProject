@@ -276,8 +276,6 @@ function callback_details(json_detail, status){
   var date_comment    = '';
   var chaine_comments = '';
 
-  console.log(json_detail);
-
   if(status=='OK'){
       chaine += '<div id="resto">';
         chaine += '<p><img src="img/ping.png" alt="ping" class="ping">'+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
