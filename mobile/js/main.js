@@ -12,10 +12,12 @@
  *  	-> Réception JSON
  */
 
-$(document).ready(function(){
+var userLocation      = {longitude : '', latitude : ''};
+var json_foursquare   = {};
+var trajet            = {};
+var carte_initialisee = false;
 
-	var userLocation    = {longitude : '', latitude : ''};
-	var json_foursquare = {};
+$(document).ready(function(){
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -47,13 +49,19 @@ $(document).ready(function(){
 	 * @see  afficher_carte()
 	 * @see  init_map()
 	 */
-	$.rotation_complete = function(resultatRoue){
+	$.rotation_complete = function(resultatRoue, radiusPanel){
 		if(getTokenUrl()!=''){	
-			console.log('Il y a un token dans l\'url...');
+			// Si le token n'existe pas en localstorage, on l'enregistre pour la prochaine fois
+			if(localStorage.getItem('token_foursquare') == null){
+				console.log('Le token n\'existe pas en localStorage - enregistrement...');
+				localStorage.setItem('token_foursquare', getTokenUrl());
+			}else{
+				console.log('Le token existe en localStorage !');
+			}
 			init_Foursquare();
 		}else{
 			transition_carte();
-			init_map(resultatRoue);
+			init_map(resultatRoue, radiusPanel);
 		}
 	};
 
@@ -102,6 +110,8 @@ $(document).ready(function(){
 	 *
 	 * @see  Geolocation.init()
 	 * @see  Geolocation.getLocation()
+	 * @see  Foursquare.setPosition(pos);
+	 * @see  retour_geolocation();
 	 * @return {rien} Ne retourne rien
 	 */
 	function setGeolocation(){
@@ -122,6 +132,7 @@ $(document).ready(function(){
 	 * Foursquare nous renvoie un json, qui va être récupéré
 	 * grace à la fonction de callback retour_requete_foursquare
 	 *
+	 * @see  Foursquare.getLocation()
 	 * @see  Foursquare.setURL_Foursquare()
 	 * @see  Foursquare.getURL()
 	 * @see  Foursquare.envoi_requete_foursquare()
@@ -140,7 +151,7 @@ $(document).ready(function(){
 	 * le JSON obtenu lors de cette requête. Ensuite, on a plus
 	 * qu'à afficher la carte mapBox en UI.
 	 *
-	 * @see  afficher_carte()
+	 * @see  transition_carte();
 	 * @see  init_map()
 	 * @param  {Object} Foursquare L'objet Foursquare
 	 * @param  {JSON} json       Le JSON obtenu par la requête
@@ -163,24 +174,83 @@ $(document).ready(function(){
 	 * @see  carte.getPointsPlaces()
 	 * @return {rien} Pas de renvoi
 	 */
-	function init_map(resultatRoue){
+	function init_map(resultatRoue,radiusPanel){
 		if(userLocation.longitude!='' && userLocation.latitude!=''){
 			var params = {
+				//radius: perimetreCarte,
 			    zoom : 17,
 			    map : "map",
-			    recherche : resultatRoue,
+			    keyword : resultatRoue,
+			    radius : radiusPanel,
 			 /*   recherche : "restaurant",*/
 			    center : {
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude
 			    },
-			    rechercheOk : function(geoJSON, pos){					      
-			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte   
-			    }
+			    rechercheOk : function(geoJSON, pos){	
+			      if(carte_initialisee==false){
+				   	carte.init_map(pos);
+				   	carte_initialisee = true;
+				  }
+			      carte.affichagePointsCarte(geoJSON, pos);	// On affiche les points sur la carte
+			    },
+			    pasDeResto : afficher_modale
 			  };
 			carte.init(params);
 			carte.getPointsPlaces();
 		}
+	}
+
+	/**
+	 * Fonction lancée au clic sur l'image du détail
+	 * d'un restaurant. Ceci permet d'aller chercher
+	 * l'itinéraire entre notre point et ce resto.
+	 *
+	 * @see  Itineraire.init()
+	 * @see  Itineraire.getJsonDirection()
+	 * @param  {Event} e L'évènement au clic
+	 * @return {rien}   Pas de return
+	 */
+	$('#details-restaurant').on('click', '#itineraire', function(e){
+	  e.preventDefault();
+	  var A_longitude = $(this).attr('data-aLong');
+	  var A_latitude = $(this).attr('data-aLat');
+	  var B_longitude = $(this).attr('data-bLong');
+	  var B_latitude = $(this).attr('data-bLat');
+	  var A = {latitude:A_latitude, longitude: A_longitude};
+	  var B = {latitude:B_latitude, longitude: B_longitude};
+	  console.log(A_latitude+','+A_longitude+' - '+B_latitude+','+B_longitude);	  
+	  
+	  Itineraire.init({coordsA:A, coordsB:B, retourItineraire:itineraire_recu});
+	  Itineraire.getJsonDirection();
+	});
+
+	/**
+	 * Callback lancé à la récpetion du json
+	 * de l'itinéraire. Construit l'itinéraire
+	 * sur la carte mabox trait par trait, selon les
+	 * étapes de cet itinéraire (coordonnées GPS)
+	 *
+	 * @see  map_globale.removeLayer()
+	 * @param  {Object} etapes Le json des étapes du trajet
+	 * @return {rien}          Pas de return
+	 */
+	function itineraire_recu(etapes){
+		var line_points      = [];
+		var polyline         = {};
+		var polyline_options = {
+	        color: '#000'
+	    };
+	    map_globale.removeLayer(trajet);
+	    trajet = L.featureGroup().addTo(map_globale);
+
+		for(var i=0; i<etapes.length; i++){
+			if(i<(etapes.length-2))
+				line_points[i] = [etapes[i].start_point.ob, etapes[i].start_point.pb];
+			else
+				line_points[i] = [etapes[i].end_point.ob, etapes[i].end_point.pb];
+		}
+		polyline = L.polyline(line_points, polyline_options).addTo(trajet);
 	}
 
 	/**
@@ -191,13 +261,109 @@ $(document).ready(function(){
 	 * @return {rien} Pas de retour
 	 */
 	function transition_carte(){
-		$('#map').fadeIn(1000);
-		$("#panel").delay(1000).animate(
-		    {"margin-left":"0%"},
-		    {duration:500}
-	    );
-	    $("#panel-roue").delay(1500).fadeOut(500);
-	    $("#panel-results").delay(1500).fadeIn(500);
+		var imgs = $("#map > img").not(function() { return this.complete; });
+		var count = imgs.length;
+
+		//Si la carte n'est pas encore chargée, on affiche le loader :
+		if (count) {
+			$(".wrapperloading").show();
+		    imgs.load(function() {
+		        count--;
+
+		        //Puis on cache le loader et on affiche la map :
+		        if (!count) {
+		        	$(".wrapperloading").fadeOut(500);
+		            $('#map').fadeIn(1000);
+		            alert('all done');
+		        }
+		    });
+		//Si elle l'est déjà, on l'affiche sans loader
+		} else {
+		    $('#map').fadeIn(1000);
+				$("#panel").delay(1000).animate(
+				    {"margin-left":"0%"},
+				    {duration:500}
+			    );
+
+			    $("#panel-results").delay(1500).fadeIn(500);
+			    $("#panel-roue").delay(1500).fadeOut(500);
+			    $("#resultats-restaurants").mCustomScrollbar("update");
+			    if($('#panel-results .mCSB_container').hasClass('mCS_no_scrollbar')){
+			      $('#panel-results .scroll-more').fadeOut(0).addClass('off');
+			    }
+		}
+	}
+
+	/**
+	 * Si l'utilisateur n'a pas de restaurants à proximité,
+	 * on ouvre une fenêtre modale lui proposant de cuisiner
+	 * lui-même un plat en rapport avec le mot-clef trouvé par la roue.
+	 * On utilise un timeout de façon à laisser les animations
+	 * CSS se faire avant d'afficher la modale.
+	 *
+	 * @see  get_json_mot_clef()
+	 * @param  {String} mot_clef Le mot-clef retourné par la roue
+	 * @return {rien}          Pas de retour
+	 */
+	function afficher_modale(mot_clef){
+	  var chaine = '';
+	  var json = {};
+	  setTimeout(function(){
+	    $.getJSON( "recettes.json", function( data ) {
+	    	$("#modale_campagne").html('');
+	    	$("#content").html('');
+    		$('#resultats-restaurants .espace').remove();
+	    	json = get_json_mot_clef(mot_clef, data);
+	          chaine += '<div class="modal fade" id="modaleRecette">';
+	          chaine += '<div class="modal-dialog">';
+	          chaine += '<div class="modal-content">';
+	            chaine += '<div class="modal-header" style="background-color:#be4c46;color:white;">';
+	              chaine += '<h4 class="modal-title">Aucun restaurant '+mot_clef+' trouvé à proximité...</h4>';
+	            chaine += '</div>';
+	            chaine += '<div class="modal-body">';
+	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
+	              chaine += '<div id="recette">';
+	                chaine += '<video id="video_player" style="margin:0 auto;" width="550" height="240" controls="controls">';
+	                chaine += '<source src="assets/'+json.url_video+'" type="video/mp4" />';
+	                chaine += '<source src="assets/'+json.url_video_webm+'" type="video/webm" />';
+	                chaine += '<source src="assets/'+json.url_video_ogg+'" type="video/ogg" />'+mot_clef+'</video>';
+	               chaine += '</div>';
+	            chaine += '</div>';
+	            chaine += '<div class="modal-footer" style="background-color:#be4c46;">';
+	              chaine += '<button type="button" id="fermer_modale" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
+	            chaine += '</div>';
+	          chaine += '</div>';
+	          chaine += '</div>';
+	          chaine += '</div>';
+	          $("#modale_campagne").append(chaine);
+	          $('#modaleRecette').modal();
+	          $('.modal-backdrop').css('display', 'none');
+	      });
+	  }, 1000);
+	}	
+
+	/**
+	 * Renvoie l'élément du JSON des recettes/vidéos
+	 * de cuisine correspondant au mot-clef trouvé 
+	 * par la roue
+	 * 
+	 * @param  {String} mot_clef Le mot-clef trouvé
+	 * @param  {Object} data     Le json contenant les recettes
+	 * @return {Object}          Le 'sous-json' correspondant
+	 */
+	function get_json_mot_clef(mot_clef, data){
+		if(mot_clef=='Japonais') return data.japonais;
+		else if(mot_clef=='Chinois') return data.chinois;
+		else if(mot_clef=='Asiatique') return data.asiatique;
+		else if(mot_clef=='Pizza') return data.pizza;
+		else if(mot_clef=='Sandwitch') return data.sandwitch;
+		else if(mot_clef=='Viande') return data.viande;
+		else if(mot_clef=='Poisson') return data.poisson;
+		else if(mot_clef=='Kebab') return data.kebab;
+		else if(mot_clef=='Crêperie') return data.creperie;
+		else if(mot_clef=='Brasserie') return data.brasserie;
+		else if(mot_clef=='Indien') return data.indien;
+		else return data.japonais;
 	}
 
 });

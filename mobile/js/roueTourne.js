@@ -25,15 +25,24 @@
         restoLength = 10, 
         resultatRoue = null,
         restoArray = paramsRoue.restoArray;
+        restoArraySrc = paramsRoue.restoArraySrc;
+        restoArraySlogan = paramsRoue.restoArraySlogan;
+        var canvas = document.getElementById("canvas");
+        var restoArrayBackUp = paramsRoue.restoArray.slice(0);
+        var restoArraySloganBackUp = paramsRoue.restoArraySlogan.slice(0);
 
         if($.isFunction(options)){
             callback = options;
             options = {};
         } 
         
-         //////////// DECLARATION METHODES DE L'OBJET ////////////
+        //////////// DECLARATION METHODES DE L'OBJET ////////////
         var methods = {
             init: function() {
+                var children = $("#choix > input");
+                for (var i = 0; i < restoArray.length; i++) {
+                    children.eq(i).val(restoArray[i]);
+                };
                 methods.getContext();
                 methods.setup();
                 drawroue();                
@@ -41,9 +50,12 @@
 
             /////////////// SET-UP DES EVENEMENTS QUI DECLENCHERONT LES METHODES //////////////// 
             setup: function() {
+
                 //Un click sur "tourneDeclencheur" (voir dans les options) fera tourner la roue
                 $(paramsRoue.tourneDeclencheur).bind('click', function(e){
                     e.preventDefault();
+                    $(this).parent().fadeOut(100);
+                    $('#roue').fadeIn(100);
                     methods.tourne();
                 });
                 
@@ -64,8 +76,6 @@
             getContext: function() {  
                 if(ctx !== null)
                     return ctx;
-
-                 var canvas = document.getElementById("canvas");
                  var G_vmlCanvasManager;
 
                 if (G_vmlCanvasManager != undefined) { // if IE9
@@ -79,29 +89,20 @@
 
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
             back : function(){
-                // $("#affichage").animate(
-                //     {"margin-left":"80%"},
-                //     {
-                //       duration:500,
-                //     }).animate(
-                //     {"width":"20%"},
-                //     {
-                //       duration:500,
-                //     });
-                //   $("#panel").css('width', '100%');
-                //   $("#map").css('width', '0%');
-                //   $("#panel-results").fadeOut(500);
-                //   $("#panel-roue").fadeIn(500);
+                map_globale.removeLayer(trajet);
                 $("#panel").delay(1000).animate(
                     {"margin-left":"75%"},
                     {duration:500}
                 );
+
+                $("#details-restaurant").fadeOut(1000);
                 $("#panel-results").delay(1500).fadeOut(500);
                 $("#panel-roue").delay(1500).fadeIn(500);
                 $('#map').fadeOut(1000);
-                  $(paramsRoue.restoResultatDiv+">img").fadeIn(1200);
+                  $(paramsRoue.restoResultatDiv).fadeIn(1000);
                   $("#canvas").fadeIn(1000);
                   $("#fleche").fadeIn(750);
+                  $(paramsRoue.logo).fadeIn(500);
 
                   modifResto=true;
             },
@@ -117,28 +118,46 @@
                 if (modifResto){
                 //Si la roue n'est pas en train de tourner :
                     var trouve=false;
-
+                    //On récupère le type de resto que l'on souhaite supprimer ou ajouter dans la roue :
                     var typeRestoEnCours = evenement.currentTarget;
                     $restoAjout = typeRestoEnCours.value;
+                    //On teste si le type de resto est déjà dans le tableau
                     var index = $.inArray($restoAjout, restoArray);
+                    //Le indexTrue ira chercher l'index du tableau de base pour bien replacer le titre du resto, le picto et le slogan dans les tableaux mis à jour
+                    var indexTrue = $.inArray($restoAjout, restoArrayBackUp);
+
+                    //L'élément a-t-il été trouvé dans le tableau ?
                     if (index>-1){
                         trouve=true;
                     }
 
                     //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
                     if ((!trouve)&&(restoArray.length<10)){
+                        //On ajoute la classe "selected" à l'input sur lequel on a cliqué
                         $(typeRestoEnCours).toggleClass('selected');
-                        restoArray.push($restoAjout);
+                        //On ajoute le titre du resto dans restoArray
+                         restoArray.splice(indexTrue,0,$restoAjout);
+                        var restoMin = $restoAjout.toLowerCase()
+                        //On ajoute l'image du resto dans le tableau restoArraySrc
+                        restoArraySrc.splice(indexTrue,0,'img/'+restoMin+'.png');
+                        //On ajout le slogan
+                         restoArraySlogan.splice(indexTrue,0,restoArraySloganBackUp[indexTrue]);
                         restoLength = $restoAjout.length;
+                        //Enfin on redessinne la roue pour ajouter le quartier
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
                     }
                     
                     //Sinon on le supprime (sauf si le tableau contient moins de deux éléments, auquel cas on n'enlève pas les deux derniers éléments)
-                    else if ((trouve)&&(restoArray.length>2)){
+                    else if ((trouve)&&(restoArray.length>4)){
+                        //On remove la classe selected
                         $(typeRestoEnCours).toggleClass('selected');
+                        //On enlève le type de resto dans les 3 tableaux (type, picto, slogan)
                         restoArray.splice(index, 1);
+                        restoArraySlogan.splice(index, 1);
+                        restoArraySrc.splice(index, 1);
                         restoLength = restoArray.length;
+                        //On redessine la roue pour enlever le quartier
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
                     }
@@ -166,51 +185,70 @@
                 var degrees = startAngle * 180 / Math.PI + 90;
                 var arcd = arc * 180 / Math.PI;
                 var index = Math.floor((360 - degrees % 360) / arcd);
+                var chaine = "";
+                var radiusPanel = 900;
+                modifResto = true
                 ctx.save();
 
-                ctx.font = paramsRoue.resultTextFont;
                 resultatRoue = restoArray[index];
+                resultatRoueSlogan = restoArraySlogan[index];
+                resultatRoueSrc = restoArraySrc[index];
 
-                //Affichage, à la place du logo, du type de resto gagnant :
-                 $(paramsRoue.restoResultatDiv).children().fadeOut(0, function() {
-                    $(paramsRoue.restoResultatDiv+">p").text(resultatRoue).fadeIn(100);
+                if ($('input[value="Avec transport"]').hasClass('selectTransport')){ 
+                //Si l'utilisateur a signalé qu'il avait un transport, on étend le périmètre de recherche
+                    radiusPanel = 2000;
+                }
+
+                $(paramsRoue.restoResultatDiv).empty();
+                
+                $(paramsRoue.logo).fadeOut(0, function() {
+                     chaine += '<div id="resultat">';
+                      chaine += '<img class="pictoResultat" src='+resultatRoueSrc+' alt='+resultatRoue+'>';
+                      chaine += '<h1>'+resultatRoue+'</h1>';
+                      chaine += '<p>'+resultatRoueSlogan+'</p>';
+                      chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>';
+                      chaine += '</div>';                     
+                      $(paramsRoue.restoResultatDiv).append(chaine);
+                      chaine = '';
                   });
 
-                 $(paramsRoue.restoResultatDiv+">p").fadeOut(0, function() {
-                    $.rotation_complete(resultatRoue);
+                $("#relancer").bind('click', function(e){
+                    e.preventDefault();
+                    methods.tourne();
+                });
+
+                $("#bonchoix").bind('click', function(e){
+                    e.preventDefault();
+                    $.rotation_complete(resultatRoue,radiusPanel);
+                    $(paramsRoue.restoResultatDiv).fadeOut(500);
                     $("#canvas").fadeOut(500);
                     $("#fleche").fadeOut(500);
-                    ctx.restore();
-                  });
+                    $("#restoDiv").empty();
+                });
+             ctx.restore();
             }         
-/*        
+       
         /////////// DESSIN DE LA FLECHE ////////////////////  
-        function drawArrow() {
-            ctx.fillStyle = paramsRoue.arrowColor;
-            ctx.beginPath();
-            ctx.moveTo(0 - 4, 250 - (paramsRoue.outterRadius + 15));
-            ctx.lineTo(0 + 4, 250 - (paramsRoue.outterRadius + 15));
-            ctx.lineTo(0 + 4, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 + 9, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 + 0, 250 - (paramsRoue.outterRadius - 23));
-            ctx.lineTo(0 - 9, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 - 4, 250 - (paramsRoue.outterRadius - 15));
-            ctx.lineTo(0 - 4, 250 - (paramsRoue.outterRadius + 15));
-            ctx.fill();               
+     /*   function drawArrow() {
+            var posX = ($(canvas).width())-135;
+            var posY = ($(canvas).height())-590;
+            var fleche=new Image();
+            fleche.onload = function() {
+                     ctx.drawImage(fleche, posX, posY);
+            }
+            fleche.src = "img/fleche.png";        
         }*/
 
         /////////// DESSIN DE LA ROUE ////////////////////      
         function drawroue() {
             ctx.strokeStyle = paramsRoue.roueBorderColor;
-            ctx.lineWidth = paramsRoue.roueBorderWidth;
-            ctx.font = paramsRoue.roueTextFont;            
-            ctx.clearRect(0,0,500,500);
-            var text = null, 
-            i = 0,
+            ctx.lineWidth = paramsRoue.roueBorderWidth;            
+            ctx.clearRect(0,0,300,300);
+          /*  var picto = new Image(); */
             totalJoiner = restoArray.length;
 
             for(i = 0; i < totalJoiner; i++) {
-                text = restoArray[i];
+                text = restoArray[i];        
                 //On met le texte/picto qui correspond au type de resto           
                 var angle = startAngle + i * arc; 
                 //console.log(restoArray[i]+ " angle : "+ angle + " arc : "+ arc+ " startangle "+ startAngle);      
@@ -239,12 +277,12 @@
                 ctx.fillStyle     = paramsRoue.roueTextColor;
                 ctx.translate(0 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                
-                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+                ctx.font = paramsRoue.roueTextFont;
+                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);                
                 ctx.restore();
                 ctx.closePath();
-            }     /*
-                drawArrow();*/
+            }     
+       /*         drawArrow();*/
         }          
 
         /////////// ANIMATION DE LA ROUE QUAND ELLE TOURNE ////////////////////  
@@ -253,6 +291,11 @@
             var tc = ts*t;
             return b+c*(tc + -3*ts + 3*t);
         } 
+
+        $('#modale_campagne').on('click', '#fermer_modale', function(e){
+            document.getElementById('video_player').pause();
+            methods.back();
+        });
                 
         methods.init.apply(this,[]);
     }
@@ -260,17 +303,16 @@
 
      //////////// OPTIONS DE L'UTILISATEUR (UI) DE L'OBJET ////////////
     $.fn.rouetourne.default_options = {
-        outterRadius:400, 
-        innerRadius:150, 
+        outterRadius:150, 
+        innerRadius:50, 
         textRadius: 300, 
         tourneDeclencheur: '#go', 
         backDeclencheur : '#back',
         roueBorderColor: 'white',
         roueBorderWidth : 30, 
-        roueTextFont : '22px sans-serif', 
-        roueTextColor: 'white', /*
-        roueTextShadowColor : 'none',*/
-        resultTextFont : '30px sans-serif', 
+        roueTextFont : '24px "HandOfSean"', 
+        roueTextColor: 'white',
+        logo: '#logo',
         arrowColor :'black',
         typeRestoDeclencheur:'#choix :input',
         restoResultatDiv:'#restoDiv'
