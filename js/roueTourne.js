@@ -149,8 +149,8 @@
                         //On remove la classe selected
                         $(typeRestoEnCours).toggleClass('selected');
                         //On enlève le type de resto dans les 3 tableaux (type, picto, slogan)
-                        restoArray.splice(indexTrue, 1);
-                        restoArraySlogan.splice(indexTrue, 1);
+                        restoArray.splice(index, 1);
+                        restoArraySlogan.splice(index, 1);
                         restoArraySrc.splice(indexTrue, 1);
                         restoLength = restoArray.length;
                         //On redessine la roue pour enlever le quartier

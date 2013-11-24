@@ -33,10 +33,10 @@ $('#details-restaurant .scroll-more').on('click', function(){
 });
 
 var checkIfScrollNeeded = function(){
-  console.log("checkifscroll");
-  $("#bloc-commentaires").mCustomScrollbar("update");
-  console.log($("#bloc-commentaires").mCustomScrollbar("update"));
-  if($('#details-restaurant .mCSB_container').hasClass('mCS_no_scrollbar') || $('#comments h3').hasClass('no-comment')){
+/*  console.log("checkifscroll");
+*/  $("#bloc-commentaires").mCustomScrollbar("update");
+/*  console.log($("#bloc-commentaires").mCustomScrollbar("update"));
+*/  if($('#details-restaurant .mCSB_container').hasClass('mCS_no_scrollbar') || $('#comments h3').hasClass('no-comment')){
     $('#details-restaurant .scroll-more').fadeOut(0).addClass('off');
   }
   else{
