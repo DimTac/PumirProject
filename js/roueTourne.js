@@ -28,6 +28,8 @@
         restoArraySrc = paramsRoue.restoArraySrc;
         restoArraySlogan = paramsRoue.restoArraySlogan;
         var canvas = document.getElementById("canvas");
+        var restoArrayBackUp = paramsRoue.restoArray.slice(0);
+        var restoArraySloganBackUp = paramsRoue.restoArraySlogan.slice(0);
 
         if($.isFunction(options)){
             callback = options;
@@ -112,33 +114,46 @@
                 if (modifResto){
                 //Si la roue n'est pas en train de tourner :
                     var trouve=false;
+                    //On récupère le type de resto que l'on souhaite supprimer ou ajouter dans la roue :
                     var typeRestoEnCours = evenement.currentTarget;
                     $restoAjout = typeRestoEnCours.value;
+                    //On teste si le type de resto est déjà dans le tableau
                     var index = $.inArray($restoAjout, restoArray);
+                    //Le indexTrue ira chercher l'index du tableau de base pour bien replacer le titre du resto, le picto et le slogan dans les tableaux mis à jour
+                    var indexTrue = $.inArray($restoAjout, restoArrayBackUp);
+
+                    //L'élément a-t-il été trouvé dans le tableau ?
                     if (index>-1){
                         trouve=true;
                     }
 
                     //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
                     if ((!trouve)&&(restoArray.length<10)){
+                        //On ajoute la classe "selected" à l'input sur lequel on a cliqué
                         $(typeRestoEnCours).toggleClass('selected');
-                        restoArray.push($restoAjout);
-                        restoArraySrc.push(+$restoAjout+'.png');
-                       /* restoArraySlogan.push();
-                            !!!!!!!!!!!!!!!!!!!!!!!!TROUVER UNE SOLUTION!!!!!!!!!!!!!!!!!!!!!!!
-                       */
+                        //On ajoute le titre du resto dans restoArray
+                         restoArray.splice(indexTrue,0,$restoAjout);
+                        var restoMin = $restoAjout.toLowerCase()
+                        //On ajoute l'image du resto dans le tableau restoArraySrc
+                        restoArraySrc.splice(indexTrue,0,'img/'+restoMin+'.png');
+                        //On ajout le slogan
+                         restoArraySlogan.splice(indexTrue,0,restoArraySloganBackUp[indexTrue]);
                         restoLength = $restoAjout.length;
+                        //Enfin on redessinne la roue pour ajouter le quartier
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
                     }
                     
                     //Sinon on le supprime (sauf si le tableau contient moins de deux éléments, auquel cas on n'enlève pas les deux derniers éléments)
                     else if ((trouve)&&(restoArray.length>4)){
+                        //On remove la classe selected
                         $(typeRestoEnCours).toggleClass('selected');
-                        restoArray.splice(index, 1);
-                        restoArraySlogan.splice(index, 1);
-                        restoArraySrc.splice(index, 1);
+                        //On enlève le type de resto dans les 3 tableaux (type, picto, slogan)
+                        restoArray.splice(indexTrue, 1);
+                        restoArraySlogan.splice(indexTrue, 1);
+                        restoArraySrc.splice(indexTrue, 1);
                         restoLength = restoArray.length;
+                        //On redessine la roue pour enlever le quartier
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
                     }
@@ -185,7 +200,7 @@
                 
                 $(paramsRoue.logo).fadeOut(0, function() {
                      chaine += '<div id="resultat">';
-                      chaine += '<img class="pictoResultat" src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';
+                      chaine += '<img class="pictoResultat" src='+resultatRoueSrc+' alt='+resultatRoue+'>';
                       chaine += '<h1>'+resultatRoue+'</h1>';
                       chaine += '<p>'+resultatRoueSlogan+'</p>';
                       chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>';
