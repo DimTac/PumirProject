@@ -16,8 +16,8 @@ $(document).ready(function(){
 
 	var userLocation      = {longitude : '', latitude : ''};
 	var json_foursquare   = {};
-	var carte_initialisee = false;
 	var trajet            = {};
+	var carte_initialisee = false;
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -221,10 +221,12 @@ $(document).ready(function(){
 
 	/**
 	 * Callback lancé à la récpetion du json
-	 * de l'itinéraire. 
+	 * de l'itinéraire. Construit l'itinéraire
+	 * sur la carte mabox trait par trait, selon les
+	 * étapes de cet itinéraire (coordonnées GPS)
 	 * 
 	 * @param  {Object} etapes Le json des étapes du trajet
-	 * @return {rien}        Pas de return
+	 * @return {rien}          Pas de return
 	 */
 	function itineraire_recu(etapes){
 		var line_points      = [];
@@ -315,6 +317,15 @@ $(document).ready(function(){
 	  }, 1000);
 	}	
 
+	/**
+	 * Renvoie l'élément du JSON des recettes/vidéos
+	 * de cuisine correspondant au mot-clef trouvé 
+	 * par la roue
+	 * 
+	 * @param  {String} mot_clef Le mot-clef trouvé
+	 * @param  {Object} data     Le json contenant les recettes
+	 * @return {Object}          Le 'sous-json' correspondant
+	 */
 	function get_json_mot_clef(mot_clef, data){
 		console.log('mot-clef : '+mot_clef);
 		if(mot_clef=='Japonais') return data.japonais;
