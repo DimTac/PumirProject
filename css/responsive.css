@@ -1,30 +1,4 @@
 /*			RESPONSIVE	TABLETTE / PETIT DESKTOP		*/
-@media (max-width: 1390px) {
-	#resto > h2{
-		margin : 0 0 0 0;
-	}
-	#details-restaurant{
-		height:200px;
-	}
-	#resto > hr{
-		display:none;
-	}
-	#resto input[type="button"]{
-		width: 75px !important;
-	}
-	#resto > h2{
-		margin-top:10px !important;
-		font-size: 1.5em !important;
-		margin-bottom: 10px !important;
-	}
-	#resto p{
-		margin-bottom: 0 !important;
-		font-size: 0.9em !important;
-	}
-	#itineraire{
-		margin-top: 10px;
-	}
-}
 
 @media (max-width: 1250px) {
 	#canvas{
@@ -35,24 +9,6 @@
 	}
 	#transport{
 		height:50px;
-	}
-	#resto input[type="button"]{
-		width: 75px;
-	}
-	#resto > h2{
-		margin: 0 0 0 0;
-	}
-	#resto > h2{
-		margin-top:10px !important;
-		font-size: 1.5em !important;
-		margin-bottom: 10px !important;
-	}
-	#resto p{
-		margin-bottom: 0 !important;
-		font-size: 0.9em !important;
-	}
-	#itineraire{
-		margin-top: 10px;
 	}
 }
 
@@ -78,41 +34,14 @@
 		font-size:1em;
 		height:auto;
 	}
-	#details-restaurant{
-		height:200px;
-	}
-	#resto input[type="button"]{
-		width: 75px;
-	}
-	#resto > h2{
-		margin-top:10px !important;
-		font-size: 1.5em !important;
-		margin-bottom: 10px !important;
-	}
-	#resto p{
-		margin-bottom: 0 !important;
-		font-size: 0.9em !important;
-	}
-	#comments{
-		font-size: 0.8em !important;
-		height:200px !important;
-		width:37%;
-	}
-	#itineraire{
-		margin-top: 10px;
-	}
 }
 
 @media (max-width: 1110px) {
-	#restoDiv{
-			top:0 !important;
-			left:37% !important;
-		}
 	#back img, #go img{
 		width:15px;
 		height:15px;
 	}
-	.budget0, .budget1, .budget2, .budget3, #plus, #moins{
+	.budget0, .budget1, .budget2, .budget3, .budget4, #plus, #moins{
 		height:50px !important;
 	}
 
@@ -173,50 +102,10 @@
 		height:49px;
 	}
 	#panel{
-		width:150px;
+		/*width:150px;*/
 	}
 	#budget span, .envie{
 		font-size:0.7em !important;
 		padding-left:52px !important;
-	}
-	#logo{
-		left:35%;
-	}
-	.imgResto{
-		display:none;
-	}
-	#resto input[type="button"]{
-		width:75px !important;
-		margin-top:10px !important;
-	}
-	#resto p:first-child {
-		margin-top:10px !important;
-	}
-	#resto > h2{
-		margin-top:10px !important;
-		font-size: 1.5em !important;
-	}
-	#resto p{
-		margin-left:0 !important;
-		margin-bottom: 0 !important;
-		font-size: 0.85em !important;
-	}
-	#resto > hr{
-		display:none;
-	}
-	#details-restaurant{
-		left: 200px !important;
-		width:82%;
-	}
-	#comments{
-		font-size: 0.8em !important;
-		height:200px !important;
-		width:32%;
-	}
-	#details-restaurant{
-		height:200px !important;
-	}
-	#itineraire{
-		margin-top: 10px;
 	}
 }
