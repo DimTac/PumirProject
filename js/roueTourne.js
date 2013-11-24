@@ -122,8 +122,6 @@
                     //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
                     if ((!trouve)&&(restoArray.length<10)){
                         $(typeRestoEnCours).toggleClass('selected');
-                        $(typeRestoEnCours).append("<img src='/img/selected.png' alt='selected'>");
-
                         restoArray.push($restoAjout);
                         restoArraySrc.push(+$restoAjout+'.png');
                        /* restoArraySlogan.push();

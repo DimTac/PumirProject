@@ -291,7 +291,7 @@ function callback_details(json_detail, status){
             chaine_comments += '<div class="comment">';
               chaine_comments += '<p class="date_comment">'+date_comment+'</p>';
               chaine_comments += '<p class="auteur">';
-                chaine_comments += (compte_google!=null) ? ('De <a href="'+comments[i].author_url+'">@'+comments[i].author_name+'</a>') : ('De '+comments[i].author_name);
+                chaine_comments += (compte_google!=null) ? ('De <a target="_blank" href="'+comments[i].author_url+'">@'+comments[i].author_name+'</a>') : ('De '+comments[i].author_name);
               chaine_comments += '</p>';
               chaine_comments += '<p class="note">'+afficher_etoiles(parseInt(comments[i].rating))+'</p>';
               chaine_comments += '<p class="text_comment">'+comments[i].text+'</p>';
