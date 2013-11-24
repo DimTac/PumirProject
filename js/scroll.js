@@ -36,7 +36,6 @@ var checkIfScrollNeeded = function(){
   else{
     $('#details-restaurant .scroll-more').fadeIn(0).removeClass('off');
     $('#comments .scroll-more').on('click', function(){
-      console.log("coucou");
       $("#bloc-commentaires").mCustomScrollbar("scrollTo","bottom");
     });
   }
