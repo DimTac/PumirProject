@@ -4,87 +4,103 @@
         "url":"http://www.marmiton.org/recettes/recette_nems_21488.aspx",
         "image":"http://images.marmitoncdn.org/recipephotos/multiphoto/fe/fefc0927-ae3a-44e1-be7f-5466f850fb8a_normal.jpg",
         "url_video":"recette_nems.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video_ogg": "recette_nems.oggtheora.ogv",
+        "url_video_webm": "recette_nems.webmhd.webm"
     },
     "japonais": {
         "nom": "Sushis",
         "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
         "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
         "url_video":"recette_sushis.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video_ogg": "recette_sushis.oggtheora.ogg",
+        "url_video_webm": "recette_sushis.webmhd.webm"
     },
     "asiatique": {
-        "nom": "Sushis",
-        "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
-        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
+        "nom":"nems",
+        "url":"http://www.marmiton.org/recettes/recette_nems_21488.aspx",
+        "image":"http://images.marmitoncdn.org/recipephotos/multiphoto/fe/fefc0927-ae3a-44e1-be7f-5466f850fb8a_normal.jpg",
         "url_video":"recette_nems.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video_ogg": "recette_nems.oggtheora.ogv",
+        "url_video_webm": "recette_nems.webmhd.webm"
     },
     "kebab": {
         "nom": "Kebab",
         "url": "d",
         "image": "f",
         "url_video":"recette_kebab.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video_ogg": "recette_kebab.oggtheora.ogg",
+        "url_video_webm": "recette_kebab.webmhd.webm"
     },
     "brasserie": {
         "nom": "brasserie",
         "url": "d",
         "image": "f",
-        "url_video":"",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video":"recette_brasserie.mp4",
+        "url_video_ogg": "recette_brasserie.oggtheora.ogg",
+        "url_video_webm": "recette_brasserie.webmhd.webm"
     },
     "pizza": {
         "nom": "pizza",
         "url": "d",
         "image": "f",
-        "url_video":"recette_pizza.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video":"recette_pizzas.mp4",
+        "url_video_ogg": "recette_pizzas.oggtheora.ogg",
+        "url_video_webm": "recette_pizzas.webmhd.webm"
     },
-    "indien": {
-        "nom": "indien",
+    "fast-food": {
+        "nom": "burger",
         "url": "d",
         "image": "f",
-        "url_video":"recette_samossa.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video":"recette_burger.mp4",
+        "url_video_ogg": "recette_burger.oggtheora.ogg",
+        "url_video_webm": "recette_burger.webmhd.webm"
+    },    
+    "indien": {
+        "nom": "indienne",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_samossas.mp4",
+        "url_video_ogg": "recette_samossas.oggtheora.ogg",
+        "url_video_webm": "recette_samossas.webmhd.webm"
     },
     "creperie": {
-        "nom": "creperie",
+        "nom": "crêpes",
         "url": "d",
         "image": "f",
-        "url_video":"recette_galette.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video":"recette_galettes.mp4",
+        "url_video_ogg": "recette_galettes.oggtheora.ogg",
+        "url_video_webm": "recette_galettes.webmhd.webm"
     },
     "sandwitch": {
         "nom": "sandwitch",
         "url": "d",
         "image": "f",
         "url_video":"recette_sandwitch.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video_ogg": "recette_sandwitch.oggtheora.ogv",
+        "url_video_webm": "recette_sandwitch.webmhd.webm"
+    },
+    "salade": {
+        "nom": "salade",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_salade.mp4",
+        "url_video_ogg": "recette_salade.oggtheora.ogv",
+        "url_video_webm": "recette_salade.webmhd.webm"
     },
     "viande": {
-        "nom": "Viande",
-        "url": "d",
-        "image": "f",
+        "nom": "viande",
+        "url": "http://www.marmiton.org/recettes/recette_boulettes-de-viande-legeres-a-la-tomate_16981.aspx",
+        "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/7a/7a2f9416-c4e7-4343-85cc-457a2e6656a8_normal.jpg",
         "url_video":"recette_viande.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video_ogg": "recette_viande.oggtheora.ogg",
+        "url_video_webm": "recette_viande.webmhd.webm"
     },
     "poisson": {
-        "nom": "Poisson",
-        "url": "d",
+        "nom": "poisson",
+        "url": "http://www.atelierdeschefs.fr/fr/recette/14027-roti-de-saumon-pret-a-cuire.php",
         "image": "f",
-        "url_video":"recette_galette.mp4",
-        "url_video_ogg": "",
-        "url_video_webm": ""
+        "url_video":"recette_poisson.mp4",
+        "url_video_ogg": "recette_poisson.oggtheora.ogg",
+        "url_video_webm": "recette_poisson.webmhd.webm"
     }
 }
