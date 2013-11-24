@@ -87,6 +87,7 @@
 
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
             back : function(){
+                map_globale.removeLayer(trajet);
                 $("#panel").delay(1000).animate(
                     {"margin-left":"75%"},
                     {duration:500}

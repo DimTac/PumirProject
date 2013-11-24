@@ -12,12 +12,12 @@
  *  	-> Réception JSON
  */
 
-$(document).ready(function(){
+var userLocation      = {longitude : '', latitude : ''};
+var json_foursquare   = {};
+var trajet            = {};
+var carte_initialisee = false;
 
-	var userLocation      = {longitude : '', latitude : ''};
-	var json_foursquare   = {};
-	var trajet            = {};
-	var carte_initialisee = false;
+$(document).ready(function(){
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
