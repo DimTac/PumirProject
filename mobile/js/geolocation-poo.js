@@ -32,7 +32,7 @@ var GeoLocation = {
 				        console.log("Une erreur inconnue s\'est produite.");
 				        break;
 				    }
-					that.property.callback_user.call(this, {longitude : '48.859068', latitude : '2.352249'});	// Paris, par défaut
+					that.property.callback_user.call(this, {longitude : '2.352249', latitude : '48.859068'});	// Paris, par défaut
 				},
 				{enableHighAccuracy : true}
 			);

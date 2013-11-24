@@ -2,6 +2,8 @@ WheeLunch
 =======================
 #### A student project for F. Pumir
 
+Available <a href="http://wheelunch.fr" target="_blank">here</a>
+
 ### API
    * Google Places
    * MapBox
@@ -22,8 +24,8 @@ WheeLunch
     <td valign="middle">Pierre B.</td>
   </tr>
       <tr>
-    <td><img src="http://lorempixel.com/80/80/cats/"></td>
-    <td valign="middle">Piere G.</td>
+    <td><img src="http://www.gravatar.com/avatar/292c4785a7a823f50fa27a53a96f5b4e"></td>
+    <td valign="middle">Pierre G.</td>
   </tr>
       <tr>
     <td><img src="http://lorempixel.com/80/80/cats/"></td>
