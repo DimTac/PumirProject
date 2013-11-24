@@ -7,6 +7,9 @@ body {
 	 -o-background-size: cover; /* pour Opera */
 	 background-size: cover; /* version standardisée */}
 
+#total{
+	display: none;
+}
 
 #trame{
 	width: 100%;

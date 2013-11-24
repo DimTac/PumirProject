@@ -86,6 +86,10 @@ body{
 	 font-family: Raleway;
 }
 
+#total{
+	display: none;
+}
+
 #canvas {
 	top:20px;
 	left:20px;
