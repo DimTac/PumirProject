@@ -34,6 +34,7 @@ var carte = {
         [pos.latitude ,pos.longitude], 
         carte.parametres.zoom
     );
+    new L.Control.Zoom({ position: 'topright' }).addTo(map);
     map_globale = map;
   },
 
@@ -120,6 +121,7 @@ var carte = {
     affichageRestaurantsPanel(geoJSON, map_globale.markerLayer, map_globale);  
 
     map_globale.markerLayer.on('click',function(e){
+      map_globale.removeLayer(trajet);
       selectionRestaurantsPanel(e);
     });
   }
@@ -216,6 +218,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       $(this).on('click', function(){
         $('.espace').removeClass('resto-select');
         that.toggleClass('resto-select');
+        map_globale.removeLayer(trajet);
         point = map_globale._layers[$(this).attr('data-leafletId')];
         point.openPopup();
         map_globale.panTo(point.getLatLng());
