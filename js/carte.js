@@ -34,6 +34,7 @@ var carte = {
         [pos.latitude ,pos.longitude], 
         carte.parametres.zoom
     );
+    new L.Control.Zoom({ position: 'topright' }).addTo(map);
     map_globale = map;
   },
 
