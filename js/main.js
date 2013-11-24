@@ -261,19 +261,37 @@ $(document).ready(function(){
 	 * @return {rien} Pas de retour
 	 */
 	function transition_carte(){
-		$('#map').fadeIn(1000);
-		$("#panel").delay(1000).animate(
-		    {"margin-left":"0%"},
-		    {duration:500}
-	    );
+		var imgs = $("#map > img").not(function() { return this.complete; });
+		var count = imgs.length;
 
-	    $("#panel-results").delay(1500).fadeIn(500);
-	    $("#panel-roue").delay(1500).fadeOut(500);
-	    $("#resultats-restaurants").mCustomScrollbar("update");
-	    if($('#panel-results .mCSB_container').hasClass('mCS_no_scrollbar')){
-	      $('#panel-results .scroll-more').fadeOut(0).addClass('off');
-	    }
+		//Si la carte n'est pas encore chargée, on affiche le loader :
+		if (count) {
+			$(".wrapperloading").show();
+		    imgs.load(function() {
+		        count--;
 
+		        //Puis on cache le loader et on affiche la map :
+		        if (!count) {
+		        	$(".wrapperloading").fadeOut(500);
+		            $('#map').fadeIn(1000);
+		            alert('all done');
+		        }
+		    });
+		//Si elle l'est déjà, on l'affiche sans loader
+		} else {
+		    $('#map').fadeIn(1000);
+				$("#panel").delay(1000).animate(
+				    {"margin-left":"0%"},
+				    {duration:500}
+			    );
+
+			    $("#panel-results").delay(1500).fadeIn(500);
+			    $("#panel-roue").delay(1500).fadeOut(500);
+			    $("#resultats-restaurants").mCustomScrollbar("update");
+			    if($('#panel-results .mCSB_container').hasClass('mCS_no_scrollbar')){
+			      $('#panel-results .scroll-more').fadeOut(0).addClass('off');
+			    }
+		}
 	}
 
 	/**
