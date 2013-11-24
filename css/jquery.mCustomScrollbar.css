@@ -145,8 +145,8 @@
 	filter:"alpha(opacity=40)"; -ms-filter:"alpha(opacity=40)"; /* old ie */
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
-	background:#fff; /* rgba fallback */
-	background:rgba(255,255,255,0.75);
+	background:#be4d47;; /* rgba fallback */
+	background:rgba(190,77,71,0.75);
 	filter:"alpha(opacity=75)"; -ms-filter:"alpha(opacity=75)"; /* old ie */
 }
 .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
@@ -421,8 +421,8 @@
 }
 /*light-thin*/
 .mCS-light-thin>.mCSB_scrollTools .mCSB_draggerRail{
-	background:#fff; /* rgba fallback */
-	background:rgba(255,255,255,0.1);
+	background:#be4d47; /* rgba fallback */
+	background:rgba(190,77,71,0.1);
 }
 .mCS-light-thin>.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
 	width:2px;
