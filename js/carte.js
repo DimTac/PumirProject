@@ -205,7 +205,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
-      chaine += '<h5>'+tableauMarkers[i].feature.properties.adresse+'</h5><hr />';
+      chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4><hr />';
       chaine += '</div>';
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
@@ -275,38 +275,41 @@ function callback_details(json_detail, status){
 
   if(status=='OK'){
       chaine += '<div id="resto">';
-        chaine += '<p>Distance à vol d\'oiseau : '+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
+        chaine += '<p><img src="img/ping.png" alt="ping" class="ping">'+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
         chaine += '<a href="" id="itineraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
-        chaine += '<img src="'+url_image+'" alt="'+json_detail.name+'" ></a>';
+        chaine += '<img class="imgResto" src="'+url_image+'" alt="'+json_detail.name+'" ></a>';
         chaine += '<h2>'+json_detail.name+'</h2>';
         chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
         chaine += (rating!=null) ? 'Note globale : '+afficher_etoiles(rating)+'</p><hr />' : '';
+    chaine += '</div>';
         chaine += '<div id="comments">';
         if(comments != null){
+          chaine += '<div id="bloc-commentaires">'
           for(var i=0; i<comments.length; i++){
             compte_google = (typeof comments[i].author_url !== 'undefined') ? comments[i].author_url : null;
             date_comment  = getDateFormatee(new Date(comments[i].time * 1000));
             chaine_comments += '<div class="comment">';
-              chaine_comments += '<span class="auteur">';
-                chaine_comments += (compte_google!=null) ? ('De <a href="'+comments[i].author_url+'">@'+comments[i].author_name+'</a>') : ('De '+comments[i].author_name);
-              chaine_comments += '</span>';
-              chaine_comments += '<br /><span class="text_comment">'+comments[i].text+'</span>';
-              chaine_comments += '<span class="date_comment">Le '+date_comment+'</span><span class="note">Note : '+afficher_etoiles(parseInt(comments[i].rating))+'</span>';
+              chaine_comments += '<p class="date_comment">'+date_comment+'</p>';
+              chaine_comments += '<p class="auteur">';
+                chaine_comments += (compte_google!=null) ? ('De <a target="_blank" href="'+comments[i].author_url+'">@'+comments[i].author_name+'</a>') : ('De '+comments[i].author_name);
+              chaine_comments += '</p>';
+              chaine_comments += '<p class="note">'+afficher_etoiles(parseInt(comments[i].rating))+'</p>';
+              chaine_comments += '<p class="text_comment">'+comments[i].text+'</p>';
             chaine_comments += '</div><hr />';
           }
           chaine += chaine_comments;
-          chaine += '<div class="scroll-more">+</div>';
+          chaine += '</div>'
         }else{
-          chaine += '<h3>Pas de commentaires postés sur ce restaurant</h3>';
+          chaine += '<h3 class="no-comment">Pas de commentaires postés sur ce restaurant</h3>';
         }
-        chaine += '<div>';
-      chaine += '</div>';
-    chaine += '</div>';
+      //   chaine += '<div>';
+      // chaine += '</div>';
+          chaine += '<div class="scroll-more">+</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
   $('#content').html(chaine);
-  $("#comments").mCustomScrollbar({
+  $("#bloc-commentaires").mCustomScrollbar({
     autoHideScrollbar:true,
     theme:"light-thin",
     advanced:{  
@@ -320,16 +323,13 @@ function callback_details(json_detail, status){
         },
         onScroll:function(){
           if($('#details-restaurant .scroll-more').css('display') == 'none' && $('.scroll-more').hasClass('off') == true){
-            console.log('ok');
             $('#details-restaurant .scroll-more').removeClass('off').stop().fadeIn(0);
           }
         }
     }
-    $("#comments").mCustomScrollbar("update");
-    if($('#details-restaurant .mCSB_container').hasClass('mCS_no_scrollbar')){
-      $('#details-restaurant .scroll-more').fadeOut(0).addClass('off');
-    }
   });
+  checkIfScrollNeeded();
+
 
 }
 
@@ -354,8 +354,13 @@ function getDateFormatee(date){
  */
 function afficher_etoiles(nb){
   chaine = '';
-  for(var i=0; i<nb; i++)
-    chaine += '☆';
+  for(var i=1; i<=nb; i++){
+    // chaine += '☆';
+    chaine += '<img src="img/etoile-vote.png" alt="'+i+'" title="'+nb+'">';
+  }
+  for (var i = 0; i < 5-nb; i++) {
+    chaine += '<img src="img/etoile-novote.png" alt="" title="'+nb+'">';
+  }
   return chaine;
 }
 

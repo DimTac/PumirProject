@@ -43,12 +43,13 @@
         <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
     </head>
     <body>
+      <div id="total">
         <div id="trame"></div>
         <div id="roue">
                <canvas id="canvas" width="500px" height="1000px"></canvas>
 <!--                <img id="fleche" src="img/fleche.png" alt="fleche">
  -->               <img id="logo" src="img/logo.png" alt="logo">
-                <div id="restoDiv">
+                 <div id="restoDiv">
                </div>
         </div>
         
@@ -58,31 +59,31 @@
 
                   <div id="transport">
                     <input type="button" value="Avec transport">
-                    <input type="button" value="Sans transport">
+                    <input type="button" value="Sans transport" class="selectTransport">
                     <!-- <div><p>ou</p></div> -->
                   </div>
                   
                   <div id="budget">
                       <span class="budget">Mon budget pour aujourd'hui</span>
-                      <input id="moins" type="button" value="-" onclick="">
+                      <input id="moins" type="button" value="-">
                       <div class="budget0"></div>
-                      <input id="plus" type="button" value="+" onclick="">
+                      <input id="plus" type="button" value="+">
                   </div>
                   
                   <div id="choix">
                     <span class="envie">J'ai plutôt envie de manger</span>
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
-                    <input type="button" value="">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
+                    <input type="button">
                   </div>
-                  <input type="button" id="go" value="> Lancer la roue !"/>
+                  <button id="go"> <img src="img/forward.png" alt="forward">Lancer la roue</button>
                 </div>
 
                 <div id="panel-results">
@@ -92,28 +93,28 @@
                 </div>
 
             </div>
-                <div id="details-restaurant" style="display:none">
-                  <img id="close" src="img/close.png" alt="close panel">
-                  <div id="content">
-                    <div id="resto">
-                        <p>100m</p>
-                        <img src="img/resto.png" alt="resto_test" >
-                         <h2>Chez Marc & Babette</h2>
-                          <p>260 rue ton adresse<br>75011 - Paris</p>
-                          <hr>
-                          <p>10-15€</p>
-                          <div id="other">
-                          <h3>Partager votre choix :</h3>
-                          <!-- Partages FB, G+, Twitter, Mail -->
-                         <!--  <p>Tickets resto, ou autres</p> -->
-                        </div>
-                      </div>
-                    <div id="comments">
+              <div id="details-restaurant" style="display:none">
+                <img id="close" src="img/close.png" alt="close panel">
+                <div id="content">
+                  <div id="resto">
+                    <p>100m</p>
+                    <img src="img/resto.png" alt="resto_test" >
+                    <h2>Chez Marc & Babette</h2>
+                    <p>260 rue ton adresse<br>75011 - Paris</p>
+                    <hr>
+                    <p>10-15€</p>
+                    <div id="other">
+                      <h3>Partager votre choix :</h3>
+                      <!-- Partages FB, G+, Twitter, Mail -->
+                      <!--  <p>Tickets resto, ou autres</p> -->
                     </div>
                   </div>
-<!--                   <div id="groupon">
-                  </div> -->
+                  <div id="comments">
+                  </div>
                 </div>
+  <!--                   <div id="groupon">
+                    </div> -->
+              </div>
               <div id="modale_campagne"></div>
             <!-- <div id="map"> -->
                 <div id="resultats"></div>
@@ -122,6 +123,8 @@
             <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+      </div>
+      <script src="js/fade.js" type="text/javascript"></script>
       <script type="text/javascript">
       if ( document.addEventListener && window.addEventListener ) {
           //Pour IE9
@@ -130,22 +133,26 @@
           });*/
       }
       </script>
+      <!-- custom scrollbars plugin -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/scroll.js"></script>
+
+      <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
       <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
       <script src='js/roueTourne.js'></script>
       <script src='js/roue.js'></script>
-      <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
       <script src="js/itineraire.js" type="text/javascript" charset="utf-8"></script> 
       <script type="text/javascript">
 
         $('input[value="Avec transport"]').bind('click', function(evt){
-             $('input[value="Sans transport"]').removeClass('selectTransport');
+             $('input[value="Sans transport"]').toggleClass('selectTransport');
              $(this).toggleClass('selectTransport');
         });
 
         $('input[value="Sans transport"]').bind('click', function(evt){
-             $('input[value="Avec transport"]').removeClass('selectTransport');
+             $('input[value="Avec transport"]').toggleClass('selectTransport');
              $(this).toggleClass('selectTransport');
         });
 
@@ -153,21 +160,27 @@
         $('#moins').bind('click', function(evt){
           evt.preventDefault();
           if(window.compteur == 0){
+            $('#moins').css('cursor', 'default');
             return;
           }
           else{
             window.compteur--;
+            $('#moins').css('cursor', 'pointer');
+            $('#budget div').empty();
             $('#budget div').removeClass().addClass("budget"+window.compteur);   
           }
         });
 
         $('#plus').bind('click', function(evt){
           evt.preventDefault();
-          if(window.compteur == 3){
+          if(window.compteur == 4){
+            $('#plus').css('cursor', 'default');
             return;
           }
           else{
             window.compteur++;
+            $('#plus').css('cursor', 'pointer');
+             $('#budget div').empty();
             $('#budget div').removeClass().addClass("budget"+window.compteur);   
           }
         });
@@ -179,10 +192,7 @@
 
       </script>
 
-      <script>!window.jQuery && document.write(unescape('%3Cscript src="js/minified/jquery-1.9.1.min.js"%3E%3C/script%3E'))</script>
-      <!-- custom scrollbars plugin -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/scroll.js"></script>
+
     </body>
 </html>
 

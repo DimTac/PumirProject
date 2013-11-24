@@ -34,12 +34,13 @@
             options = {};
         } 
         
-        //////////// DECLARATION METHODES DE L'OBJET ////////////
+         //////////// DECLARATION METHODES DE L'OBJET ////////////
         var methods = {
             init: function() {
                 var children = $("#choix > input");
                 for (var i = 0; i < restoArray.length; i++) {
                     children.eq(i).val(restoArray[i]);
+                    children.eq(i).attr({slogan: restoArraySlogan[i]});
                 };
                 methods.getContext();
                 methods.setup();
@@ -122,14 +123,19 @@
                     //Si le type de resto n'est pas dans le tableau, on l'ajoute, sauf si le tableau est déjà plein
                     if ((!trouve)&&(restoArray.length<10)){
                         $(typeRestoEnCours).toggleClass('selected');
+                        var indexEnfant = ($(typeRestoEnCours).index())-1;
+                        var sloganEnfant = $(typeRestoEnCours).attr("slogan");
+
                         restoArray.push($restoAjout);
-                        restoArraySrc.push(+$restoAjout+'.png');
-                       /* restoArraySlogan.push();
-                            !!!!!!!!!!!!!!!!!!!!!!!!TROUVER UNE SOLUTION!!!!!!!!!!!!!!!!!!!!!!!
-                       */
+                        restoArraySrc.push('img/'+$restoAjout+'.png');
+                        if ($.inArray(sloganEnfant, restoArraySlogan)<=-1){
+                            restoArraySlogan.splice(indexEnfant,0,sloganEnfant);
+                            console.log(restoArraySlogan);
+                        }
                         restoLength = $restoAjout.length;
                         arc = Math.PI / (restoArray.length/2);
                         drawroue();
+                        compteur++;
                     }
                     
                     //Sinon on le supprime (sauf si le tableau contient moins de deux éléments, auquel cas on n'enlève pas les deux derniers éléments)
@@ -163,7 +169,7 @@
         function stopRotationRoue () {
                 clearTimeout(tourneTimeout);
                 //Quel type de resto va gagner ?
-                var degrees = startAngle * 180 / Math.PI + 360;
+                var degrees = startAngle * 180 / Math.PI + 90;
                 var arcd = arc * 180 / Math.PI;
                 var index = Math.floor((360 - degrees % 360) / arcd);
                 var chaine = "";
@@ -188,7 +194,7 @@
                       chaine += '<img class="pictoResultat" src=img/'+resultatRoueSrc+' alt='+resultatRoue+'>';
                       chaine += '<h1>'+resultatRoue+'</h1>';
                       chaine += '<p>'+resultatRoueSlogan+'</p>';
-                      chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>';
+                      chaine += '<button id="relancer">Relancer<img src="img/reload.png" alt="next"></button><button id="bonchoix">Bon choix<img src="img/next.png" alt="next"></button>'
                       chaine += '</div>';                     
                       $(paramsRoue.restoResultatDiv).append(chaine);
                       chaine = '';
@@ -294,7 +300,7 @@
         backDeclencheur : '#back',
         roueBorderColor: 'white',
         roueBorderWidth : 30, 
-        roueTextFont : '24px "HandOfSean"', 
+        roueTextFont : '17pt Open Sans', 
         roueTextColor: 'white',
         logo: '#logo',
         arrowColor :'black',

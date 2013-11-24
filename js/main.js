@@ -49,7 +49,7 @@ $(document).ready(function(){
 	 * @see  afficher_carte()
 	 * @see  init_map()
 	 */
-	$.rotation_complete = function(resultatRoue){
+	$.rotation_complete = function(resultatRoue, radiusPanel){
 		if(getTokenUrl()!=''){	
 			// Si le token n'existe pas en localstorage, on l'enregistre pour la prochaine fois
 			if(localStorage.getItem('token_foursquare') == null){
@@ -61,7 +61,7 @@ $(document).ready(function(){
 			init_Foursquare();
 		}else{
 			transition_carte();
-			init_map(resultatRoue);
+			init_map(resultatRoue, radiusPanel);
 		}
 	};
 
@@ -295,7 +295,10 @@ $(document).ready(function(){
 	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
 	              chaine += '<div id="recette">';
 	                console.log(json.url_video);
-	                chaine += '<video style="margin:0 auto;" width="550" height="240" controls="controls"><source src="http://wheelunch.fr/_pierre/assets/'+json.url_video+'" type="video/mp4" />'+mot_clef+'</video>';
+	                chaine += '<video style="margin:0 auto;" width="550" height="240" controls="controls">';
+	                chaine += '<source src="assets/'+json.url_video+'" type="video/mp4" />';
+	                chaine += '<source src="assets/'+json.url_video_webm+'" type="video/webm" />';
+	                chaine += '<source src="assets/'+json.url_video_ogg+'" type="video/ogg" />'+mot_clef+'</video>';
 	               chaine += '</div>';
 	            chaine += '</div>';
 	            chaine += '<div class="modal-footer" style="background-color:#be4c46;">';
