@@ -14,8 +14,8 @@
 
 $(document).ready(function(){
 
-	var userLocation    = {longitude : '', latitude : ''};
-	var json_foursquare = {};
+	var userLocation      = {longitude : '', latitude : ''};
+	var json_foursquare   = {};
 	var carte_initialisee = false;
 	var trajet            = {};
 
