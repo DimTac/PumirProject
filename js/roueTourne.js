@@ -295,6 +295,11 @@
             var tc = ts*t;
             return b+c*(tc + -3*ts + 3*t);
         } 
+
+        $('#modale_campagne').on('click', '#fermer_modale', function(e){
+            document.getElementById('video_player').pause();
+            methods.back();
+        });
                 
         methods.init.apply(this,[]);
     }

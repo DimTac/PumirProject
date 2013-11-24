@@ -267,6 +267,9 @@ function callback_details(json_detail, status){
   var url_image       = (typeof json_detail.photos === 'undefined') ? 'img/resto.png' : json_detail.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 127});
   var comments        = (typeof json_detail.reviews === 'undefined') ? null : json_detail.reviews;
   var rating          = (typeof json_detail.rating === 'undefined') ? null : json_detail.rating;
+  var tel             = (typeof json_detail.formatted_phone_number === 'undefined') ? null : json_detail.formatted_phone_number;
+  var site_web        = (typeof json_detail.website === 'undefined') ? null : json_detail.website;
+  var ouvert          = (typeof json_detail.opening_hours === 'undefined') ? null : (json_detail.opening_hours.open_now==true) ? 'Oui' : 'Non';
   var add             = json_detail.address_components;
   var chaine          = '';
   var compte_google   = '';
@@ -276,12 +279,16 @@ function callback_details(json_detail, status){
   if(status=='OK'){
       chaine += '<div id="resto">';
         chaine += '<p><img src="img/ping.png" alt="ping" class="ping">'+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
-        chaine += '<a href="" id="itineraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
-        chaine += '<img class="imgResto" src="'+url_image+'" alt="'+json_detail.name+'" ></a>';
+        chaine += '<img class="imgResto" src="'+url_image+'" alt="'+json_detail.name+'" >';
+        chaine += '<input type="button" id="itineraire" value="Calculer l\'itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
         chaine += '<h2>'+json_detail.name+'</h2>';
         chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
-        chaine += (rating!=null) ? 'Note globale : '+afficher_etoiles(rating)+'</p><hr />' : '';
-    chaine += '</div>';
+        chaine += (tel!=null) ? 'Téléphone : '+tel : '';
+        chaine += (site_web!=null) ? '<br />Site internet : <a href="'+site_web+'">'+site_web+'</a>' : '';
+        chaine += (ouvert!=null) ? '<br />Ouvert maintenant : '+ouvert : '';
+        chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
+        chaine+= '</p><hr />';
+      chaine += '</div>';
         chaine += '<div id="comments">';
         if(comments != null){
           chaine += '<div id="bloc-commentaires">'

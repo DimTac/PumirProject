@@ -14,10 +14,10 @@
 
 $(document).ready(function(){
 
-	var userLocation    = {longitude : '', latitude : ''};
-	var json_foursquare = {};
-	var carte_initialisee = false;
+	var userLocation      = {longitude : '', latitude : ''};
+	var json_foursquare   = {};
 	var trajet            = {};
+	var carte_initialisee = false;
 
 	/* 
 	 * S'il n'y a pas de token dans l'url, c'est que
@@ -110,6 +110,8 @@ $(document).ready(function(){
 	 *
 	 * @see  Geolocation.init()
 	 * @see  Geolocation.getLocation()
+	 * @see  Foursquare.setPosition(pos);
+	 * @see  retour_geolocation();
 	 * @return {rien} Ne retourne rien
 	 */
 	function setGeolocation(){
@@ -130,6 +132,7 @@ $(document).ready(function(){
 	 * Foursquare nous renvoie un json, qui va être récupéré
 	 * grace à la fonction de callback retour_requete_foursquare
 	 *
+	 * @see  Foursquare.getLocation()
 	 * @see  Foursquare.setURL_Foursquare()
 	 * @see  Foursquare.getURL()
 	 * @see  Foursquare.envoi_requete_foursquare()
@@ -148,7 +151,7 @@ $(document).ready(function(){
 	 * le JSON obtenu lors de cette requête. Ensuite, on a plus
 	 * qu'à afficher la carte mapBox en UI.
 	 *
-	 * @see  afficher_carte()
+	 * @see  transition_carte();
 	 * @see  init_map()
 	 * @param  {Object} Foursquare L'objet Foursquare
 	 * @param  {JSON} json       Le JSON obtenu par la requête
@@ -202,6 +205,9 @@ $(document).ready(function(){
 	 * Fonction lancée au clic sur l'image du détail
 	 * d'un restaurant. Ceci permet d'aller chercher
 	 * l'itinéraire entre notre point et ce resto.
+	 *
+	 * @see  Itineraire.init()
+	 * @see  Itineraire.getJsonDirection()
 	 * @param  {Event} e L'évènement au clic
 	 * @return {rien}   Pas de return
 	 */
@@ -221,10 +227,13 @@ $(document).ready(function(){
 
 	/**
 	 * Callback lancé à la récpetion du json
-	 * de l'itinéraire. 
-	 * 
+	 * de l'itinéraire. Construit l'itinéraire
+	 * sur la carte mabox trait par trait, selon les
+	 * étapes de cet itinéraire (coordonnées GPS)
+	 *
+	 * @see  map_globale.removeLayer()
 	 * @param  {Object} etapes Le json des étapes du trajet
-	 * @return {rien}        Pas de return
+	 * @return {rien}          Pas de return
 	 */
 	function itineraire_recu(etapes){
 		var line_points      = [];
@@ -272,7 +281,8 @@ $(document).ready(function(){
 	 * lui-même un plat en rapport avec le mot-clef trouvé par la roue.
 	 * On utilise un timeout de façon à laisser les animations
 	 * CSS se faire avant d'afficher la modale.
-	 * 
+	 *
+	 * @see  get_json_mot_clef()
 	 * @param  {String} mot_clef Le mot-clef retourné par la roue
 	 * @return {rien}          Pas de retour
 	 */
@@ -281,6 +291,9 @@ $(document).ready(function(){
 	  var json = {};
 	  setTimeout(function(){
 	    $.getJSON( "recettes.json", function( data ) {
+	    	$("#modale_campagne").html('');
+	    	$("#content").html('');
+    		$('#resultats-restaurants .espace').remove();
 	    	json = get_json_mot_clef(mot_clef, data);
 	          chaine += '<div class="modal fade" id="modaleRecette">';
 	          chaine += '<div class="modal-dialog">';
@@ -291,20 +304,18 @@ $(document).ready(function(){
 	            chaine += '<div class="modal-body">';
 	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
 	              chaine += '<div id="recette">';
-	                console.log(json.url_video);
-	                chaine += '<video style="margin:0 auto;" width="550" height="240" controls="controls">';
+	                chaine += '<video id="video_player" style="margin:0 auto;" width="550" height="240" controls="controls">';
 	                chaine += '<source src="assets/'+json.url_video+'" type="video/mp4" />';
 	                chaine += '<source src="assets/'+json.url_video_webm+'" type="video/webm" />';
 	                chaine += '<source src="assets/'+json.url_video_ogg+'" type="video/ogg" />'+mot_clef+'</video>';
 	               chaine += '</div>';
 	            chaine += '</div>';
 	            chaine += '<div class="modal-footer" style="background-color:#be4c46;">';
-	              chaine += '<button type="button" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
+	              chaine += '<button type="button" id="fermer_modale" class="btn btn-default" data-dismiss="modal">Non merci !</button>';
 	            chaine += '</div>';
 	          chaine += '</div>';
 	          chaine += '</div>';
 	          chaine += '</div>';
-	          console.debug(chaine);
 	          $("#modale_campagne").append(chaine);
 	          $('#modaleRecette').modal();
 	          $('.modal-backdrop').css('display', 'none');
@@ -312,8 +323,16 @@ $(document).ready(function(){
 	  }, 1000);
 	}	
 
+	/**
+	 * Renvoie l'élément du JSON des recettes/vidéos
+	 * de cuisine correspondant au mot-clef trouvé 
+	 * par la roue
+	 * 
+	 * @param  {String} mot_clef Le mot-clef trouvé
+	 * @param  {Object} data     Le json contenant les recettes
+	 * @return {Object}          Le 'sous-json' correspondant
+	 */
 	function get_json_mot_clef(mot_clef, data){
-		console.log('mot-clef : '+mot_clef);
 		if(mot_clef=='Japonais') return data.japonais;
 		else if(mot_clef=='Chinois') return data.chinois;
 		else if(mot_clef=='Asiatique') return data.asiatique;
