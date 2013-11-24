@@ -2,7 +2,7 @@ WheeLunch
 =======================
 #### A student project for F. Pumir
 
-Available <a href="http://wheelunch.fr">here</a>
+Available <a href="http://wheelunch.fr" target="_blank">here</a>
 
 ### API
    * Google Places
