@@ -268,6 +268,7 @@ $(document).ready(function(){
 	    );
 
 	    $("#panel-results").delay(1500).fadeIn(500);
+	    $("#panel-roue").delay(1500).fadeOut(500);
 	    $("#resultats-restaurants").mCustomScrollbar("update");
 	    if($('#panel-results .mCSB_container').hasClass('mCS_no_scrollbar')){
 	      $('#panel-results .scroll-more').fadeOut(0).addClass('off');

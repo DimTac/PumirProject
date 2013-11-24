@@ -282,12 +282,12 @@ function callback_details(json_detail, status){
         chaine += '<img class="imgResto" src="'+url_image+'" alt="'+json_detail.name+'" >';
         chaine += '<input type="button" id="itineraire" value="Calculer l\'itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
         chaine += '<h2>'+json_detail.name+'</h2>';
-        chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
-        chaine += (tel!=null) ? 'Téléphone : '+tel : '';
-        chaine += (site_web!=null) ? '<br />Site internet : <a href="'+site_web+'">'+site_web+'</a>' : '';
-        chaine += (ouvert!=null) ? '<br />Ouvert maintenant : '+ouvert : '';
-        chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
-        chaine+= '</p><hr />';
+        chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'</p>';
+        chaine += (tel!=null) ? '<p>Téléphone : '+tel : '</p>';
+        chaine += (site_web!=null) ? '<p>Site internet : <a href="'+site_web+'">'+site_web+'</a>' : '</p>';
+        chaine += (ouvert!=null) ? '<p>Ouvert maintenant : '+ouvert : '</p>';
+        chaine += (rating!=null) ? '<p>Note globale : '+afficher_etoiles(rating) : '</p>';
+        chaine+= '<hr />';
       chaine += '</div>';
         chaine += '<div id="comments">';
         if(comments != null){
