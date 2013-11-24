@@ -283,7 +283,7 @@ function callback_details(json_detail, status){
       chaine += '<div id="resto">';
         chaine += '<p><img src="img/ping.png" alt="ping" class="ping">'+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
         chaine += '<img class="imgResto" src="'+url_image+'" alt="'+json_detail.name+'" >';
-        chaine += '<input type="button" id="itineraire" value="Calculer l\'itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
+        chaine += '<input type="button" id="itineraire" value="Itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
         chaine += '<h2>'+json_detail.name+'</h2>';
         chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
         chaine += (tel!=null) ? 'Téléphone : '+tel : '';
@@ -291,7 +291,7 @@ function callback_details(json_detail, status){
         /*chaine += (ouvert!=null) ? '<br />Ouvert maintenant : '+ouvert : '';*/
         chaine += (ouvert!=null) ? '<br />Ouvert en ce moment': '';
         chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
-        chaine+= '</p><hr />';
+        chaine+= '</p>';
 
       chaine += '</div>';
         chaine += '<div id="comments">';
