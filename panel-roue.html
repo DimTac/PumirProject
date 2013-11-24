@@ -1,18 +1,47 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
+
 <html>
-    <head>
-      <meta charset='utf-8' />
-       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- PROJET WHEELUNCH ! Tournez, trouvez, lunchez !
+  By Pierre Bost, Pierre Guilhou, Lucie Reitz, Dimitri Tacita, Jérémy Zaloga
+    APIs :
+        - FourSquare 
+        - Dimensions
+        - Google Places
+        - LeafLet
+        - MapBox
+        - Native HTML5 video player
+
+    Technologies used :
+        - Object JQuery
+        - Oauth
+        - HTML5 canvas drawing
+        - Bootstrap (index)
+        - CSS3 (IE9 :()
+        - Media Queries
+
+    JQuery plug-ins used :
+        - Custom ScrollBar
+        - SpinWheel
+  -->
+  <head>
+    <meta http-equiv="X-UA- Compatible" content="IE=edge,chrome=1">
+
     <title>Wheelunch - Tournez, Trouvez, Lunchez !</title>
     <link rel="shortcut icon" href="img/favicon.png" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- WebFonts -->
     <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
+    <!-- Meta TAGS -->
     <meta property="og:title" content="Wheelunch - Tournez, Trouvez, Lunchez !"/>
     <meta property="og:image" content="http://www.wheelunch.fr/img/og_fb.png"/>
     <meta property="og:type" content="website" />
+
+    <!-- Main CSS files -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/responsive.css">
 
     <!-- Bootstrap Twitter -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -30,7 +59,7 @@
     <!-- JS Scripts -->
     <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>    
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true&amp;libraries=places"></script>
   <script type="text/javascript">
       /*var isMobile = function() {
            //console.log("Navigator: " + navigator.userAgent);
@@ -49,14 +78,14 @@
              <!--  Cette div ne se voit pas mais elle permet de précharger la font face -->
               <div style="font-family: HandOfSean;display:none"></div>
                <img id="fleche" src="img/fleche.png" alt="fleche">
-               <canvas id="canvas" width="500px" height="1000px">
+               <canvas id="canvas" width="500" height="1000">
                 </canvas>
                <img id="logo" src="img/logo.png" alt="logo">
                  <div id="restoDiv">
                </div>
         </div>
         
-        <!-- <div id="affichage"> -->
+
             <div id="panel">
                 <div id="panel-roue">
 
@@ -67,24 +96,24 @@
                   </div>
                   
                   <div id="budget">
-                      <span class="budget">Mon budget pour aujourd'hui</span>
+                      <span class="budget">Mon budget pour aujourd'hui :</span>
                       <input id="moins" type="button" value="-">
                       <div class="budget0"></div>
                       <input id="plus" type="button" value="+">
                   </div>
                   
                   <div id="choix">
-                    <span class="envie">J'ai plutôt envie de manger</span>
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
-                    <input type="button">
+                    <span class="envie">J'ai plutôt envie de manger...</span>
+                    <input type="button" value="resto1">
+                    <input type="button" value="resto2">
+                    <input type="button" value="resto3">
+                    <input type="button" value="resto4">
+                    <input type="button" value="resto5">
+                    <input type="button" value="resto6">
+                    <input type="button" value="resto7">
+                    <input type="button" value="resto8">
+                    <input type="button" value="resto9">
+                    <input type="button" value="resto10">
                   </div>
                   <button id="go"> <img src="img/forward.png" alt="forward">Lancer la roue</button>
                 </div>
@@ -92,7 +121,7 @@
                 <div id="panel-results">
                     <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
                     <div id="resultats-restaurants"></div>
-                    <div class="scroll-more">+</div>
+                    <div class="scroll-more">&or;</div>
                 </div>
 
             </div>
@@ -100,33 +129,18 @@
                 <img id="close" src="img/close.png" alt="close panel">
                 <div id="content">
                   <div id="resto">
-                    <p>100m</p>
-                    <img src="img/resto.png" alt="resto_test" >
-                    <h2>Chez Marc & Babette</h2>
-                    <p>260 rue ton adresse<br>75011 - Paris</p>
-                    <hr>
-                    <p>10-15€</p>
-                    <div id="other">
-                      <h3>Partager votre choix :</h3>
-                      <!-- Partages FB, G+, Twitter, Mail -->
-                      <!--  <p>Tickets resto, ou autres</p> -->
+                    
                     </div>
                   </div>
                   <div id="comments">
                   </div>
                 </div>
-  <!--                   <div id="groupon">
-                    </div> -->
               </div>
               <div id="modale_campagne"></div>
-            <!-- <div id="map"> -->
                 <div id="resultats"></div>
                 <div id="map" class="dark"></div>
                 <div id="geolocate"></div>
-            <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
-      </div>
+
       <script src="js/fade.js" type="text/javascript"></script>
       <script type="text/javascript">
       if ( document.addEventListener && window.addEventListener ) {

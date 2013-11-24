@@ -285,15 +285,11 @@ function callback_details(json_detail, status){
         chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'<br />';
         chaine += (tel!=null) ? 'Téléphone : '+tel : '';
         chaine += (site_web!=null) ? '<br />Site internet : <a target="_blank" rel="nofollow" href="'+site_web+'">'+site_web+'</a>' : '';
-        chaine += (ouvert!=null) ? '<br />Ouvert maintenant : '+ouvert : '';
+        /*chaine += (ouvert!=null) ? '<br />Ouvert maintenant : '+ouvert : '';*/
+        chaine += (ouvert!=null) ? '<br />Ouvert en ce moment': '';
         chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
         chaine+= '</p><hr />';
-/*        chaine += '<p>'+add[0].long_name+' '+add[1].long_name+'<br>'+add[4].long_name+' '+add[2].long_name.toUpperCase()+'</p>';
-        chaine += (tel!=null) ? '<p>Téléphone : '+tel : '</p>';
-        chaine += (site_web!=null) ? '<p>Site internet : <a href="'+site_web+'">'+site_web+'</a>' : '</p>';
-        chaine += (ouvert!=null) ? '<p>Ouvert maintenant : '+ouvert : '</p>';
-        chaine += (rating!=null) ? '<p>Note globale : '+afficher_etoiles(rating) : '</p>';
-        chaine+= '<hr />';*/
+
       chaine += '</div>';
         chaine += '<div id="comments">';
         if(comments != null){
@@ -317,7 +313,7 @@ function callback_details(json_detail, status){
         }
       //   chaine += '<div>';
       // chaine += '</div>';
-          chaine += '<div class="scroll-more">+</div>';
+          chaine += '<div class="scroll-more">&or;</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
