@@ -39,7 +39,7 @@ button
 width   : 80px;
 background  : none;
 cursor  : pointer;
-font-family : 'voltaeftu-regular',Times New Roman;
+font-family : 'Open Sans',Times New Roman;
 font-size   : 16px;
 color   : #fff;
 border  : none;
@@ -347,6 +347,7 @@ input[type="button"] + span{
 }
 
 #panel-results h3{
+	font-family: inherit;
 	color:#be4d47;
 	margin-left:10%;
 	font-weight: bold;
@@ -355,6 +356,7 @@ input[type="button"] + span{
 
 #panel-results p, h4{
 	margin-left:10%;
+	font-family: inherit;
 }
 
 #resultats-restaurants{
@@ -539,6 +541,7 @@ input[type="button"] + span{
 	color:#c6574e;
 	margin-bottom: 15px;
 	position: relative;
+	font-family: inherit;
 }
 
 #resto > hr{
@@ -593,6 +596,7 @@ input[type="button"] + span{
 	text-align: center;
 	font-size: 1.3em;
 	margin-top: 30px;
+	font-family: inherit;
 }
 
 #bloc-commentaires{
@@ -796,6 +800,7 @@ input[type="button"] + span{
 	#panel-results h4{
 		font-size: 0.8em;
 		margin-left: 15%;
+		font-family: inherit;
 	}
 	#relancer,#bonchoix{
 		width:auto;

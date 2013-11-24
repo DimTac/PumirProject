@@ -152,7 +152,7 @@
                         //On enlève le type de resto dans les 3 tableaux (type, picto, slogan)
                         restoArray.splice(index, 1);
                         restoArraySlogan.splice(index, 1);
-                        restoArraySrc.splice(indexTrue, 1);
+                        restoArraySrc.splice(index, 1);
                         restoLength = restoArray.length;
                         //On redessine la roue pour enlever le quartier
                         arc = Math.PI / (restoArray.length/2);
