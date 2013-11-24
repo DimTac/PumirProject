@@ -43,9 +43,9 @@
         "nom": "pizza",
         "url": "d",
         "image": "f",
-        "url_video":"recette_pizza.mp4",
-        "url_video_ogg": "recette_pizza.oggtheora.ogg",
-        "url_video_webm": "recette_pizza.webmhd.webm"
+        "url_video":"recette_pizzas.mp4",
+        "url_video_ogg": "recette_pizzas.oggtheora.ogg",
+        "url_video_webm": "recette_pizzas.webmhd.webm"
     },
     "fast-food": {
         "nom": "burger",
@@ -59,17 +59,17 @@
         "nom": "indienne",
         "url": "d",
         "image": "f",
-        "url_video":"recette_samossa.mp4",
-        "url_video_ogg": "recette_samossa.oggtheora.ogg",
-        "url_video_webm": "recette_samossa.webmhd.webm"
+        "url_video":"recette_samossas.mp4",
+        "url_video_ogg": "recette_samossas.oggtheora.ogg",
+        "url_video_webm": "recette_samossas.webmhd.webm"
     },
     "creperie": {
         "nom": "crêpes",
         "url": "d",
         "image": "f",
-        "url_video":"recette_galette.mp4",
-        "url_video_ogg": "recette_galette.oggtheora.ogg",
-        "url_video_webm": "recette_galette.webmhd.webm"
+        "url_video":"recette_galettes.mp4",
+        "url_video_ogg": "recette_galettes.oggtheora.ogg",
+        "url_video_webm": "recette_galettes.webmhd.webm"
     },
     "sandwitch": {
         "nom": "sandwitch",
@@ -78,6 +78,14 @@
         "url_video":"recette_sandwitch.mp4",
         "url_video_ogg": "recette_sandwitch.oggtheora.ogv",
         "url_video_webm": "recette_sandwitch.webmhd.webm"
+    },
+    "salade": {
+        "nom": "salade",
+        "url": "d",
+        "image": "f",
+        "url_video":"recette_salade.mp4",
+        "url_video_ogg": "recette_salade.oggtheora.ogv",
+        "url_video_webm": "recette_salade.webmhd.webm"
     },
     "viande": {
         "nom": "viande",
