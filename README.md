@@ -2,12 +2,16 @@ WheeLunch
 =======================
 #### A student project for F. Pumir
 
+Used to help you finding somewhere to eat nearby, by choosing the type of food you like, your budget and if you are walking or not.  
+
 Available <a href="http://wheelunch.fr" target="_blank">here</a>
 
 ### API
    * Google Places
+   * Google Directions
    * MapBox
    * Foursquare
+   * Tag video HTML5
 
 ### Authors
 <table>
