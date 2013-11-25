@@ -32,7 +32,7 @@
         "url_video_webm": "recette_kebab.webmhd.webm"
     },
     "brasserie": {
-        "nom": "brasserie",
+        "nom": "typique de brasserie",
         "url": "d",
         "image": "f",
         "url_video":"recette_brasserie.mp4",
@@ -47,7 +47,7 @@
         "url_video_ogg": "recette_pizzas.oggtheora.ogg",
         "url_video_webm": "recette_pizzas.webmhd.webm"
     },
-    "fast-food": {
+    "fastfood": {
         "nom": "burger",
         "url": "d",
         "image": "f",

@@ -355,6 +355,7 @@ $(document).ready(function(){
 		if(mot_clef=='Japonais') return data.japonais;
 		else if(mot_clef=='Chinois') return data.chinois;
 		else if(mot_clef=='Asiatique') return data.asiatique;
+		else if(mot_clef=='Salade') return data.salade;
 		else if(mot_clef=='Pizza') return data.pizza;
 		else if(mot_clef=='Sandwitch') return data.sandwitch;
 		else if(mot_clef=='Viande') return data.viande;
@@ -363,6 +364,8 @@ $(document).ready(function(){
 		else if(mot_clef=='Crêperie') return data.creperie;
 		else if(mot_clef=='Brasserie') return data.brasserie;
 		else if(mot_clef=='Indien') return data.indien;
+		else if(mot_clef=='Fast-Food') return data.fastfood;
+		else if(mot_clef=='Brasserie') return data.brasserie;
 		else return data.japonais;
 	}
 
