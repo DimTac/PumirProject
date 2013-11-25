@@ -291,7 +291,7 @@
         } 
 
         $('#modale_campagne').on('click', '#fermer_modale', function(e){
-            document.getElementById('video_player').pause();
+            document.getElementsByTagName('video')[0].pause();
             methods.back();
         });
                 
