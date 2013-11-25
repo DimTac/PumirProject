@@ -432,21 +432,19 @@ input[type="button"] + span{
 	vertical-align:middle;
 	font-size: 1em;
 	line-height: 50px;
-	padding-left: 5em;
+	padding-left: 4em;
 }
 
 .budget{
 	background-image: url('../img/money-01.png');
 	background-position: center left 15px;
 	background-repeat: no-repeat;
-	background-size: 35px 35px;
 }
 
 .envie{
 	background-image: url('../img/foud.png');
 	background-position: center left 15px;
 	background-repeat: no-repeat;
-	background-size: 35px 35px;
 }
 
 #logo{
@@ -521,7 +519,7 @@ input[type="button"] + span{
 }
 
 #resto{
-	margin-left:15px;
+	margin-left: 15px;
 	width:59%;
 }
 
