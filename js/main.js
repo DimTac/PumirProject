@@ -357,7 +357,7 @@ $(document).ready(function(){
 		else if(mot_clef=='Asiatique') return data.asiatique;
 		else if(mot_clef=='Salade') return data.salade;
 		else if(mot_clef=='Pizza') return data.pizza;
-		else if(mot_clef=='Sandwitch') return data.sandwitch;
+		else if(mot_clef=='Sandwich') return data.sandwitch;
 		else if(mot_clef=='Viande') return data.viande;
 		else if(mot_clef=='Poisson') return data.poisson;
 		else if(mot_clef=='Kebab') return data.kebab;
