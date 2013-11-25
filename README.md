@@ -11,7 +11,7 @@ Available <a href="http://wheelunch.fr" target="_blank">here</a>
    * Google Directions
    * MapBox
    * Foursquare
-   * Tag video HTML5
+   * HTML5 video tag
 
 ### Authors
 <table>
