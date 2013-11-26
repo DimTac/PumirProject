@@ -180,7 +180,7 @@ $(document).ready(function(){
 				//radius: perimetreCarte,
 			    zoom : 17,
 			    map : "map",
-			    keyword : resultatRoue,
+			    keyword : (resultatRoue=='Asiatique') ? 'japonais|chinois' : resultatRoue,
 			    radius : radiusPanel,
 			 /*   recherche : "restaurant",*/
 			    center : {
@@ -214,9 +214,9 @@ $(document).ready(function(){
 	$('#details-restaurant').on('click', '#itineraire', function(e){
 	  e.preventDefault();
 	  var A_longitude = $(this).attr('data-aLong');
-	  var A_latitude = $(this).attr('data-aLat');
+	  var A_latitude  = $(this).attr('data-aLat');
 	  var B_longitude = $(this).attr('data-bLong');
-	  var B_latitude = $(this).attr('data-bLat');
+	  var B_latitude  = $(this).attr('data-bLat');
 	  var A = {latitude:A_latitude, longitude: A_longitude};
 	  var B = {latitude:B_latitude, longitude: B_longitude};
 	  console.log(A_latitude+','+A_longitude+' - '+B_latitude+','+B_longitude);	  
