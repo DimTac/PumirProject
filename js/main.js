@@ -179,14 +179,12 @@ $(document).ready(function(){
 	function init_map(resultatRoue,radiusPanel){
 		if(userLocation.longitude!='' && userLocation.latitude!=''){
 			var params = {
-				//radius: perimetreCarte,
 			    zoom : 17,
 			    map : "map",
 			    keyword : (resultatRoue=='Asiatique') ? 'japonais|chinois' : resultatRoue,
 			    transport : avec_transport,
 			    prix : window.compteur,
-			    radius : radiusPanel,
-			 /*   recherche : "restaurant",*/
+			    radius : (avec_transport==false) ? 900 : 2000,
 			    center : {
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude

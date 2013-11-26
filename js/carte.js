@@ -24,7 +24,6 @@ var carte = {
   init: function(options)
   {
     this.parametres = $.extend(this.defaults,options); 
-    this.parametres.radius = (this.parametres.transport==false) ? 900 : 2000;
     console.log('Initialisation de la carte effectuée - coordonnées : '+this.parametres.center.latitude+', '+this.parametres.center.longitude);
   },
 
