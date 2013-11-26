@@ -9,8 +9,10 @@ var carte = {
   defaults:
   {
     map: "#map",
-    recherche:"restaurant",
-    keyword:"pizza",
+    recherche: "restaurant",
+    keyword: "pizza",
+    transport: false,
+    prix: 0,
     zoom: 16,
     radius: 900,
     center: {latitude:48.857713,longitude:2.347271},
@@ -22,6 +24,7 @@ var carte = {
   init: function(options)
   {
     this.parametres = $.extend(this.defaults,options); 
+    this.parametres.radius = (this.parametres.transport==false) ? 900 : 2000;
     console.log('Initialisation de la carte effectuée - coordonnées : '+this.parametres.center.latitude+', '+this.parametres.center.longitude);
   },
 
@@ -65,7 +68,8 @@ var carte = {
       location: position,
       radius: [this.parametres.radius],
       types: [this.parametres.recherche],
-      keyword: [this.parametres.keyword]
+      keyword: [this.parametres.keyword],
+      maxprice: [(this.parametres.prix==0) ? 4 : this.parametres.prix]
     };
 
     //Declaration de l'objet service

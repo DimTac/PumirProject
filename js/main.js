@@ -16,6 +16,8 @@ var userLocation      = {longitude : '', latitude : ''};
 var json_foursquare   = {};
 var trajet            = {};
 var carte_initialisee = false;
+var avec_transport    = false;
+var categorie_prix    = 0; 
 
 $(document).ready(function(){
 
@@ -181,6 +183,8 @@ $(document).ready(function(){
 			    zoom : 17,
 			    map : "map",
 			    keyword : (resultatRoue=='Asiatique') ? 'japonais|chinois' : resultatRoue,
+			    transport : avec_transport,
+			    prix : window.compteur,
 			    radius : radiusPanel,
 			 /*   recherche : "restaurant",*/
 			    center : {
