@@ -210,7 +210,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     for(var i=0; i<sizeOf(tableauMarkers); i++){
       chaine += '<div class="espace" data-leafletId="'+tableauMarkers[i]._leaflet_id+'">';
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
-      chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4><hr />';
+      chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4>';
       chaine += '</div>';
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
