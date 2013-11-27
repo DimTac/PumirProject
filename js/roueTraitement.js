@@ -7,12 +7,6 @@
  */
 
 
-/* -------------------- 
-    FICHIER CONTENANT TOUT LE TRAITEMENT DE LA ROUE (DESSIN, RESULTAT, MISE A JOUR) 
---------------------- */
-
-
-
 (function($){
     $.fn.rouetourne = function(options, callback){
         

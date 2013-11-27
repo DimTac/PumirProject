@@ -63,72 +63,11 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>     
     <script src='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.standalone.js'></script>
 
-
     <!-- JS Scripts -->
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>    
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true&amp;libraries=places"></script>
 
-        <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
-    </head>
-    <body>
-     <div style="font-family: HandOfSean;visibility: hidden"></div>
-      <div id="loader">
-      </div>
-      <div id="total">
-        <div id="trame"></div>
-        <div id="roue">
-             <!--  Cette div ne se voit pas mais elle permet de précharger la font face -->
-               <img id="fleche" src="img/fleche.png" alt="fleche">
-               <canvas id="canvas" width="500" height="1000">
-                </canvas>
-               <img id="logo" src="img/logo.png" alt="logo">
-                 <div id="restoDiv">
-               </div>
-        </div>
-        
-
-            <div id="panel">
-                <div id="panel-roue">
-
-                  <div id="transport">
-                    <input type="button" value="Avec transport">
-                    <input type="button" value="Sans transport" class="selectTransport">
-                  </div>
-                  
-                  <div id="budget">
-                      <span class="budget">Mon budget pour aujourd'hui :</span>
-                      <input id="moins" type="button" value="-">
-                      <div class="budget0"></div>
-                      <input id="plus" type="button" value="+">
-                  </div>
-                  
-                  <div id="choix">
-                    <span class="envie">J'ai plutôt envie de manger...</span>
-                    <input type="button" value="resto1">
-                    <input type="button" value="resto2">
-                    <input type="button" value="resto3">
-                    <input type="button" value="resto4">
-                    <input type="button" value="resto5">
-                    <input type="button" value="resto6">
-                    <input type="button" value="resto7">
-                    <input type="button" value="resto8">
-                    <input type="button" value="resto9">
-                    <input type="button" value="resto10">
-                  </div>
-                  <button id="go"> <img src="img/forward.png" alt="forward">Lancer la roue</button>
-                </div>
-
-                <div id="panel-results">
-                   <div class="wrapperloading" style="display:none">
-                      <div class="loading up"></div>
-                      <div class="loading down"></div>
-                    </div>
-
-                    <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
-                    <div id="resultats-restaurants"></div>
-                    <div class="scroll-more">&or;</div>
-                </div>
     <!-- Google Analytics script -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -139,15 +78,7 @@
         ga('create', 'UA-46026272-1', 'wheelunch.fr');
         ga('send', 'pageview');
     </script>
-    <script type="text/javascript">
-        /*var isMobile = function() {
-             //console.log("Navigator: " + navigator.userAgent);
-             return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
-           };
-          if(isMobile()) {
-                 window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
-          }*/
-    </script>   
+    
     <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
   </head>
   <body>
