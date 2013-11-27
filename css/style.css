@@ -393,14 +393,12 @@ input[type=button] + span {
     background-image: url(../img/money-01.png);
     background-position: center left 15px;
     background-repeat: no-repeat;
-    background-size: 35px 35px;
 }
 
 .envie {
     background-image: url(../img/foud.png);
     background-position: center left 15px;
     background-repeat: no-repeat;
-    background-size: 35px 35px;
 }
 
 #logo {
