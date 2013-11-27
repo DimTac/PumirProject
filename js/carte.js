@@ -343,8 +343,6 @@ function callback_details(json_detail, status){
     }
   });
   checkIfScrollNeeded();
-
-
 }
 
 /**
