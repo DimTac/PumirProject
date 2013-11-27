@@ -12,7 +12,7 @@
         "url": "http://www.marmiton.org/recettes/recette_oshi-sushi_44837.aspx",
         "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/37/37d383c5-54dd-4c0f-bd33-7453b98d3f48_normal.jpg",
         "url_video":"recette_sushis.mp4",
-        "url_video_ogg": "recette_sushis.oggtheora.ogg",
+        "url_video_ogg": "recette_sushis.oggtheora.ogv",
         "url_video_webm": "recette_sushis.webmhd.webm"
     },
     "asiatique": {
@@ -28,15 +28,15 @@
         "url": "d",
         "image": "f",
         "url_video":"recette_kebab.mp4",
-        "url_video_ogg": "recette_kebab.oggtheora.ogg",
+        "url_video_ogg": "recette_kebab.oggtheora.ogv",
         "url_video_webm": "recette_kebab.webmhd.webm"
     },
     "brasserie": {
-        "nom": "brasserie",
+        "nom": "typique de brasserie",
         "url": "d",
         "image": "f",
         "url_video":"recette_brasserie.mp4",
-        "url_video_ogg": "recette_brasserie.oggtheora.ogg",
+        "url_video_ogg": "recette_brasserie.oggtheora.ogv",
         "url_video_webm": "recette_brasserie.webmhd.webm"
     },
     "pizza": {
@@ -44,15 +44,15 @@
         "url": "d",
         "image": "f",
         "url_video":"recette_pizzas.mp4",
-        "url_video_ogg": "recette_pizzas.oggtheora.ogg",
+        "url_video_ogg": "recette_pizzas.oggtheora.ogv",
         "url_video_webm": "recette_pizzas.webmhd.webm"
     },
-    "fast-food": {
+    "fastfood": {
         "nom": "burger",
         "url": "d",
         "image": "f",
         "url_video":"recette_burger.mp4",
-        "url_video_ogg": "recette_burger.oggtheora.ogg",
+        "url_video_ogg": "recette_burger.oggtheora.ogv",
         "url_video_webm": "recette_burger.webmhd.webm"
     },    
     "indien": {
@@ -60,7 +60,7 @@
         "url": "d",
         "image": "f",
         "url_video":"recette_samossas.mp4",
-        "url_video_ogg": "recette_samossas.oggtheora.ogg",
+        "url_video_ogg": "recette_samossas.oggtheora.ogv",
         "url_video_webm": "recette_samossas.webmhd.webm"
     },
     "creperie": {
@@ -68,7 +68,7 @@
         "url": "d",
         "image": "f",
         "url_video":"recette_galettes.mp4",
-        "url_video_ogg": "recette_galettes.oggtheora.ogg",
+        "url_video_ogg": "recette_galettes.oggtheora.ogv",
         "url_video_webm": "recette_galettes.webmhd.webm"
     },
     "sandwitch": {
@@ -92,7 +92,7 @@
         "url": "http://www.marmiton.org/recettes/recette_boulettes-de-viande-legeres-a-la-tomate_16981.aspx",
         "image": "http://images.marmitoncdn.org/recipephotos/multiphoto/7a/7a2f9416-c4e7-4343-85cc-457a2e6656a8_normal.jpg",
         "url_video":"recette_viande.mp4",
-        "url_video_ogg": "recette_viande.oggtheora.ogg",
+        "url_video_ogg": "recette_viande.oggtheora.ogv",
         "url_video_webm": "recette_viande.webmhd.webm"
     },
     "poisson": {
@@ -100,7 +100,7 @@
         "url": "http://www.atelierdeschefs.fr/fr/recette/14027-roti-de-saumon-pret-a-cuire.php",
         "image": "f",
         "url_video":"recette_poisson.mp4",
-        "url_video_ogg": "recette_poisson.oggtheora.ogg",
+        "url_video_ogg": "recette_poisson.oggtheora.ogv",
         "url_video_webm": "recette_poisson.webmhd.webm"
     }
 }

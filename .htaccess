@@ -1,0 +1,27 @@
+## contrôle du cache navigateur - Expire headers  
+<IfModule mod_expires.c>  
+    ExpiresActive On  
+    ExpiresDefault "access plus 7200 seconds"  
+    ExpiresByType image/jpg             "access plus 1 week"  
+    ExpiresByType image/jpeg            "access plus 1 week"  
+    ExpiresByType image/png             "access plus 1 week"  
+    ExpiresByType image/gif             "access plus 1 week"  
+    AddType image/x-icon .ico  
+    ExpiresByType image/ico             "access plus 1 week"  
+    ExpiresByType image/icon            "access plus 1 week"  
+    ExpiresByType image/x-icon          "access plus 1 week"   
+    ExpiresByType application/x-shockwave-flash "access plus 1 week"  
+</IfModule>  
+
+# MOD_DEFLATE COMPRESSION
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+#Pour les navigateurs incompatibles
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+#ne pas mettre en cache si ces fichiers le sont déjà
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+#les proxies doivent donner le bon contenu
+Header append Vary User-Agent env=!dont-vary

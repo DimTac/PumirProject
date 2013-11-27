@@ -16,6 +16,8 @@ var userLocation      = {longitude : '', latitude : ''};
 var json_foursquare   = {};
 var trajet            = {};
 var carte_initialisee = false;
+var avec_transport    = false;
+var categorie_prix    = 0; 
 
 $(document).ready(function(){
 
@@ -177,12 +179,12 @@ $(document).ready(function(){
 	function init_map(resultatRoue,radiusPanel){
 		if(userLocation.longitude!='' && userLocation.latitude!=''){
 			var params = {
-				//radius: perimetreCarte,
 			    zoom : 17,
 			    map : "map",
-			    keyword : resultatRoue,
-			    radius : radiusPanel,
-			 /*   recherche : "restaurant",*/
+			    keyword : (resultatRoue=='Asiatique') ? 'japonais|chinois' : resultatRoue,
+			    transport : avec_transport,
+			    prix : window.compteur,
+			    radius : (avec_transport==false) ? 900 : 2000,
 			    center : {
 			      latitude : userLocation.latitude,
 			      longitude : userLocation.longitude
@@ -214,9 +216,9 @@ $(document).ready(function(){
 	$('#details-restaurant').on('click', '#itineraire', function(e){
 	  e.preventDefault();
 	  var A_longitude = $(this).attr('data-aLong');
-	  var A_latitude = $(this).attr('data-aLat');
+	  var A_latitude  = $(this).attr('data-aLat');
 	  var B_longitude = $(this).attr('data-bLong');
-	  var B_latitude = $(this).attr('data-bLat');
+	  var B_latitude  = $(this).attr('data-bLat');
 	  var A = {latitude:A_latitude, longitude: A_longitude};
 	  var B = {latitude:B_latitude, longitude: B_longitude};
 	  console.log(A_latitude+','+A_longitude+' - '+B_latitude+','+B_longitude);	  
@@ -355,14 +357,17 @@ $(document).ready(function(){
 		if(mot_clef=='Japonais') return data.japonais;
 		else if(mot_clef=='Chinois') return data.chinois;
 		else if(mot_clef=='Asiatique') return data.asiatique;
+		else if(mot_clef=='Salade') return data.salade;
 		else if(mot_clef=='Pizza') return data.pizza;
-		else if(mot_clef=='Sandwitch') return data.sandwitch;
+		else if(mot_clef=='Sandwich') return data.sandwitch;
 		else if(mot_clef=='Viande') return data.viande;
 		else if(mot_clef=='Poisson') return data.poisson;
 		else if(mot_clef=='Kebab') return data.kebab;
 		else if(mot_clef=='Crêperie') return data.creperie;
 		else if(mot_clef=='Brasserie') return data.brasserie;
 		else if(mot_clef=='Indien') return data.indien;
+		else if(mot_clef=='Fast-Food') return data.fastfood;
+		else if(mot_clef=='Brasserie') return data.brasserie;
 		else return data.japonais;
 	}
 

@@ -34,7 +34,6 @@ var carte = {
         [pos.latitude ,pos.longitude], 
         carte.parametres.zoom
     );
-    new L.Control.Zoom({ position: 'topright' }).addTo(map);
     map_globale = map;
   },
 
@@ -216,6 +215,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
     $('.espace').each(function(){
       var that=$(this);
       $(this).on('click', function(){
+        $('#panel-results').toggleClass('liste-on');
         $('.espace').removeClass('resto-select');
         that.toggleClass('resto-select');
         map_globale.removeLayer(trajet);
@@ -316,12 +316,11 @@ function callback_details(json_detail, status){
         }
       //   chaine += '<div>';
       // chaine += '</div>';
-          chaine += '<div class="scroll-more">&or;</div>';
   }else{
     chaine += '<h3>Impossible de charger le détail du restaurant.</h3>';
   }
   $('#content').html(chaine);
-  $("#bloc-commentaires").mCustomScrollbar({
+  $("#details-restaurant").mCustomScrollbar({
     autoHideScrollbar:true,
     theme:"light-thin",
     advanced:{  
@@ -329,18 +328,7 @@ function callback_details(json_detail, status){
       updateOnContentResize:true   
     },
     scrollInertia : 0,
-    callbacks:{
-        onTotalScroll:function(){
-          $('#details-restaurant .scroll-more').fadeOut(0).addClass('off');
-        },
-        onScroll:function(){
-          if($('#details-restaurant .scroll-more').css('display') == 'none' && $('.scroll-more').hasClass('off') == true){
-            $('#details-restaurant .scroll-more').removeClass('off').stop().fadeIn(0);
-          }
-        }
-    }
   });
-  checkIfScrollNeeded();
 
 
 }

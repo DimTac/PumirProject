@@ -115,27 +115,23 @@
         </div>
       </div>
 
+      <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
+      <button id="switch" class="switch">+</button>
       <div id="modale_campagne"></div>
       <div id="resultats"></div>
       <div id="map" class="dark"></div>
       <div id="geolocate"></div>
 
       <div id="panel-results">
-        <div class="wrapperloading" style="display:none">
-          <div class="loading up"></div>
-          <div class="loading down"></div>
-        </div>
-        <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
         <div id="resultats-restaurants"></div>
-        <div class="scroll-more">&or;</div>
       </div>
 
       <div id="details-restaurant" style="display:none">
-        <img id="close" src="img/close.png" alt="close panel">
+        <button id="switch" class="switch">X</button>
         <div id="content">
           <div id="resto"></div>
         </div>
-        <div id="comments"></div>
+
       </div>
               <!-- </div> -->
 
@@ -160,6 +156,10 @@
       <script src='js/roue.js'></script>
       <script src="js/itineraire.js" type="text/javascript" charset="utf-8"></script> 
       <script type="text/javascript">
+
+        $('#switch').on('click', function(){
+          $('#panel-results').toggleClass('liste-on');
+        });
 
         $('input[value="Avec transport"]').bind('click', function(evt){
              $('input[value="Sans transport"]').toggleClass('selectTransport');
