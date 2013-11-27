@@ -1,3 +1,8 @@
+/* -------------------- 
+FICHIER CONTENANT LA GESTION DE LA CARTE : AJOUT DES MARKERS, DES RESTAURANTS ET AFFICHAGE DES 
+PANNEAUX DE RESULTAT
+ --------------------- */
+
 var jsonObj       = [];
 var carte_globale = {}; // points places globale
 var map_globale   = {}; // carte mapbox globale

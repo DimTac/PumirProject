@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'HandOfSean';
+    src: url('../fonts/hand_of_sean_demo-webfont.eot');
+    src: local(HandOfSean), local(HandOfSean),
+    	 url('../fonts/hand_of_sean_demo-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/hand_of_sean_demo-webfont.woff') format('woff'),
+         url('../fonts/hand_of_sean_demo-webfont.ttf') format('truetype'),
+         url('../fonts/hand_of_sean_demo-webfont.svg#hand_of_sean_demoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

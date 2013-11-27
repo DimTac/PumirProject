@@ -1,3 +1,7 @@
+/* ------------------
+	FICHIER GERANT LA LOCALISATION 
+--------------------- */
+
 var GeoLocation = {
 
 	params : {

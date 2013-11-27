@@ -367,3 +367,66 @@ $(document).ready(function(){
 	}
 
 });
+
+
+/* -------------------- 
+	FONCTIONS GENERALES RELATIVES AU SITE (ANIMATIONS ET REDIRECTION MOBILE PAR EX) 
+--------------------- */
+
+var isMobile = function() {
+           //console.log("Navigator: " + navigator.userAgent);
+           return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
+         };
+        if(isMobile()) {
+               window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
+        }
+
+$(document).ready(function(){
+	$("#total").delay(400).fadeIn(1500);
+
+	$('input[value="Avec transport"]').bind('click', function(evt){
+             $('input[value="Sans transport"]').toggleClass('selectTransport');
+             $(this).toggleClass('selectTransport');
+        });
+
+        $('input[value="Sans transport"]').bind('click', function(evt){
+             $('input[value="Avec transport"]').toggleClass('selectTransport');
+             $(this).toggleClass('selectTransport');
+        });
+
+        window.compteur = 0;
+        $('#moins').bind('click', function(evt){
+          evt.preventDefault();
+          if(window.compteur == 0){
+            $('#moins').css('cursor', 'default');
+            return;
+          }
+          else{
+            window.compteur--;
+            $('#moins').css('cursor', 'pointer');
+            $('#budget div').empty();
+            $('#budget div').removeClass().addClass("budget"+window.compteur);   
+          }
+        });
+
+        $('#plus').bind('click', function(evt){
+          evt.preventDefault();
+          if(window.compteur == 4){
+            $('#plus').css('cursor', 'default');
+            return;
+          }
+          else{
+            window.compteur++;
+            $('#plus').css('cursor', 'pointer');
+             $('#budget div').empty();
+            $('#budget div').removeClass().addClass("budget"+window.compteur);   
+          }
+        });
+
+         $('#close').on('click', function(evt){
+          evt.preventDefault();
+          $("#details-restaurant").hide();
+        });
+
+
+});

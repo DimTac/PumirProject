@@ -1,3 +1,7 @@
+/* ------------------
+  FICHIER GERANT LE SCROLL INTERNE DANS LE BLOC DE RESULTATS & DES COMMENTAIRES 
+--------------------- */
+
 (function($){
   $(document).ready(function(){
     $("#resultats-restaurants").mCustomScrollbar({

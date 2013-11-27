@@ -1,3 +1,7 @@
+/* -------------------- 
+	FICHIER CONTENANT LE DESSIN DE L'ITINERAIRE VERS LE RESTAURANT AU CLIC SUR "CALCULER L'ITINERAIRE" 
+--------------------- */
+
 var Itineraire = {
 
 	params: {

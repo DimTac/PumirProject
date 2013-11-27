@@ -1,4 +1,7 @@
-/*			RESPONSIVE	TABLETTE / PETIT DESKTOP		*/
+/* -------------------- 
+	RESPONSIVE CSS BY US
+--------------------- */
+
 @media (max-width: 1390px) {
 	#resto > h2{
 		margin : 0 0 0 0;

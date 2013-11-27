@@ -1,3 +1,8 @@
+/* ------------ 
+	FICHIER INITIALISANT LA ROUE : DECLARATION DES TABLEAUX QUI CONTIENNENT LES NOMS, IMAGES ET SLOGANS DES RESTOS PAR DEFAUT 
+--------------------- */
+
+
 $(document).ready(function(){
    $('#canvas').rouetourne({
      restoArray : ['Asiatique','Salade','Fast-Food','Brasserie','Pizza','Indien','Crêperie','Sandwich','Poisson','Viande'],
