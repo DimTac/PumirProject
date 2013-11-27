@@ -369,11 +369,8 @@ input[type=button] + span {
 
 .espace {
     color: #000;
-    padding-top: 15px;
-}
-
-.espace hr {
-    margin-top: 20px;
+    padding:7px 0 7px 0;
+    border-bottom:#000;
 }
 
 #panel-roue div > span {
