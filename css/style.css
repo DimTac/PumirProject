@@ -389,7 +389,7 @@ input[type=button] + span {
 }
 
 .resto-select {
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(15,15,15,0.9);
     color: #fff !important;
 }
 
@@ -698,7 +698,6 @@ input[type=button] + span {
     box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
     -moz-box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
     -webkit-box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.3);
-    
     border-radius: 0px 2px 2px 0px; 
     -moz-border-radius: 0px 2px 2px 0px; 
     -webkit-border-radius: 0px 2px 2px 0px;  
@@ -713,7 +712,6 @@ input[type=button] + span {
 
 #relancer{
     text-shadow: 0px -1px 0px #000;
-    
     margin-top:30px;
     color: #ffffff;
     text-transform: uppercase;
