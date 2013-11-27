@@ -1,11 +1,10 @@
 <!DOCTYPE html> 
-
 <html>
   <!-- PROJET WHEELUNCH ! Tournez, trouvez, lunchez !
   By Pierre Bost, Pierre Guilhou, Lucie Reitz, Dimitri Tacita, Jérémy Zaloga
     APIs :
         - FourSquare 
-        - Dimensions
+        - Directions
         - Google Places
         - LeafLet
         - MapBox
@@ -29,15 +28,18 @@
     <title>Wheelunch - Tournez, Trouvez, Lunchez !</title>
     <link rel="shortcut icon" href="img/favicon.png" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <!-- WebFonts -->
-    <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Meta TAGS -->
     <meta property="og:title" content="Wheelunch - Tournez, Trouvez, Lunchez !"/>
     <meta property="og:image" content="http://www.wheelunch.fr/img/og_fb.png"/>
     <meta property="og:type" content="website" />
+    <meta property="og:description" content="Où manger ce midi ? Tourne la roue et trouve un restaurant à proximité !"/>
+    <meta name="description" content="Wheelunch vous aide à trouver un endroit où manger à proximité selon vos critères de sélection"/>
+    <link rel="author" href="https://plus.google.com/u/1/110125718725953983012/posts"/>
+    
+    <!-- WebFonts -->
+    <link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Main CSS files -->
     <link href="css/style.css" rel="stylesheet">
@@ -60,6 +62,8 @@
     <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>    
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true&amp;libraries=places"></script>
+
+    <!-- Google Analytics script -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -69,161 +73,156 @@
         ga('create', 'UA-46026272-1', 'wheelunch.fr');
         ga('send', 'pageview');
     </script>
-  <script type="text/javascript">
-      /*var isMobile = function() {
-           //console.log("Navigator: " + navigator.userAgent);
-           return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
-         };
-        if(isMobile()) {
-               window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
-        }*/
-  </script>   
-        <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
-    </head>
-    <body>
-      <div id="loader">
-      </div>
-      <div id="total">
-        <div id="trame"></div>
-        <div id="roue">
-             <!--  Cette div ne se voit pas mais elle permet de précharger la font face -->
-              <div style="font-family: HandOfSean;display:none"></div>
-               <img id="fleche" src="img/fleche.png" alt="fleche">
-               <canvas id="canvas" width="500" height="1000">
-                </canvas>
-               <img id="logo" src="img/logo.png" alt="logo">
-                 <div id="restoDiv">
-               </div>
+    <script type="text/javascript">
+        /*var isMobile = function() {
+             //console.log("Navigator: " + navigator.userAgent);
+             return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
+           };
+          if(isMobile()) {
+                 window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
+          }*/
+    </script>   
+    <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+  </head>
+  <body>
+    <div id="loader">
+    </div>
+    <div id="total">
+      <div id="trame"></div>
+      <div id="roue">
+         <!--  Cette div ne se voit pas mais elle permet de précharger la font face -->
+          <div style="font-family: HandOfSean;display:none"></div>
+          <img id="fleche" src="img/fleche.png" alt="fleche">
+          <canvas id="canvas" width="500" height="1000"></canvas>
+          <img id="logo" src="img/logo.png" alt="logo">
+          <div id="restoDiv"></div>
+      </div>      
+
+      <div id="panel">
+        <div id="panel-roue">
+
+          <div id="transport">
+            <input type="button" value="Avec transport">
+            <input type="button" value="Sans transport" class="selectTransport">
+            <!-- <div><p>ou</p></div> -->
+          </div>
+          
+          <div id="budget">
+              <span class="budget">Mon budget pour aujourd'hui :</span>
+              <input id="moins" type="button" value="-">
+              <div class="budget0"></div>
+              <input id="plus" type="button" value="+">
+          </div>
+          
+          <div id="choix">
+            <span class="envie">J'ai plutôt envie de manger...</span>
+            <input type="button" value="resto1">
+            <input type="button" value="resto2">
+            <input type="button" value="resto3">
+            <input type="button" value="resto4">
+            <input type="button" value="resto5">
+            <input type="button" value="resto6">
+            <input type="button" value="resto7">
+            <input type="button" value="resto8">
+            <input type="button" value="resto9">
+            <input type="button" value="resto10">
+          </div>
+          <button id="go"> <img src="img/forward.png" alt="forward">Lancer la roue</button>
         </div>
-        
 
-            <div id="panel">
-                <div id="panel-roue">
-
-                  <div id="transport">
-                    <input type="button" value="Avec transport">
-                    <input type="button" value="Sans transport" class="selectTransport">
-                    <!-- <div><p>ou</p></div> -->
-                  </div>
-                  
-                  <div id="budget">
-                      <span class="budget">Mon budget pour aujourd'hui :</span>
-                      <input id="moins" type="button" value="-">
-                      <div class="budget0"></div>
-                      <input id="plus" type="button" value="+">
-                  </div>
-                  
-                  <div id="choix">
-                    <span class="envie">J'ai plutôt envie de manger...</span>
-                    <input type="button" value="resto1">
-                    <input type="button" value="resto2">
-                    <input type="button" value="resto3">
-                    <input type="button" value="resto4">
-                    <input type="button" value="resto5">
-                    <input type="button" value="resto6">
-                    <input type="button" value="resto7">
-                    <input type="button" value="resto8">
-                    <input type="button" value="resto9">
-                    <input type="button" value="resto10">
-                  </div>
-                  <button id="go"> <img src="img/forward.png" alt="forward">Lancer la roue</button>
-                </div>
-
-                <div id="panel-results">
-                   <div class="wrapperloading" style="display:none">
-                      <div class="loading up"></div>
-                      <div class="loading down"></div>
-                    </div>
-
-                    <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
-                    <div id="resultats-restaurants"></div>
-                    <div class="scroll-more">&or;</div>
-                </div>
-
+        <div id="panel-results">
+            <div class="wrapperloading" style="display:none">
+              <div class="loading up"></div>
+              <div class="loading down"></div>
             </div>
 
+            <button id="back"> <img src="img/back.png" alt="back">Je ne suis pas satisfait</button>
+            <div id="resultats-restaurants"></div>
+            <div class="scroll-more">&or;</div>
+        </div>
+      </div>
 
-              <div id="details-restaurant" style="display:none">
-                <img id="close" src="img/close.png" alt="close panel">
-                <div id="content">
-                  <div id="resto"></div>
-                  <div id="comments"></div>
-                </div>
-              </div>
-              <div id="modale_campagne"></div>
-                <div id="resultats"></div>
-                <div id="map" class="dark"></div>
-                <div id="geolocate"></div>
+      <div id="details-restaurant" style="display:none">
+        <img id="close" src="img/close.png" alt="close panel">
+        <div id="content">
+          <div id="resto"></div>
+          <div id="comments"></div>
+        </div>
+      </div>
 
-      <script src="js/fade.js" type="text/javascript"></script>
-      <script type="text/javascript">
-      if ( document.addEventListener && window.addEventListener ) {
-          //Pour IE9
-       /*   document.getElementById('test').addEventListener('click', function(e){
-            this.style["background-color"] = "#ddd";
-          });*/
-      }
-      </script>
-      <!-- custom scrollbars plugin -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/scroll.js"></script>
+      <div id="modale_campagne"></div>
+      <div id="resultats"></div>
+      <div id="map" class="dark"></div>
+      <div id="geolocate"></div>
 
-      <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
-      <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
-      <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
-      <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
-      <script src='js/roueTourne.js'></script>
-      <script src='js/roue.js'></script>
-      <script src="js/itineraire.js" type="text/javascript" charset="utf-8"></script> 
-      <script type="text/javascript">
+    <script src="js/fade.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    if ( document.addEventListener && window.addEventListener ) {
+        //Pour IE9
+        /* document.getElementById('test').addEventListener('click', function(e){
+          this.style["background-color"] = "#ddd";
+        });*/
+    }
+    </script>
+    <!-- custom scrollbars plugin -->
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/scroll.js"></script>
 
-        $('input[value="Avec transport"]').bind('click', function(evt){
-             $('input[value="Sans transport"]').toggleClass('selectTransport');
-             $(this).toggleClass('selectTransport');
-             avec_transport = true;
-        });
+    <script src="js/carte.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/geolocation-poo.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/foursquare-poo.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/itineraire.js" type="text/javascript" charset="utf-8"></script> 
+    <script src='js/roueTourne.js'></script>
+    <script src='js/roue.js'></script>
+    <script type="text/javascript">
 
-        $('input[value="Sans transport"]').bind('click', function(evt){
-             $('input[value="Avec transport"]').toggleClass('selectTransport');
-             $(this).toggleClass('selectTransport');
-             avec_transport = false;
-        });
+      $('input[value="Avec transport"]').bind('click', function(evt){
+           $('input[value="Sans transport"]').toggleClass('selectTransport');
+           $(this).toggleClass('selectTransport');
+           avec_transport = true;
+      });
 
-        window.compteur = 0;
-        $('#moins').bind('click', function(evt){
-          evt.preventDefault();
-          if(window.compteur == 0){
-            $('#moins').css('cursor', 'default');
-            return;
-          }
-          else{
-            window.compteur--;
-            $('#moins').css('cursor', 'pointer');
-            $('#budget div').empty();
-            $('#budget div').removeClass().addClass("budget"+window.compteur);   
-          }
-        });
+      $('input[value="Sans transport"]').bind('click', function(evt){
+           $('input[value="Avec transport"]').toggleClass('selectTransport');
+           $(this).toggleClass('selectTransport');
+           avec_transport = false;
+      });
 
-        $('#plus').bind('click', function(evt){
-          evt.preventDefault();
-          if(window.compteur == 4){
-            $('#plus').css('cursor', 'default');
-            return;
-          }
-          else{
-            window.compteur++;
-            $('#plus').css('cursor', 'pointer');
-             $('#budget div').empty();
-            $('#budget div').removeClass().addClass("budget"+window.compteur);   
-          }
-        });
+      window.compteur = 0;
+      $('#moins').bind('click', function(evt){
+        evt.preventDefault();
+        if(window.compteur == 0){
+          $('#moins').css('cursor', 'default');
+          return;
+        }
+        else{
+          window.compteur--;
+          $('#moins').css('cursor', 'pointer');
+          $('#budget div').empty();
+          $('#budget div').removeClass().addClass("budget"+window.compteur);   
+        }
+      });
 
-         $('#close').on('click', function(evt){
-          evt.preventDefault();
-          $("#details-restaurant").hide();
-        });
+      $('#plus').bind('click', function(evt){
+        evt.preventDefault();
+        if(window.compteur == 4){
+          $('#plus').css('cursor', 'default');
+          return;
+        }
+        else{
+          window.compteur++;
+          $('#plus').css('cursor', 'pointer');
+           $('#budget div').empty();
+          $('#budget div').removeClass().addClass("budget"+window.compteur);   
+        }
+      });
 
-      </script>
-    </body>
+       $('#close').on('click', function(evt){
+        evt.preventDefault();
+        $("#details-restaurant").hide();
+      });
+
+    </script>
+  </body>
 </html>
-
