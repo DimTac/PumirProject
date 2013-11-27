@@ -90,19 +90,17 @@
             /////////////// QUAND ON CLIQUE SUR BACK ////////////////
             back : function(){
                 map_globale.removeLayer(trajet);
-                $("#panel").delay(1000).animate(
-                    {"margin-left":"75%"},
-                    {duration:500}
-                );
 
                 $("#details-restaurant").fadeOut(1000);
-                $("#panel-results").delay(1500).fadeOut(500);
-                $("#panel-roue").delay(1500).fadeIn(500);
+                $("#panel-results").delay(1000).fadeOut(500);
+                $("#switch").delay(1000).fadeOut(500);
+                $("#back").delay(1000).fadeOut(500);
+                $("#panel-roue").delay(1000).fadeIn(500);
                 $('#map').fadeOut(1000);
                   $(paramsRoue.restoResultatDiv).fadeIn(1000);
                   $("#canvas").fadeIn(1000);
                   $("#fleche").fadeIn(750);
-                  $(paramsRoue.logo).fadeIn(500);
+                  // $(paramsRoue.logo).fadeIn(500);
 
                   modifResto=true;
             },
