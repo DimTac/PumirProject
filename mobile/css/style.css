@@ -877,3 +877,39 @@ input[type="button"] + span{
 #switch{
 	display: none;
 }
+
+#logo-panel{
+	/*background-color: #ffffff;*/
+	padding: 5px;
+}
+#logo-panel img{
+	width: 100%;
+	height: auto;
+}
+
+
+#panel-roue aside{
+	display: block;
+	padding: 5px;
+	text-align:center;
+}
+
+#panel-roue aside a{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+
+@media (max-width: 500px) {
+	#relancer,#bonchoix{
+		width:auto;
+		font-size: 1em;
+		padding-left: 24px;
+		padding-right: 22px;
+		padding-top: 17px;
+		padding-bottom: 17px;
+	}
+	#bonchoix img, #relancer img{
+		display: none;
+	}
+}
