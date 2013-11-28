@@ -24,11 +24,6 @@ body {
     background: url('../img/trame.png') repeat;
 }
 
-img{
-    width: 858px;
-    height: 267px;
-}
-
 #centrer{
     margin : 0 auto;
     display: block;
