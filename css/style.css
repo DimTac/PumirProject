@@ -547,6 +547,70 @@ input {
     border-bottom:1px solid #000;
 }
 
+#panel-roue div > span {
+    display: inline-block;
+    background-color: #be4d47;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1em;
+    line-height: 50px;
+    padding-left: 5em;
+}
+
+.budget {
+    background-image: url(../img/money-01.png);
+    background-position: center left 15px;
+    background-repeat: no-repeat;
+}
+
+.envie {
+    background-image: url(../img/foud.png);
+    background-position: center left 15px;
+    background-repeat: no-repeat;
+}
+
+#logo {
+    position: absolute;
+    width: 35%;
+    left: 32%;
+    top: 40%;
+}
+
+#restoDiv {
+    position: absolute;
+    width: 35%;
+    left: 32%;
+    top: 15%;
+    text-align: center;
+}
+
+/*Taille picto roue*/
+.pictoResultat {
+    width: 100px;
+    height: 100px;
+}
+
+#restoDiv h1 {
+    color: #fff;
+    font-size: 5em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+#restoDiv p {
+    margin-top: -10px;
+    color: #ffd629;
+    font-size: 2em;
+}
+
+#trame {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(../img/trame.png) repeat;
 .selected {
     background-color: rgba(255,255,255,0.3) !important;
     cursor: pointer;
