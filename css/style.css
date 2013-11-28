@@ -337,7 +337,6 @@ input {
     background-image: url(../img/money-01.png);
     background-position: center left 15px;
     background-repeat: no-repeat;
-    background-size: 35px 35px;
 }
 
 #budget input {
@@ -402,7 +401,6 @@ input {
     background-image: url(../img/foud.png);
     background-position: center left 15px;
     background-repeat: no-repeat;
-    background-size: 35px 35px;
 }
 
 #choix input {
@@ -549,6 +547,8 @@ input {
     height: 100%;
     position: absolute;
     background: url(../img/trame.png) repeat;
+}
+
 .selected {
     background-color: rgba(255,255,255,0.3) !important;
     cursor: pointer;
