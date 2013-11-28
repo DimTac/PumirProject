@@ -213,6 +213,10 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4>';
       chaine += '</div>';
+
+      // Tag Analytics - Selection du restaurant dans panel-results
+      ga('send', 'event', 'Selection restaurant', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+'tableauMarkers[i].feature.properties.adresse', 4);
+
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }

@@ -222,8 +222,8 @@
                 $("#bonchoix").bind('click', function(e){
                     e.preventDefault();
 
-                    // Tag Analytics - Relancer la roue
-                    ga('send', 'event', 'Bouton Bon Choix', 'click', 'Choix '+restoArray[index], 4);
+                    // Tag Analytics - Bon choix
+                    ga('send', 'event', 'Bon Choix', 'click', 'Choix '+restoArray[index], 4);
 
                     $.rotation_complete(resultatRoue,radiusPanel);
                     $(paramsRoue.restoResultatDiv).fadeOut(500);
