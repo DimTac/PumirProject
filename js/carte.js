@@ -108,7 +108,8 @@ var carte = {
           ref_photo : data[i].reference,
           'marker-size': 'medium',
           'marker-color':'#046380',
-          'marker-symbol': 'restaurant'
+          'marker-symbol': 'restaurant',
+          'typeResto' : this.defaults.keyword
         }
       });
     }
@@ -314,7 +315,7 @@ function callback_details(json_detail, status){
           chaine += chaine_comments;
           chaine += '</div>'
         }else{
-          chaine += '<h3 class="no-comment">Pas de commentaires postés sur ce restaurant</h3>';
+          chaine += '<h3 class="no-comment">Pas de commentaires disponibles. :(</h3>';
         }
       //   chaine += '<div>';
       // chaine += '</div>';
@@ -386,6 +387,9 @@ function afficher_etoiles(nb){
 function selectionRestaurantsPanel(marker){
   $("#resultats-restaurants div").removeClass('resto-select');
   $("#details-restaurant").show();
+  $('meta[property="og:title"]').attr('content','Ce midi c\'est' +marker.layer.feature.properties.typeResto+' avec Wheelunch !');
+  $('meta[property="og:description"]').attr('content','Rejoignez-moi chez '+marker.layer.feature.properties.title+','+marker.layer.feature.properties.adresse);
+  
   $("#resultats-restaurants div[data-leafletId='"+marker.layer._leaflet_id+"']").toggleClass('resto-select');
   map_globale.panTo(marker.latlng);
   recherche_details(marker.layer.feature.properties.ref_photo);
