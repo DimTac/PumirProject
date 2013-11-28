@@ -35,15 +35,11 @@ body {
 }
 
 #boutons{
-    margin : 0 auto;
-    display: block;
-    margin-top : -66px;
-    margin-left : -215px;
-    position: absolute;
-    top : 70%;
-    left: 50%;
+   	position: absolute;
+	top: 70%;
+	left: 35%;
 }
-    
+
 @media screen and (max-width: 860px) 
 {
     img {
@@ -61,6 +57,7 @@ body {
 	left: 50%;
 	}
 }
+
 #button_foursquare
 {
     text-shadow: rgb(0, 0, 0) 0px -1px 0px;
