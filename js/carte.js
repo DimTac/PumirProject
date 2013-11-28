@@ -214,9 +214,6 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4>';
       chaine += '</div>';
 
-      // Tag Analytics - Selection du restaurant dans panel-results
-      ga('send', 'event', 'Selection restaurant', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+'tableauMarkers[i].feature.properties.adresse', 4);
-
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
@@ -288,13 +285,9 @@ function callback_details(json_detail, status){
   var date_comment    = '';
   var chaine_comments = '';
 
-  //Chargement de Facebook
-  $('body').append('<div id="fb-root"></div><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=396017477198671";fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));</script>');
-  
-  $.getScript('http://connect.facebook.net/sv_SE/all.js#xfbml=1', function(){
-    $('#fb-root').show(); // show the DIVs
-    $('#fb-like').show();
-  });
+  // Tag Analytics - Selection du restaurant dans panel-results
+  ga('send', 'event', 'Selection restaurant', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+'tableauMarkers[i].feature.properties.adresse', 4);
+
 
   if(status=='OK'){
       chaine += '<div id="resto">';
