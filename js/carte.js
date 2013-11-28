@@ -227,7 +227,8 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
         map_globale.panTo(point.getLatLng());
         detail_json = geoJSON[$('.mCSB_container div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
-        $("#details-restaurant").delay(100).fadeIn(100);      
+        $("#details-restaurant").delay(100).fadeIn(100);  
+
       });      
     });
   }else{
@@ -295,6 +296,9 @@ function callback_details(json_detail, status){
         chaine += (ouvert!=null) ? '<br />Ouvert en ce moment': '';
         chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
         chaine+= '</p>';
+        chaine+= '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>';
+        chaine+= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+
       chaine += '</div>';
         chaine += '<div id="comments">';
         if(comments != null){

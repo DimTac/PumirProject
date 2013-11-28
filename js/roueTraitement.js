@@ -212,6 +212,11 @@
 
                 $("#relancer").bind('click', function(e){
                     e.preventDefault();
+
+                    //
+                    //ga('send', 'button', 'clicked', 'navigation menu');
+                    ga('send', 'event', 'button', 'click', 'nav buttons', 4);
+
                     methods.tourne();
                 });
 
