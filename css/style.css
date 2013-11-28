@@ -600,6 +600,7 @@ input {
     margin-top: 6px;
     font-size: 1.5em;
     text-align: center;
+    margin-left: 0;
 }
 
 #resto > h2 {
@@ -631,10 +632,6 @@ input {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     display: block;
-}
-
-#resto p {
-    margin-left: 157px;
 }
 
 .imgResto {

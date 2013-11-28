@@ -24,11 +24,6 @@ body {
     background: url('../img/trame.png') repeat;
 }
 
-img{
-    width: 858px;
-    height: 267px;
-}
-
 #centrer{
     margin : 0 auto;
     display: block;
@@ -40,15 +35,11 @@ img{
 }
 
 #boutons{
-    margin : 0 auto;
-    display: block;
-    margin-top : -66px;
-    margin-left : -215px;
-    position: absolute;
-    top : 70%;
-    left: 50%;
+   	position: absolute;
+	top: 70%;
+	left: 35%;
 }
-    
+
 @media screen and (max-width: 860px) 
 {
     img {
@@ -66,6 +57,7 @@ img{
 	left: 50%;
 	}
 }
+
 #button_foursquare
 {
     text-shadow: rgb(0, 0, 0) 0px -1px 0px;
