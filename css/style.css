@@ -32,6 +32,68 @@ button {
     margin: 0;
     padding: 0;
 }
+#button_foursquare
+{
+    text-shadow: rgb(0, 0, 0) 0px -1px 0px;
+    margin-top: 30px;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    text-align: center;
+    width: auto;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    height: 40%;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(71, 59, 59)), to(rgb(61, 51, 51)));
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    background-size: initial;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.298039) 0px 1px 1px 0px inset;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.298039) 0px 1px 1px 0px inset;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 0px;
+}
+#button_ss_foursquare
+{
+    text-shadow: rgb(0, 0, 0) 0px -1px 0px;
+    margin-top: 30px;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    text-align: center;
+    width: auto;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    height: 40%;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(71, 59, 59)), to(rgb(61, 51, 51)));
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    background-size: initial;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.298039) 0px 1px 1px 0px inset;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.298039) 0px 1px 1px 0px inset;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 0px;
+}
 
 /* HTML5 display-role reset for older browsers */
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
