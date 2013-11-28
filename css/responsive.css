@@ -57,6 +57,10 @@
 	#itineraire{
 		margin-top: 10px;
 	}
+	#fleche{
+		margin-left: 300px;
+		margin-top:335px;
+	}
 }
 
 @media (max-width: 1220px) {
@@ -107,6 +111,10 @@
 }
 
 @media (max-width: 1110px) {
+	#panel-roue>div:last-of-type {
+  	 	height: 60%;
+	}
+
 	#restoDiv{
 			top:0 !important;
 			left:37% !important;

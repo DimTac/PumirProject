@@ -323,7 +323,7 @@ $(document).ready(function(){
 	              chaine += '<h4 class="modal-title">Aucun restaurant '+mot_clef+' trouvé à proximité...</h4>';
 	            chaine += '</div>';
 	            chaine += '<div class="modal-body">';
-	              chaine += '<h4>Il va falloir cuisiner par vous-même cette <a href="'+json.url+'">recette de '+json.nom+'</a> !</h4>';
+	              chaine += '<h4>Il va falloir cuisiner par vous-même cette recette de '+json.nom+' !</h4>';
 	              chaine += '<div id="recette">';
 	                chaine += '<video id="video_player" style="margin:0 auto;" width="550" height="240" controls="controls">';
 	                chaine += '<source src="assets/'+json.url_video+'" type="video/mp4" />';
@@ -377,14 +377,6 @@ $(document).ready(function(){
 /* -------------------- 
 	FONCTIONS GENERALES RELATIVES AU SITE (ANIMATIONS ET REDIRECTION MOBILE PAR EX) 
 --------------------- */
-
-var isMobile = function() {
-           //console.log("Navigator: " + navigator.userAgent);
-           return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
-         };
-        if(isMobile()) {
-               window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
-        }
 
 $(document).ready(function(){
 	$("#total").delay(400).fadeIn(1500);

@@ -51,7 +51,7 @@
     <meta name="twitter:image" content="http://www.wheelunch.fr/img/og_fb.png">
     <meta name="twitter:title" content="Wheelunch - Tournez, Trouvez, Lunchez !">
     <meta name="twitter:description" content="Où manger ce midi ? Tourne la roue et trouve un restaurant à proximité !">
-    
+
     <meta name="description" content="Wheelunch vous aide à trouver un endroit où manger à proximité selon vos critères de sélection"/>
     <link rel="author" href="https://plus.google.com/u/1/110125718725953983012/posts"/>
     
@@ -83,6 +83,14 @@
 
         ga('create', 'UA-46026272-1', 'wheelunch.fr');
         ga('send', 'pageview');
+
+        var isMobile = function() {
+           //console.log("Navigator: " + navigator.userAgent);
+           return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
+         };
+        if(isMobile()) {
+               window.location.href = "http://www.wheelunch.fr/mobile/panel-roue.html";
+        }
     </script>
     
     <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
@@ -102,8 +110,6 @@
     <div id="total">
       <div id="trame"></div>
       <div id="roue">
-         <!--  Cette div ne se voit pas mais elle permet de précharger la font face -->
-          <div style="font-family: HandOfSean;display:none"></div>
           <img id="fleche" src="img/fleche.png" alt="fleche">
           <canvas id="canvas" width="500" height="1000"></canvas>
           <img id="logo" src="img/logo.png" alt="logo">
@@ -116,7 +122,6 @@
           <div id="transport">
             <input type="button" value="Avec transport">
             <input type="button" value="Sans transport" class="selectTransport">
-            <!-- <div><p>ou</p></div> -->
           </div>
           
           <div id="budget">
