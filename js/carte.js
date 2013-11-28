@@ -284,6 +284,14 @@ function callback_details(json_detail, status){
   var date_comment    = '';
   var chaine_comments = '';
 
+  //Chargement de Facebook
+  $('body').append('<div id="fb-root"></div><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=396017477198671";fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));</script>');
+  
+  $.getScript('http://connect.facebook.net/sv_SE/all.js#xfbml=1', function(){
+    $('#fb-root').show(); // show the DIVs
+    $('#fb-like').show();
+  });
+
   if(status=='OK'){
       chaine += '<div id="resto">';
         chaine += '<p><input type="button" id="itineraire" value="Calculer l\'itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
@@ -299,8 +307,7 @@ function callback_details(json_detail, status){
         chaine+= '</p>';
         chaine+= '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>';
         chaine+= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
-
-      chaine += '</div>';
+        chaine+= '<div class="fb-share-button" data-href="http://www.wheelunch.fr" data-type="button_count"></div>';
         chaine += '<div id="comments">';
         if(comments != null){
           chaine += '<div id="bloc-commentaires">'

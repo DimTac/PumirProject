@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
   <!-- PROJET WHEELUNCH ! Tournez, trouvez, lunchez !
   By Pierre Bost, Pierre Guilhou, Lucie Reitz, Dimitri Tacita, Jérémy Zaloga
   Date : November 2013
@@ -88,6 +88,15 @@
     <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
   </head>
   <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=396017477198671";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     <div id="loader">
     </div>
     <div id="total">

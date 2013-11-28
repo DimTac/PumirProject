@@ -213,15 +213,18 @@
                 $("#relancer").bind('click', function(e){
                     e.preventDefault();
 
-                    //
-                    //ga('send', 'button', 'clicked', 'navigation menu');
-                    ga('send', 'event', 'button', 'click', 'nav buttons', 4);
+                    // Tag Analytics - Relancer la roue
+                    ga('send', 'event', 'Relance de la roue', 'click', 'Choix '+restoArray[index], 4);
 
                     methods.tourne();
                 });
 
                 $("#bonchoix").bind('click', function(e){
                     e.preventDefault();
+
+                    // Tag Analytics - Relancer la roue
+                    ga('send', 'event', 'Bouton Bon Choix', 'click', 'Choix '+restoArray[index], 4);
+
                     $.rotation_complete(resultatRoue,radiusPanel);
                     $(paramsRoue.restoResultatDiv).fadeOut(500);
                     $("#canvas").fadeOut(500);
