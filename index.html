@@ -31,6 +31,14 @@
 
 		  ga('create', 'UA-46026272-1', 'wheelunch.fr');
 		  ga('send', 'pageview');
+
+		  var isMobile = function() {
+           //console.log("Navigator: " + navigator.userAgent);
+           return /(iphone|ipod|ipad|android|blackberry|windows ce|palm|symbian)/i.test(navigator.userAgent);
+         };
+        if(isMobile()) {
+               window.location.href = "http://www.wheelunch.fr/mobile/index.html";
+        }
 		</script>
 	</head>
 	<body>
