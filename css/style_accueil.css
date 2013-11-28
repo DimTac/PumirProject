@@ -49,13 +49,23 @@ img{
     left: 50%;
 }
     
-@media screen and (max-width: 860px) {
-      img {
+@media screen and (max-width: 860px) 
+{
+    img {
         width: 429px;
         height: 133px;
     }
-
-<<<<<<< HEAD
+    
+    #centrer{
+	margin : 0 auto;
+	display: block;
+	margin-top : -66px;
+	margin-left : -215px;
+	position: absolute;
+	top : 50%;
+	left: 50%;
+	}
+}
 #button_foursquare
 {
     text-shadow: rgb(0, 0, 0) 0px -1px 0px;
@@ -118,25 +128,4 @@ img{
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 0px;
-}
-
-#centrer{
-	margin : 0 auto;
-	display: block;
-	margin-top : -66px;
-	margin-left : -215px;
-	position: absolute;
-	top : 50%;
-	left: 50%;
-=======
-    #centrer{
-        margin : 0 auto;
-        display: block;
-        margin-top : -66px;
-        margin-left : -215px;
-        position: absolute;
-        top : 50%;
-        left: 50%;
-    }
->>>>>>> ed29e0214b81d8f838aaf79e2e3455bd603c6845
 }
