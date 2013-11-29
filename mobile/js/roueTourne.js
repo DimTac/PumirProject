@@ -225,17 +225,6 @@
                 });
              ctx.restore();
             }         
-       
-        /////////// DESSIN DE LA FLECHE ////////////////////  
-     /*   function drawArrow() {
-            var posX = ($(canvas).width())-135;
-            var posY = ($(canvas).height())-590;
-            var fleche=new Image();
-            fleche.onload = function() {
-                     ctx.drawImage(fleche, posX, posY);
-            }
-            fleche.src = "img/fleche.png";        
-        }*/
 
         /////////// DESSIN DE LA ROUE ////////////////////      
         function drawroue() {
@@ -261,7 +250,7 @@
                      ctx.fillStyle="#9c4b47";
                 }
 
-                var posX=((canvas.width)/2);
+                var posX=((screen.width)/2);
                 var posY=((canvas.height)/2);
 
                 ctx.beginPath();
