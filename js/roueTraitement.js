@@ -224,7 +224,7 @@
                     e.preventDefault();
 
                     // Tag Analytics - Bon choix
-                    ga('send', 'event', 'Bon Choix', 'click', 'Choix '+restoArray[index], 4);
+                    ga('send', 'event', 'Bouton Bon Choix', 'click', 'Choix '+restoArray[index], 4);
 
                     $.rotation_complete(resultatRoue,radiusPanel);
                     $(paramsRoue.restoResultatDiv).fadeOut(500);
