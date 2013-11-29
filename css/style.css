@@ -159,14 +159,6 @@ input {
     top: 40%;
 }
 
-#restoDiv {
-    position: absolute;
-    width: 35%;
-    left: 32%;
-    top: 15%;
-    text-align: center;
-}
-
 #trame {
     width: 100%;
     height: 100%;
@@ -194,7 +186,7 @@ input {
 #fleche {
     position: fixed;
     margin-left: 365px;
-    margin-top: 380px;
+    margin-top: 360px;
     z-index: 1;
 }
 
@@ -213,8 +205,9 @@ input {
 
 #restoDiv p {
     margin-top: -10px;
-    color: #ffd629;
+    color: #ffc700;
     font-size: 2em;
+    font-weight: bold;
 }
 
 #bonchoix {
@@ -285,7 +278,6 @@ input {
 
 #panel-roue>div:last-of-type {
    height: 51.6%;
-   background-color: transparent;
 }
 
 #panel-roue>div:last-of-type input {
@@ -295,8 +287,8 @@ input {
 
 #panel-roue div > span {
     display: inline-block;
-    background-color: #be4d47;
-    width: 100%;
+/*    background-color: #be4d47;
+*/    width: 100%;
     height: 50px;
     color: #fff;
     display: inline-block;
@@ -308,16 +300,21 @@ input {
 
 #transport {
     height: 80px;
-    background-color: rgba(140,127,126,0.3);
 }
 
 #transport :nth-child(1) {
+    color:#000;
+    font-weight: bold;
+    background-color: rgba(255,255,255,0.3);
     float: left;
     height: 100%;
     cursor: pointer;
 }
 
 #transport :nth-child(2) {
+    color:#000;
+    font-weight: bold;
+    background-color: rgba(255,255,255,0.3);
     float: left;
     height: 100%;
     border-left: 2px solid #ccc;
@@ -325,8 +322,8 @@ input {
 }
 
 .selectTransport {
-    color: #bd4d47;
-    background-color: #FFF;
+    color: #bd4d47 !important;
+    background-color: #FFF !important;
     font-weight: 700;
 }
 
@@ -351,6 +348,7 @@ input {
 #moins,#plus {
     border: 1px solid #ccc9c9;
     cursor: pointer;
+    background-color: white;
 }
 #budget div {
     width: 70%;
@@ -360,7 +358,7 @@ input {
 
 .budget0 {
     background-image: url(../img/peuimporte.png);
-    background-color: #f1eeed;
+    background-color: #f0eeed;
     height: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -368,7 +366,7 @@ input {
 
 .budget1 {
     background-image: url(../img/budget_1.png);
-    background-color: #f1eeed;
+    background-color: #f0eeed;
     height: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -376,7 +374,7 @@ input {
 
 .budget2 {
     background-image: url(../img/budget_2.png);
-    background-color: #f1eeed;
+    background-color: #f0eeed;
     height: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -384,7 +382,7 @@ input {
 
 .budget3 {
     background-image: url(../img/budget_3.png);
-    background-color: #f1eeed;
+    background-color: #f0eeed;
     height: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -392,7 +390,7 @@ input {
 
 .budget4 {
     background-image: url(../img/budget_4.png);
-    background-color: #f1eeed;
+    background-color: #f0eeed;
     height: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -525,25 +523,6 @@ input {
     text-align: center;
 }
 
-/*Taille picto roue*/
-.pictoResultat {
-    width: 100px;
-    height: 100px;
-}
-
-#restoDiv h1 {
-    color: #fff;
-    font-size: 5em;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-#restoDiv p {
-    margin-top: -10px;
-    color: #ffd629;
-    font-size: 2em;
-}
-
 #trame {
     width: 100%;
     height: 100%;
@@ -604,6 +583,10 @@ input {
     font-size: 1.5em;
     text-align: center;
     margin-left: 0;
+}
+
+#itineraire{
+        cursor:pointer;
 }
 
 .adresse {
