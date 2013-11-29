@@ -213,10 +213,13 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4>';
       chaine += '</div>';
+      // Tag Analytics - Clic Restaurant Panel
+      //ga('send', 'event', 'Clic sur restaurant Panel ', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+tableauMarkers[i].feature.properties.adresse, 4);
 
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
+
     
     $('.espace').each(function(){
       var that=$(this);
@@ -285,11 +288,9 @@ function callback_details(json_detail, status){
   var date_comment    = '';
   var chaine_comments = '';
 
-  // Tag Analytics - Selection du restaurant dans panel-results
-  ga('send', 'event', 'Selection restaurant', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+'tableauMarkers[i].feature.properties.adresse', 4);
-
 
   if(status=='OK'){
+
       chaine += '<div id="resto">';
         chaine += '<p><input type="button" id="itineraire" value="Itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
         chaine += '<img src="img/ping.png" alt="ping" class="ping">'+distance_vol_oiseau(carte.parametres.center, json_detail.geometry.location)+'</p>';
@@ -402,6 +403,10 @@ function selectionRestaurantsPanel(marker){
   map_globale.panTo(marker.latlng);
   recherche_details(marker.layer.feature.properties.ref_photo);
   $("#resultats-restaurants").mCustomScrollbar("scrollTo",".resto-select");
+
+  // Tag Analytics - Clic Restaurant
+  ga('send', 'event', 'Clic sur restaurant Map', 'click', ' '+marker.layer.feature.properties.title+' à '+marker.layer.feature.properties.adresse, 4);
+
 }
 
 /**
