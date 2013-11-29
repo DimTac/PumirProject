@@ -213,6 +213,7 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4>';
       chaine += '</div>';
+
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
@@ -228,7 +229,8 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
         map_globale.panTo(point.getLatLng());
         detail_json = geoJSON[$('.mCSB_container div').index($(this))];
         recherche_details(detail_json.properties.ref_photo);    // Envoie une requete pour recevoir des détails
-        $("#details-restaurant").delay(100).fadeIn(100);      
+        $("#details-restaurant").delay(100).fadeIn(100);  
+
       });      
     });
   }else{
@@ -283,6 +285,10 @@ function callback_details(json_detail, status){
   var date_comment    = '';
   var chaine_comments = '';
 
+  // Tag Analytics - Selection du restaurant dans panel-results
+  ga('send', 'event', 'Selection restaurant', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+'tableauMarkers[i].feature.properties.adresse', 4);
+
+
   if(status=='OK'){
       chaine += '<div id="resto">';
         chaine += '<p><input type="button" id="itineraire" value="Itinéraire" data-aLong="'+carte.parametres.center.longitude+'" data-aLat="'+carte.parametres.center.latitude+'" data-bLong="'+json_detail.geometry.location.pb+'" data-bLat="'+json_detail.geometry.location.ob+'">';
@@ -296,7 +302,9 @@ function callback_details(json_detail, status){
         chaine += (ouvert!=null) ? '<br />Ouvert en ce moment': '';
         chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
         chaine+= '</p>';
-      chaine += '</div>';
+        chaine+= '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>';
+        chaine+= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+        chaine+= '<div class="fb-share-button" data-href="http://www.wheelunch.fr" data-type="button_count"></div>';
         chaine += '<div id="comments">';
         if(comments != null){
           chaine += '<div id="bloc-commentaires">'
