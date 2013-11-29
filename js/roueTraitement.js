@@ -42,7 +42,8 @@
                 var children = $("#choix > input");
                 for (var i = 0; i < restoArray.length; i++) {
                     children.eq(i).val(restoArray[i]);
-                };
+                }; 
+
                 methods.getContext();
                 methods.setup();
                 drawroue();                
@@ -284,11 +285,10 @@
                 ctx.translate(0 + Math.cos(angle + arc / 2) * paramsRoue.textRadius, 400 + Math.sin(angle + arc / 2) * paramsRoue.textRadius);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
                 ctx.font = paramsRoue.roueTextFont;
-                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);                
+                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);           
                 ctx.restore();
                 ctx.closePath();
             }     
-       /*         drawArrow();*/
         }          
 
         /////////// ANIMATION DE LA ROUE QUAND ELLE TOURNE ////////////////////  

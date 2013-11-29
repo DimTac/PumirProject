@@ -77,7 +77,7 @@ html,body {
 body {
     overflow-x: hidden;
     overflow-y: hidden;
-    font-family: Raleway;
+    font-family: "Open Sans";
     background: url(../img/bg.jpg) no-repeat center fixed;
     -webkit-background-size: cover;
 /* pour Chrome et Safari */
@@ -207,7 +207,6 @@ input {
     margin-top: -10px;
     color: #ffc700;
     font-size: 2em;
-    font-weight: bold;
 }
 
 #bonchoix {
