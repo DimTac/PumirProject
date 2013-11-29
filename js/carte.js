@@ -213,17 +213,18 @@ function affichageRestaurantsPanel(geoJSON, markers, map){
       chaine += '<h3>'+tableauMarkers[i].feature.properties.title+'</h3>';
       chaine += '<h4>'+tableauMarkers[i].feature.properties.adresse+'</h4>';
       chaine += '</div>';
-      // Tag Analytics - Clic Restaurant Panel
-      //ga('send', 'event', 'Clic sur restaurant Panel ', 'click', ' '+tableauMarkers[i].feature.properties.title+' à '+tableauMarkers[i].feature.properties.adresse, 4);
-
       $("#panel-results .mCustomScrollBox .mCSB_container").append(chaine); // Ajoute les restos au panel de gauche
       chaine = '';
     }
 
     
-    $('.espace').each(function(){
+    $('.espace').each(function(i){
       var that=$(this);
       $(this).on('click', function(){
+        
+        // Tag Analytics - Clic Restaurant
+        ga('send', 'event', 'Clic sur restaurant Panel', 'click', ' '+jsonObj[i].properties.title+' à '+jsonObj[i].properties.adresse, 4);
+
         $('.espace').removeClass('resto-select');
         that.toggleClass('resto-select');
         map_globale.removeLayer(trajet);
@@ -303,9 +304,8 @@ function callback_details(json_detail, status){
         chaine += (ouvert!=null) ? '<br />Ouvert en ce moment': '';
         chaine += (rating!=null) ? '<br />Note globale : '+afficher_etoiles(rating) : '';
         chaine+= '</p>';
-        chaine+= '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>';
-        chaine+= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
-        chaine+= '<div class="fb-share-button" data-href="http://www.wheelunch.fr" data-type="button_count"></div>';
+        chaine += '<div id="social"><a href="https://www.facebook.com/sharer/sharer.php?u=wheelunch.fr" target="_blank"><img src="img/icon_fb.png" alt="fb"/></a>';
+        chaine += '<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en"><img src="img/icon_twitter.png" alt="twitter"/></a></div>';
         chaine += '<div id="comments">';
         if(comments != null){
           chaine += '<div id="bloc-commentaires">'
